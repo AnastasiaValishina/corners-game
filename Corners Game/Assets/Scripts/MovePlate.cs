@@ -18,13 +18,13 @@ public class MovePlate : MonoBehaviour
     public void OnMouseUp()
     {
         board = FindObjectOfType<Board>();
-        board.GetComponent<Board>().SetPositionEmpty(reference.GetComponent<Pawn>().xBoard, reference.GetComponent<Pawn>().yBoard);
+        board.SetPositionEmpty(reference.GetComponent<Pawn>().xPos, reference.GetComponent<Pawn>().yPos);
 
-        reference.GetComponent<Pawn>().xBoard = matrixX;
-        reference.GetComponent<Pawn>().yBoard = matrixY;
+        reference.GetComponent<Pawn>().xPos = matrixX;
+        reference.GetComponent<Pawn>().yPos = matrixY;
         reference.GetComponent<Pawn>().SetCoords();
 
-        board.GetComponent<Board>().SetPosition(reference);
+        board.SetPosition(reference);
         board.NextTurn();
 
         reference.GetComponent<Pawn>().DestroyMovePlates();

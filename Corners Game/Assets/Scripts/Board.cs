@@ -13,12 +13,13 @@ public class Board : MonoBehaviour
     public GameObject pawnWhitePrefab;
     public Text winnerText;
     public Text restartText;
+    public Text turnText;
 
     GameObject[,] squares; // positions
     GameObject[] playerBlack = new GameObject[9];
     GameObject[] playerWhite = new GameObject[9];
 
-    public string currentPlayer = "white";
+    string currentPlayer = "White";
     bool gameOver = false;
 
     int width = 8;
@@ -30,6 +31,7 @@ public class Board : MonoBehaviour
         squares = new GameObject[width, height];
         CreateBoard();
         PlacePawns();
+        UpdatePlayerText();
     }
 
     private void Update()
@@ -110,7 +112,7 @@ public class Board : MonoBehaviour
         return squares[x, y];
     }
 
-    public bool PositionOnBoard(int x, int y)
+    public bool PositionOnBoardExists(int x, int y)
     {
         if (x < 0 || y < 0 || x >= squares.GetLength(0) || y >= squares.GetLength(1))
         {
@@ -121,7 +123,7 @@ public class Board : MonoBehaviour
     public void SetPosition(GameObject obj)
     {
         Pawn pawn = obj.GetComponent<Pawn>();
-        squares[pawn.xBoard, pawn.yBoard] = obj;
+        squares[pawn.xPos, pawn.yPos] = obj;
     }
 
     public string GetCurrentPlayer()
@@ -136,14 +138,21 @@ public class Board : MonoBehaviour
 
     public void NextTurn()
     {
-        if (currentPlayer == "white")
+        if (currentPlayer == "White")
         {
-            currentPlayer = "black";
+            currentPlayer = "Black";
+            UpdatePlayerText();
         }
         else
         {
-            currentPlayer = "white";
+            currentPlayer = "White"; 
+            UpdatePlayerText();
         }
+    }
+
+    private void UpdatePlayerText()
+    {
+        turnText.GetComponent<Text>().text = currentPlayer + "'s turn";
     }
 
     public void Winner(string playerWinner)
@@ -152,6 +161,5 @@ public class Board : MonoBehaviour
         winnerText.GetComponent<Text>().enabled = true;
         winnerText.GetComponent<Text>().text = playerWinner + " is the winner";
         restartText.GetComponent<Text>().enabled = true;
-
     }
 }

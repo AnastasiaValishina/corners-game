@@ -10,11 +10,6 @@ public class MovePlate : MonoBehaviour
     int matrixX;
     int matrixY;
 
-    private void Start()
-    {
-        
-    }
-
     public void OnMouseUp()
     {
         board = FindObjectOfType<Board>();

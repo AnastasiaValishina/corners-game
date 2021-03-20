@@ -114,7 +114,7 @@ public class Board : MonoBehaviour
 
     public bool PositionOnBoardExists(int x, int y)
     {
-        if (x < 0 || y < 0 || x >= squares.GetLength(0) || y >= squares.GetLength(1))
+        if (x <= 0 || y <= 0 || x >= squares.GetLength(0) || y >= squares.GetLength(1))
         {
             return false;
         }

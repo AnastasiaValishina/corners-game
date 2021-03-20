@@ -1,16 +1,23 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Pawn : MonoBehaviour
 {
-    public GameObject selectedBack;
+    Board board;
+    public GameObject movePlate;
 
-    bool isSelected = false;
-    static Pawn previousSelected = null;
+    public int xBoard;
+    public int yBoard;
+
+    string player;
+
     void Start()
     {
-        
+        board = FindObjectOfType<Board>();
+        xBoard = (int)transform.position.x;
+        yBoard = (int)transform.position.y;
     }
 
     void Update()
@@ -18,37 +25,55 @@ public class Pawn : MonoBehaviour
         
     }
 
-    private void OnMouseDown()
+    public void SetCoords()
     {
-        if (isSelected)
+        transform.position = new Vector3(xBoard, yBoard, 0f);
+    }
+
+    private void OnMouseUp()
+    {
+        DestroyMovePlates();
+        InitiateMovePlates();
+    }
+
+    public void DestroyMovePlates()
+    {
+        MovePlate[] movePlates = FindObjectsOfType<MovePlate>();
+        for (int i = 0; i < movePlates.Length; i++)
         {
-            Deselect();
+            Destroy(movePlates[i].gameObject);
         }
-        else
+    }
+
+    private void InitiateMovePlates()
+    {
+    //    switch (board)
+        PawnMovePlate(xBoard, yBoard + 1);
+        PawnMovePlate(xBoard, yBoard - 1);
+        PawnMovePlate(xBoard + 1, yBoard);
+        PawnMovePlate(xBoard - 1, yBoard);
+        PawnMovePlate(xBoard + 1, yBoard + 1);
+        PawnMovePlate(xBoard - 1, yBoard - 1);
+        PawnMovePlate(xBoard + 1, yBoard - 1);
+        PawnMovePlate(xBoard - 1, yBoard + 1);
+    }
+
+    private void PawnMovePlate(int x, int y)
+    {
+        if (board.PositionOnBoard(x, y))
         {
-            if (previousSelected == null)
+            if (board.GetPosition(x, y) == null)
             {
-                Select();
-            }
-            else
-            {
-                previousSelected.Deselect();
-                Select();
+                MovePlateSpawn(x, y);
             }
         }
     }
 
-    private void Select()
+    private void MovePlateSpawn(int x, int y)
     {
-        isSelected = true;
-        selectedBack.SetActive(true);
-        previousSelected = gameObject.GetComponent<Pawn>();
-    }
-    
-    private void Deselect()
-    {
-        isSelected = false;
-        selectedBack.SetActive(false);
-        previousSelected = null;
-    }
+        GameObject mp = Instantiate(movePlate, new Vector3(x, y, 0f), Quaternion.identity);
+        MovePlate mpScript = mp.GetComponent<MovePlate>();
+        mpScript.SetReference(gameObject);
+        mpScript.SetCoords(x, y);
+    }    
 }

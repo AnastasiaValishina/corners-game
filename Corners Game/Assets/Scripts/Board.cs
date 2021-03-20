@@ -7,15 +7,25 @@ public class Board : MonoBehaviour
 {
     public GameObject squareBlackPrefab;
     public GameObject squareWhitePrefab;
+    public GameObject pawnBlackPrefab;
+    public GameObject pawnWhitePrefab;
+
+    GameObject[,] squares; // positions
+    GameObject[] playerBlack = new GameObject[9];
+    GameObject[] playerWhite = new GameObject[9];
+
+    string currentPlayer = "white";
+    bool isGameOver = false;
 
     int width = 8;
     int height = 8;
 
-    GameObject[,] squares;
+
     void Start()
     {
         squares = new GameObject[width, height];
         CreateBoard();
+        PlacePawns();
     }
 
     private void CreateBoard()
@@ -48,5 +58,57 @@ public class Board : MonoBehaviour
                 squareBlack.name = "( " + x + ", " + y + " )";
             }
         }
+    }
+    private void PlacePawns()
+    {
+        // place player 1 pawns
+        for (int x = 5; x <= 7; x++)
+        {
+            for (int y = 0; y <= 2; y++)
+            {
+                Vector2 pawnPos = new Vector2(x, y);
+                GameObject pawn = Instantiate(pawnWhitePrefab, pawnPos, Quaternion.identity);
+                pawn.transform.parent = transform;
+                pawn.name = "( " + x + ", " + y + " )";
+                squares[x, y] = pawn;
+            }
+        }
+
+        // place player 2 pawns
+        for (int x = 0; x <= 2; x++)
+        {
+            for (int y = 5; y <= 7; y++)
+            {
+                Vector2 pawnPos = new Vector2(x, y);
+                GameObject pawn = Instantiate(pawnBlackPrefab, pawnPos, Quaternion.identity);
+                pawn.transform.parent = transform;
+                pawn.name = "( " + x + ", " + y + " )";
+                squares[x, y] = pawn;
+            }
+        }
+    }
+
+    public void SetPositionEmpty(int x, int y)
+    {
+        squares[x, y] = null;
+    }
+
+    public GameObject GetPosition(int x, int y)
+    {
+        return squares[x, y];
+    }
+
+    public bool PositionOnBoard(int x, int y)
+    {
+        if (x < 0 || y < 0 || x >= squares.GetLength(0) || y >= squares.GetLength(1))
+        {
+            return false;
+        }
+        else { return true; }
+    }
+    public void SetPosition(GameObject obj)
+    {
+        Pawn pawn = obj.GetComponent<Pawn>();
+        squares[pawn.xBoard, pawn.yBoard] = obj;
     }
 }

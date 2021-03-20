@@ -2,6 +2,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Board : MonoBehaviour
 {
@@ -9,13 +11,15 @@ public class Board : MonoBehaviour
     public GameObject squareWhitePrefab;
     public GameObject pawnBlackPrefab;
     public GameObject pawnWhitePrefab;
+    public Text winnerText;
+    public Text restartText;
 
     GameObject[,] squares; // positions
     GameObject[] playerBlack = new GameObject[9];
     GameObject[] playerWhite = new GameObject[9];
 
-    string currentPlayer = "white";
-    bool isGameOver = false;
+    public string currentPlayer = "white";
+    bool gameOver = false;
 
     int width = 8;
     int height = 8;
@@ -28,6 +32,14 @@ public class Board : MonoBehaviour
         PlacePawns();
     }
 
+    private void Update()
+    {
+        if (gameOver == true && Input.GetMouseButtonDown(0))
+        {
+            gameOver = false;
+            SceneManager.LoadScene(0);
+        }
+    }
     private void CreateBoard()
     {
         for (int x = 0; x < width; x++)
@@ -69,7 +81,7 @@ public class Board : MonoBehaviour
                 Vector2 pawnPos = new Vector2(x, y);
                 GameObject pawn = Instantiate(pawnWhitePrefab, pawnPos, Quaternion.identity);
                 pawn.transform.parent = transform;
-                pawn.name = "( " + x + ", " + y + " )";
+                pawn.name = "white";
                 squares[x, y] = pawn;
             }
         }
@@ -82,7 +94,7 @@ public class Board : MonoBehaviour
                 Vector2 pawnPos = new Vector2(x, y);
                 GameObject pawn = Instantiate(pawnBlackPrefab, pawnPos, Quaternion.identity);
                 pawn.transform.parent = transform;
-                pawn.name = "( " + x + ", " + y + " )";
+                pawn.name = "black";
                 squares[x, y] = pawn;
             }
         }
@@ -110,5 +122,36 @@ public class Board : MonoBehaviour
     {
         Pawn pawn = obj.GetComponent<Pawn>();
         squares[pawn.xBoard, pawn.yBoard] = obj;
+    }
+
+    public string GetCurrentPlayer()
+    {
+        return currentPlayer;
+    }
+
+    public bool IsGameOver()
+    {
+        return gameOver;
+    }
+
+    public void NextTurn()
+    {
+        if (currentPlayer == "white")
+        {
+            currentPlayer = "black";
+        }
+        else
+        {
+            currentPlayer = "white";
+        }
+    }
+
+    public void Winner(string playerWinner)
+    {
+        gameOver = true;
+        winnerText.GetComponent<Text>().enabled = true;
+        winnerText.GetComponent<Text>().text = playerWinner + " is the winner";
+        restartText.GetComponent<Text>().enabled = true;
+
     }
 }

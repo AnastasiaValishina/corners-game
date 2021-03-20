@@ -25,6 +25,7 @@ public class MovePlate : MonoBehaviour
         reference.GetComponent<Pawn>().SetCoords();
 
         board.GetComponent<Board>().SetPosition(reference);
+        board.NextTurn();
 
         reference.GetComponent<Pawn>().DestroyMovePlates();
     }

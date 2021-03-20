@@ -11,18 +11,21 @@ public class Pawn : MonoBehaviour
     public int xBoard;
     public int yBoard;
 
-    string player;
+    public string player;
 
     void Start()
     {
         board = FindObjectOfType<Board>();
         xBoard = (int)transform.position.x;
         yBoard = (int)transform.position.y;
-    }
 
-    void Update()
-    {
-        
+        switch (name)
+        {
+            case "white": player = "white";
+                break;
+            case "black": player = "black";
+                break;
+        }
     }
 
     public void SetCoords()
@@ -32,8 +35,11 @@ public class Pawn : MonoBehaviour
 
     private void OnMouseUp()
     {
-        DestroyMovePlates();
-        InitiateMovePlates();
+        if (!board.IsGameOver() && board.GetCurrentPlayer() == player)
+        {
+            DestroyMovePlates();
+            InitiateMovePlates();
+        }
     }
 
     public void DestroyMovePlates()

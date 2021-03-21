@@ -23,6 +23,7 @@ public class MovePlate : MonoBehaviour
         board.NextTurn();
 
         reference.GetComponent<Pawn>().DestroyMovePlates();
+        board.CheckWinner();
     }
 
     public void SetCoords(int x, int y)

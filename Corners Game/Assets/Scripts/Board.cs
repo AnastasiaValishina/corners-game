@@ -112,9 +112,37 @@ public class Board : MonoBehaviour
         return squares[x, y];
     }
 
+    public void CheckWinner()
+    {
+        if ((GetPosition(0, 5) && GetPosition(0, 5).name == "white") &&
+            (GetPosition(0, 6) && GetPosition(0, 6).name == "white") &&
+            (GetPosition(0, 7) && GetPosition(0, 7).name == "white") &&
+            (GetPosition(1, 5) && GetPosition(1, 5).name == "white") &&
+            (GetPosition(1, 6) && GetPosition(1, 6).name == "white") &&
+            (GetPosition(1, 7) && GetPosition(1, 7).name == "white") &&
+            (GetPosition(2, 5) && GetPosition(2, 5).name == "white") &&
+            (GetPosition(2, 6) && GetPosition(2, 6).name == "white") &&
+            (GetPosition(2, 7) && GetPosition(2, 7).name == "white"))
+        {
+            Winner("White");
+        }
+        if ((GetPosition(5, 0) && GetPosition(5, 0).name == "black") &&
+            (GetPosition(5, 1) && GetPosition(5, 1).name == "black") &&
+            (GetPosition(5, 2) && GetPosition(5, 2).name == "black") &&
+            (GetPosition(6, 0) && GetPosition(6, 0).name == "black") &&
+            (GetPosition(6, 1) && GetPosition(6, 1).name == "black") &&
+            (GetPosition(6, 2) && GetPosition(6, 2).name == "black") &&
+            (GetPosition(7, 0) && GetPosition(7, 0).name == "black") &&
+            (GetPosition(7, 1) && GetPosition(7, 1).name == "black") &&
+            (GetPosition(7, 2) && GetPosition(7, 2).name == "black"))
+        {
+            Winner("Black");
+        }
+    }
+
     public bool PositionOnBoardExists(int x, int y)
     {
-        if (x <= 0 || y <= 0 || x >= squares.GetLength(0) || y >= squares.GetLength(1))
+        if (x < 0 || y < 0 || x >= squares.GetLength(0) || y >= squares.GetLength(1))
         {
             return false;
         }

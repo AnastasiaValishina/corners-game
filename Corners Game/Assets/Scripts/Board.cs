@@ -11,6 +11,7 @@ public class Board : MonoBehaviour
     public GameObject pawnWhitePrefab;
 
     GameObject[,] squares;
+    GameController gameController;
 
     int width = 8;
     int height = 8;
@@ -19,6 +20,7 @@ public class Board : MonoBehaviour
     void Start()
     {
         squares = new GameObject[width, height];
+        gameController = FindObjectOfType<GameController>();
     }
 
     public void StartGame()
@@ -109,7 +111,7 @@ public class Board : MonoBehaviour
             GetPosition(2, 6) && GetPosition(2, 6).name == "white" &&
             GetPosition(2, 7) && GetPosition(2, 7).name == "white")
         {
-            FindObjectOfType<GameController>().Winner("White");
+            gameController.Winner(gameController.playerOneName);
         }
         if (GetPosition(5, 0) && GetPosition(5, 0).name == "black" &&
             GetPosition(5, 1) && GetPosition(5, 1).name == "black" &&
@@ -121,7 +123,7 @@ public class Board : MonoBehaviour
             GetPosition(7, 1) && GetPosition(7, 1).name == "black" &&
             GetPosition(7, 2) && GetPosition(7, 2).name == "black")
         {
-            FindObjectOfType<GameController>().Winner("Black");
+            gameController.Winner(gameController.playerTwoName);
         }
     }
 

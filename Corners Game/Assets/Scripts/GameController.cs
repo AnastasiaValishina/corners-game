@@ -12,11 +12,11 @@ public class GameController : MonoBehaviour
     public GameObject popupMenu;
 
     public Text winnerText;
-    public Text restartText;
     public Text turnText;
+    public GameObject restartButton;
 
-    public string playerOneName;
-    public string playerTwoName;
+    public string playerOneName = "White";
+    public string playerTwoName = "Black";
     public GameObject inputFieldPlayerOne;
     public GameObject inputFieldPlayerTwo;
 
@@ -35,11 +35,16 @@ public class GameController : MonoBehaviour
     }
     private void Update()
     {
-        if (gameOver == true && Input.GetMouseButtonDown(0))
+        if (gameOver == true)
         {
+            restartButton.SetActive(true);
             gameOver = false;
-            SceneManager.LoadScene(0);
         }
+    }
+
+    public void RestartGame()
+    {
+        SceneManager.LoadScene(0);
     }
 
     public void ToggleJumpDiagonal(bool newValue)
@@ -61,11 +66,31 @@ public class GameController : MonoBehaviour
     {
         FindObjectOfType<Board>().StartGame();
         popupMenu.SetActive(false);
-        playerOneName = inputFieldPlayerOne.GetComponent<Text>().text;
-        playerTwoName = inputFieldPlayerTwo.GetComponent<Text>().text;
+
+        SetPlayersNames();
         currentPlayer = playerOneName;
         UpdatePlayerText();
+    }
 
+    private void SetPlayersNames()
+    {
+        if (inputFieldPlayerOne.GetComponent<Text>().text == "")
+        {
+            playerOneName = "White";
+        }
+        else
+        {
+            playerOneName = inputFieldPlayerOne.GetComponent<Text>().text;
+        }
+
+        if (inputFieldPlayerTwo.GetComponent<Text>().text == "")
+        {
+            playerTwoName = "Black";
+        }
+        else
+        {
+            playerTwoName = inputFieldPlayerTwo.GetComponent<Text>().text;
+        }
     }
 
     private void UpdatePlayerText()
@@ -96,7 +121,6 @@ public class GameController : MonoBehaviour
         gameOver = true;
         winnerText.GetComponent<Text>().enabled = true;
         winnerText.GetComponent<Text>().text = playerWinner + " победил!";
-        restartText.GetComponent<Text>().enabled = true;
     }
 
     public bool IsGameOver()

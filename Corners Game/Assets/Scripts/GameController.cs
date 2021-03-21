@@ -1,6 +1,5 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -11,15 +10,21 @@ public class GameController : MonoBehaviour
     public GameObject toggleJumpLine;
     public GameObject toggleMoveOneSquare;
     public GameObject popupMenu;
+
     public Text winnerText;
     public Text restartText;
     public Text turnText;
+
+    public string playerOneName;
+    public string playerTwoName;
+    public GameObject inputFieldPlayerOne;
+    public GameObject inputFieldPlayerTwo;
 
     public bool jumpDiagonal = false;
     public bool jumpLine = false;
     public bool moveOneSquare = true;
 
-    string currentPlayer = "White";
+    string currentPlayer;
     bool gameOver = false;
 
     void Start()
@@ -27,7 +32,6 @@ public class GameController : MonoBehaviour
         toggleJumpDiagonal.GetComponent<Toggle>().isOn = jumpDiagonal;
         toggleJumpLine.GetComponent<Toggle>().isOn = jumpLine;
         toggleMoveOneSquare.GetComponent<Toggle>().isOn = moveOneSquare;
-        UpdatePlayerText();
     }
     private void Update()
     {
@@ -57,11 +61,16 @@ public class GameController : MonoBehaviour
     {
         FindObjectOfType<Board>().StartGame();
         popupMenu.SetActive(false);
+        playerOneName = inputFieldPlayerOne.GetComponent<Text>().text;
+        playerTwoName = inputFieldPlayerTwo.GetComponent<Text>().text;
+        currentPlayer = playerOneName;
+        UpdatePlayerText();
+
     }
 
     private void UpdatePlayerText()
     {
-        turnText.GetComponent<Text>().text = currentPlayer + "'s turn";
+        turnText.GetComponent<Text>().text = currentPlayer + " ходит...";
     }
 
     public string GetCurrentPlayer()
@@ -70,14 +79,14 @@ public class GameController : MonoBehaviour
     }
     public void NextTurn()
     {
-        if (currentPlayer == "White")
+        if (currentPlayer == playerOneName)
         {
-            currentPlayer = "Black";
+            currentPlayer = playerTwoName;
             UpdatePlayerText();
         }
         else
         {
-            currentPlayer = "White";
+            currentPlayer = playerOneName;
             UpdatePlayerText();
         }
     }
@@ -86,7 +95,7 @@ public class GameController : MonoBehaviour
     {
         gameOver = true;
         winnerText.GetComponent<Text>().enabled = true;
-        winnerText.GetComponent<Text>().text = playerWinner + " is the winner!";
+        winnerText.GetComponent<Text>().text = playerWinner + " победил!";
         restartText.GetComponent<Text>().enabled = true;
     }
 

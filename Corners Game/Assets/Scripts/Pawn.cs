@@ -22,9 +22,9 @@ public class Pawn : MonoBehaviour
 
         switch (name)
         {
-            case "white": player = "White";
+            case "white": player = gameController.playerOneName;
                 break;
-            case "black": player = "Black";
+            case "black": player = gameController.playerTwoName;
                 break;
         }
     }

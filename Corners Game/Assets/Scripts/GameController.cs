@@ -86,7 +86,7 @@ public class GameController : MonoBehaviour
     {
         gameOver = true;
         winnerText.GetComponent<Text>().enabled = true;
-        winnerText.GetComponent<Text>().text = playerWinner + " is the winner";
+        winnerText.GetComponent<Text>().text = playerWinner + " is the winner!";
         restartText.GetComponent<Text>().enabled = true;
     }
 

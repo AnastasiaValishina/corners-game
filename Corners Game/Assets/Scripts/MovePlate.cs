@@ -7,29 +7,31 @@ public class MovePlate : MonoBehaviour
     Board board;
     GameObject reference = null;
 
-    int matrixX;
-    int matrixY;
+    int plateX;
+    int plateY;
 
-    public void OnMouseUp()
+    public void OnMouseDown()
     {
         board = FindObjectOfType<Board>();
         board.SetPositionEmpty(reference.GetComponent<Pawn>().xPos, reference.GetComponent<Pawn>().yPos);
 
-        reference.GetComponent<Pawn>().xPos = matrixX;
-        reference.GetComponent<Pawn>().yPos = matrixY;
+        reference.GetComponent<Pawn>().xPos = plateX;
+        reference.GetComponent<Pawn>().yPos = plateY;
         reference.GetComponent<Pawn>().SetCoords();
 
         board.SetPosition(reference);
-        board.NextTurn();
+
+        FindObjectOfType<GameController>().NextTurn();
 
         reference.GetComponent<Pawn>().DestroyMovePlates();
+
         board.CheckWinner();
     }
 
     public void SetCoords(int x, int y)
     {
-        matrixX = x;
-        matrixY = y;
+        plateX = x;
+        plateY = y;
     }
 
     public void SetReference (GameObject obj)

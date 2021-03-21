@@ -8,13 +8,15 @@ public class Pawn : MonoBehaviour
     public GameObject movePlate;
     public int xPos;
     public int yPos;
-    public string player;
-
+    
+    string player;
     Board board;
+    GameController gameController;
 
     void Start()
     {
         board = FindObjectOfType<Board>();
+        gameController = FindObjectOfType<GameController>();
         xPos = (int)transform.position.x;
         yPos = (int)transform.position.y;
 
@@ -32,9 +34,9 @@ public class Pawn : MonoBehaviour
         transform.position = new Vector3(xPos, yPos, 0f);
     }
 
-    private void OnMouseUp()
+    private void OnMouseDown()
     {
-        if (!board.IsGameOver() && board.GetCurrentPlayer() == player)
+        if (!gameController.IsGameOver() && gameController.GetCurrentPlayer() == player)
         {
             DestroyMovePlates();
             InitiateMovePlates();
@@ -52,66 +54,63 @@ public class Pawn : MonoBehaviour
 
     private void InitiateMovePlates()
     {
-        // сделать шаг в любом направлении
-        if (FindObjectOfType<GameController>().moveOneSquare)
+        if (gameController.moveOneSquare)
         {
             ActivateMoveOneSquare();
         }
 
-        // перепрыгнуть по диагонали
-        if (FindObjectOfType<GameController>().jumpDiagonal)
+        if (gameController.jumpDiagonal)
         {
             ActivateJumpOverDiag();
         }
 
-        // перепрыгнуть по вертикали по горизонтали
-        if (FindObjectOfType<GameController>().jumpLine)
+        if (gameController.jumpLine)
         {
             ActivateJumpOver();
         }
     }
 
-    private void ActivateJumpOver()
+    private void ActivateJumpOver()         // перепрыгнуть по вертикали по горизонтали
     {
-        if (board.GetPosition(xPos + 1, yPos))
+        if (board.PositionOnBoardExists(xPos + 1, yPos) && board.GetPosition(xPos + 1, yPos))
         {
             JumpOver(xPos + 2, yPos);
         }
-        if (board.GetPosition(xPos, yPos + 1))
+        if (board.PositionOnBoardExists(xPos, yPos + 1) && board.GetPosition(xPos, yPos + 1))
         {
             JumpOver(xPos, yPos + 2);
         }
-        if (board.GetPosition(xPos - 1, yPos))
+        if (board.PositionOnBoardExists(xPos - 1, yPos) && board.GetPosition(xPos - 1, yPos))
         {
             JumpOver(xPos - 2, yPos);
         }
-        if (board.GetPosition(xPos, yPos - 1))
+        if (board.PositionOnBoardExists(xPos, yPos - 1) && board.GetPosition(xPos, yPos - 1))
         {
             JumpOver(xPos, yPos - 2);
         }
     }
 
-    private void ActivateJumpOverDiag()
+    private void ActivateJumpOverDiag()         // перепрыгнуть по диагонали
     {
-        if (board.GetPosition(xPos + 1, yPos + 1))
+        if (board.PositionOnBoardExists(xPos + 1, yPos + 1) && board.GetPosition(xPos + 1, yPos + 1))
         {
             JumpOver(xPos + 2, yPos + 2);
         }
-        if (board.GetPosition(xPos - 1, yPos + 1))
+        if (board.PositionOnBoardExists(xPos - 1, yPos + 1) && board.GetPosition(xPos - 1, yPos + 1))
         {
             JumpOver(xPos - 2, yPos + 2);
         }
-        if (board.GetPosition(xPos + 1, yPos - 1))
+        if (board.PositionOnBoardExists(xPos + 1, yPos - 1) && board.GetPosition(xPos + 1, yPos - 1))
         {
             JumpOver(xPos + 2, yPos - 2);
         }
-        if (board.GetPosition(xPos - 1, yPos - 1))
+        if (board.PositionOnBoardExists(xPos - 1, yPos - 1) && board.GetPosition(xPos - 1, yPos - 1))
         {
             JumpOver(xPos - 2, yPos - 2);
         }
     }
 
-    private void ActivateMoveOneSquare()
+    private void ActivateMoveOneSquare()         // сделать шаг в любом направлении
     {
         MoveOneSquare(xPos, yPos + 1);
         MoveOneSquare(xPos, yPos - 1);

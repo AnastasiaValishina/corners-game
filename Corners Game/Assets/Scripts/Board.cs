@@ -2,8 +2,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 public class Board : MonoBehaviour
 {
@@ -11,16 +9,8 @@ public class Board : MonoBehaviour
     public GameObject squareWhitePrefab;
     public GameObject pawnBlackPrefab;
     public GameObject pawnWhitePrefab;
-    public Text winnerText;
-    public Text restartText;
-    public Text turnText;
 
-    GameObject[,] squares; // positions
-    GameObject[] playerBlack = new GameObject[9];
-    GameObject[] playerWhite = new GameObject[9];
-
-    string currentPlayer = "White";
-    bool gameOver = false;
+    GameObject[,] squares;
 
     int width = 8;
     int height = 8;
@@ -29,19 +19,14 @@ public class Board : MonoBehaviour
     void Start()
     {
         squares = new GameObject[width, height];
-        CreateBoard();
-        PlacePawns();
-        UpdatePlayerText();
     }
 
-    private void Update()
+    public void StartGame()
     {
-        if (gameOver == true && Input.GetMouseButtonDown(0))
-        {
-            gameOver = false;
-            SceneManager.LoadScene(0);
-        }
+        CreateBoard();
+        PlacePawns();
     }
+
     private void CreateBoard()
     {
         for (int x = 0; x < width; x++)
@@ -114,29 +99,29 @@ public class Board : MonoBehaviour
 
     public void CheckWinner()
     {
-        if ((GetPosition(0, 5) && GetPosition(0, 5).name == "white") &&
-            (GetPosition(0, 6) && GetPosition(0, 6).name == "white") &&
-            (GetPosition(0, 7) && GetPosition(0, 7).name == "white") &&
-            (GetPosition(1, 5) && GetPosition(1, 5).name == "white") &&
-            (GetPosition(1, 6) && GetPosition(1, 6).name == "white") &&
-            (GetPosition(1, 7) && GetPosition(1, 7).name == "white") &&
-            (GetPosition(2, 5) && GetPosition(2, 5).name == "white") &&
-            (GetPosition(2, 6) && GetPosition(2, 6).name == "white") &&
-            (GetPosition(2, 7) && GetPosition(2, 7).name == "white"))
+        if (GetPosition(0, 5) && GetPosition(0, 5).name == "white" &&
+            GetPosition(0, 6) && GetPosition(0, 6).name == "white" &&
+            GetPosition(0, 7) && GetPosition(0, 7).name == "white" &&
+            GetPosition(1, 5) && GetPosition(1, 5).name == "white" &&
+            GetPosition(1, 6) && GetPosition(1, 6).name == "white" &&
+            GetPosition(1, 7) && GetPosition(1, 7).name == "white" &&
+            GetPosition(2, 5) && GetPosition(2, 5).name == "white" &&
+            GetPosition(2, 6) && GetPosition(2, 6).name == "white" &&
+            GetPosition(2, 7) && GetPosition(2, 7).name == "white")
         {
-            Winner("White");
+            FindObjectOfType<GameController>().Winner("White");
         }
-        if ((GetPosition(5, 0) && GetPosition(5, 0).name == "black") &&
-            (GetPosition(5, 1) && GetPosition(5, 1).name == "black") &&
-            (GetPosition(5, 2) && GetPosition(5, 2).name == "black") &&
-            (GetPosition(6, 0) && GetPosition(6, 0).name == "black") &&
-            (GetPosition(6, 1) && GetPosition(6, 1).name == "black") &&
-            (GetPosition(6, 2) && GetPosition(6, 2).name == "black") &&
-            (GetPosition(7, 0) && GetPosition(7, 0).name == "black") &&
-            (GetPosition(7, 1) && GetPosition(7, 1).name == "black") &&
-            (GetPosition(7, 2) && GetPosition(7, 2).name == "black"))
+        if (GetPosition(5, 0) && GetPosition(5, 0).name == "black" &&
+            GetPosition(5, 1) && GetPosition(5, 1).name == "black" &&
+            GetPosition(5, 2) && GetPosition(5, 2).name == "black" &&
+            GetPosition(6, 0) && GetPosition(6, 0).name == "black" &&
+            GetPosition(6, 1) && GetPosition(6, 1).name == "black" &&
+            GetPosition(6, 2) && GetPosition(6, 2).name == "black" &&
+            GetPosition(7, 0) && GetPosition(7, 0).name == "black" &&
+            GetPosition(7, 1) && GetPosition(7, 1).name == "black" &&
+            GetPosition(7, 2) && GetPosition(7, 2).name == "black")
         {
-            Winner("Black");
+            FindObjectOfType<GameController>().Winner("Black");
         }
     }
 
@@ -152,42 +137,5 @@ public class Board : MonoBehaviour
     {
         Pawn pawn = obj.GetComponent<Pawn>();
         squares[pawn.xPos, pawn.yPos] = obj;
-    }
-
-    public string GetCurrentPlayer()
-    {
-        return currentPlayer;
-    }
-
-    public bool IsGameOver()
-    {
-        return gameOver;
-    }
-
-    public void NextTurn()
-    {
-        if (currentPlayer == "White")
-        {
-            currentPlayer = "Black";
-            UpdatePlayerText();
-        }
-        else
-        {
-            currentPlayer = "White"; 
-            UpdatePlayerText();
-        }
-    }
-
-    private void UpdatePlayerText()
-    {
-        turnText.GetComponent<Text>().text = currentPlayer + "'s turn";
-    }
-
-    public void Winner(string playerWinner)
-    {
-        gameOver = true;
-        winnerText.GetComponent<Text>().enabled = true;
-        winnerText.GetComponent<Text>().text = playerWinner + " is the winner";
-        restartText.GetComponent<Text>().enabled = true;
     }
 }

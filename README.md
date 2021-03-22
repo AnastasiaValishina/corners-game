@@ -1,2 +1,2 @@
 # corners-game
-In progress.
+Игра "Уголки"

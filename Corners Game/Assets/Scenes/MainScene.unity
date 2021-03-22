@@ -774,6 +774,36 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   m_IsOn: 1
+--- !u!1 &441410131
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 441410132}
+  m_Layer: 0
+  m_Name: TilesContainer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &441410132
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 441410131}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -2089,6 +2119,8 @@ MonoBehaviour:
     type: 3}
   pawnWhitePrefab: {fileID: 7405731402333410533, guid: c0c770053181b9f4da744e83d371bd0d,
     type: 3}
+  tilesContainer: {fileID: 441410132}
+  pawnsContainer: {fileID: 1454017716}
 --- !u!1 &1416423329
 GameObject:
   m_ObjectHideFlags: 0
@@ -2229,6 +2261,36 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1416423329}
   m_CullTransparentMesh: 0
+--- !u!1 &1454017715
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1454017716}
+  m_Layer: 0
+  m_Name: PawnsContainer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1454017716
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1454017715}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1480445880
 GameObject:
   m_ObjectHideFlags: 0
@@ -2695,20 +2757,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1bf1d3e8eb09df458165eed3e4aec62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  toggleJumpDiagonal: {fileID: 419845051}
-  toggleJumpLine: {fileID: 1302306522}
-  toggleMoveOneSquare: {fileID: 416452145}
   popupMenu: {fileID: 2015948917}
   winnerText: {fileID: 861628182}
   turnText: {fileID: 1269455334}
   restartButton: {fileID: 1755755765}
+  toggleJumpDiagonal: {fileID: 419845053}
+  toggleJumpLine: {fileID: 1302306524}
+  toggleMoveOneSquare: {fileID: 416452147}
   playerOneName: 
   playerTwoName: 
-  inputFieldPlayerOne: {fileID: 656803985}
-  inputFieldPlayerTwo: {fileID: 1919829528}
-  jumpDiagonal: 0
-  jumpLine: 0
-  moveOneSquare: 1
+  inputFieldPlayerOne: {fileID: 1416423331}
+  inputFieldPlayerTwo: {fileID: 1196612289}
 --- !u!4 &1680525159
 Transform:
   m_ObjectHideFlags: 0

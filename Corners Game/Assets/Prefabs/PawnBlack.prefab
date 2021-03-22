@@ -71,10 +71,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c25ef157cf1d64418d195276ff87a95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movePlate: {fileID: 6318763914963463068, guid: 779eea3f3236cde47ab4f612b3ec5559,
+  movePlate: {fileID: 2693818325918432113, guid: 779eea3f3236cde47ab4f612b3ec5559,
     type: 3}
-  xBoard: 0
-  yBoard: 0
 --- !u!212 &6557708284771961339
 SpriteRenderer:
   m_ObjectHideFlags: 0

@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Pawn : MonoBehaviour
 {
-    public GameObject movePlate;
-    public int xPos;
-    public int yPos;
+    [SerializeField] private MovePlate movePlate;
+    int xPos;
+    int yPos;
     
     string player;
     Board board;
@@ -22,9 +19,9 @@ public class Pawn : MonoBehaviour
 
         switch (name)
         {
-            case "white": player = gameController.playerOneName;
+            case "white": player = gameController.GetPlayerOneName();
                 break;
-            case "black": player = gameController.playerTwoName;
+            case "black": player = gameController.GetPlayerTwoName();
                 break;
         }
     }
@@ -45,17 +42,17 @@ public class Pawn : MonoBehaviour
 
     private void InitiateMovePlates()
     {
-        if (gameController.moveOneSquare)
+        if (gameController.CanMoveOneSquare())
         {
             ActivateMoveOneSquare();
         }
 
-        if (gameController.jumpDiagonal)
+        if (gameController.CanJumpDiagonal())
         {
             ActivateJumpOverDiag();
         }
 
-        if (gameController.jumpLine)
+        if (gameController.CanJumpLine())
         {
             ActivateJumpOver();
         }
@@ -119,10 +116,9 @@ public class Pawn : MonoBehaviour
         {
             if (board.GetPosition(x, y) == null)
             {
-                GameObject mp = Instantiate(movePlate, new Vector3(x, y, 0f), Quaternion.identity);
-                MovePlate mpScript = mp.GetComponent<MovePlate>();
-                mpScript.SetReference(gameObject);
-                mpScript.SetCoords(x, y);
+                var mp = Instantiate(movePlate, new Vector3(x, y, 0f), Quaternion.identity);
+                mp.SetReference(gameObject);
+                mp.SetCoords(x, y);
             }
         }
     }
@@ -133,5 +129,22 @@ public class Pawn : MonoBehaviour
         {
             Destroy(movePlates[i].gameObject);
         }
+    }
+
+    public int GetPositionX()
+    {
+        return xPos;
+    }
+    public int GetPositionY()
+    {
+        return yPos;
+    }
+    public void SetPositionX(int x)
+    {
+        xPos = x;
+    }
+    public void SetPositionY(int y)
+    {
+        yPos = y;
     }
 }

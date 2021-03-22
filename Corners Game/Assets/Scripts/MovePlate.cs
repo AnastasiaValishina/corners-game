@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class MovePlate : MonoBehaviour
 {
@@ -15,11 +13,11 @@ public class MovePlate : MonoBehaviour
         Pawn pawnScript = reference.GetComponent<Pawn>();
 
         // отметить, что квадрат, на котором стояла пешка, свободен
-        board.SetPositionEmpty(pawnScript.xPos, pawnScript.yPos);
+        board.SetPositionEmpty(pawnScript.GetPositionX(), pawnScript.GetPositionY());
 
         // переместить пешку
-        pawnScript.xPos = plateX;
-        pawnScript.yPos = plateY;
+        pawnScript.SetPositionX(plateX);
+        pawnScript.SetPositionY(plateY);
         pawnScript.SetCoords();
 
         // отметить, что квадрат занят пешкой

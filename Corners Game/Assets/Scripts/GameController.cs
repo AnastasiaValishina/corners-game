@@ -1,38 +1,36 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameController : MonoBehaviour
 {
-    public GameObject popupMenu;
-    public Text winnerText;
-    public Text turnText;
-    public GameObject restartButton;
+    [SerializeField] GameObject popupMenu;
+    [SerializeField] Text winnerText;
+    [SerializeField] Text turnText;
+    [SerializeField] GameObject restartButton;
 
     [Header("Difficulty Toggles")]
-    public GameObject toggleJumpDiagonal;
-    public GameObject toggleJumpLine;
-    public GameObject toggleMoveOneSquare;
-    public bool jumpDiagonal = false;
-    public bool jumpLine = false;
-    public bool moveOneSquare = true;
+    [SerializeField] Toggle toggleJumpDiagonal;
+    [SerializeField] Toggle toggleJumpLine;
+    [SerializeField] Toggle toggleMoveOneSquare;
 
     [Header("Player names input")]
-    public string playerOneName;
-    public string playerTwoName;
-    public GameObject inputFieldPlayerOne;
-    public GameObject inputFieldPlayerTwo;
+    string playerOneName;
+    string playerTwoName;
+    [SerializeField] InputField inputFieldPlayerOne;
+    [SerializeField] InputField inputFieldPlayerTwo;
 
+    bool jumpDiagonal = false;
+    bool jumpLine = false;
+    bool moveOneSquare = true;
     string currentPlayer;
     bool gameOver = false;
 
     void Start()
     {
-        toggleJumpDiagonal.GetComponent<Toggle>().isOn = jumpDiagonal;
-        toggleJumpLine.GetComponent<Toggle>().isOn = jumpLine;
-        toggleMoveOneSquare.GetComponent<Toggle>().isOn = moveOneSquare;
+        toggleJumpDiagonal.isOn = jumpDiagonal;
+        toggleJumpLine.isOn = jumpLine;
+        toggleMoveOneSquare.isOn = moveOneSquare;
     }
     private void Update()
     {
@@ -73,28 +71,28 @@ public class GameController : MonoBehaviour
 
     private void SetPlayersNames()
     {
-        if (inputFieldPlayerOne.GetComponent<Text>().text == "")
+        if (inputFieldPlayerOne.text == "")
         {
             playerOneName = "Игрок 1";
         }
         else
         {
-            playerOneName = inputFieldPlayerOne.GetComponent<Text>().text;
+            playerOneName = inputFieldPlayerOne.text;
         }
 
-        if (inputFieldPlayerTwo.GetComponent<Text>().text == "")
+        if (inputFieldPlayerTwo.text == "")
         {
             playerTwoName = "Игрок 2";
         }
         else
         {
-            playerTwoName = inputFieldPlayerTwo.GetComponent<Text>().text;
+            playerTwoName = inputFieldPlayerTwo.text;
         }
     }
 
     private void UpdatePlayerText()
     {
-        turnText.GetComponent<Text>().text = currentPlayer + " ходит...";
+        turnText.text = currentPlayer + " ходит...";
     }
 
     public string GetCurrentPlayer()
@@ -119,12 +117,37 @@ public class GameController : MonoBehaviour
     public void Winner(string playerWinner)
     {
         gameOver = true;
-        winnerText.GetComponent<Text>().enabled = true;
-        winnerText.GetComponent<Text>().text = playerWinner + " победил!";
+        winnerText.enabled = true;
+        winnerText.text = playerWinner + " победил!";
     }
 
     public bool IsGameOver()
     {
         return gameOver;
+    }
+    
+    public bool CanJumpDiagonal()
+    {
+        return jumpDiagonal;
+    }
+    
+    public bool CanJumpLine()
+    {
+        return jumpLine;
+    }
+    
+    public bool CanMoveOneSquare()
+    {
+        return moveOneSquare;
+    }
+
+    public string GetPlayerOneName()
+    {
+        return playerOneName;
+    }
+    
+    public string GetPlayerTwoName()
+    {
+        return playerTwoName;
     }
 }

@@ -1,14 +1,13 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Board : MonoBehaviour
 {
-    public GameObject squareBlackPrefab;
-    public GameObject squareWhitePrefab;
-    public GameObject pawnBlackPrefab;
-    public GameObject pawnWhitePrefab;
+    [SerializeField] GameObject squareBlackPrefab;
+    [SerializeField] GameObject squareWhitePrefab;
+    [SerializeField] GameObject pawnBlackPrefab;
+    [SerializeField] GameObject pawnWhitePrefab;
+    [SerializeField] Transform tilesContainer;
+    [SerializeField] Transform pawnsContainer;
 
     GameObject[,] squares;
     GameController gameController;
@@ -37,12 +36,12 @@ public class Board : MonoBehaviour
             {
                 Vector2 posBlack = new Vector2(x, y);
                 GameObject squareBlack = Instantiate(squareBlackPrefab, posBlack, Quaternion.identity) as GameObject;
-                squareBlack.transform.parent = transform;
+                squareBlack.transform.parent = tilesContainer;
                 squareBlack.name = "( " + x + ", " + y + " )";
                 y++;
                 Vector2 posWhite = new Vector2(x, y);
                 GameObject squareWhite = Instantiate(squareWhitePrefab, posWhite, Quaternion.identity) as GameObject;
-                squareWhite.transform.parent = transform;
+                squareWhite.transform.parent = tilesContainer;
                 squareWhite.name = "( " + x + ", " + y + " )";
             }
             x++;
@@ -50,12 +49,12 @@ public class Board : MonoBehaviour
             {
                 Vector2 posBlack = new Vector2(x, y);
                 GameObject squareWhite = Instantiate(squareWhitePrefab, posBlack, Quaternion.identity) as GameObject;
-                squareWhite.transform.parent = transform;
+                squareWhite.transform.parent = tilesContainer;
                 squareWhite.name = "( " + x + ", " + y + " )";
                 y++;
                 Vector2 posWhite = new Vector2(x, y);
                 GameObject squareBlack = Instantiate(squareBlackPrefab, posWhite, Quaternion.identity) as GameObject;
-                squareBlack.transform.parent = transform;
+                squareBlack.transform.parent = tilesContainer;
                 squareBlack.name = "( " + x + ", " + y + " )";
             }
         }
@@ -69,7 +68,7 @@ public class Board : MonoBehaviour
             {
                 Vector2 pawnPos = new Vector2(x, y);
                 GameObject pawn = Instantiate(pawnWhitePrefab, pawnPos, Quaternion.identity);
-                pawn.transform.parent = transform;
+                pawn.transform.parent = pawnsContainer;
                 pawn.name = "white";
                 squares[x, y] = pawn;
             }
@@ -82,7 +81,7 @@ public class Board : MonoBehaviour
             {
                 Vector2 pawnPos = new Vector2(x, y);
                 GameObject pawn = Instantiate(pawnBlackPrefab, pawnPos, Quaternion.identity);
-                pawn.transform.parent = transform;
+                pawn.transform.parent = pawnsContainer;
                 pawn.name = "black";
                 squares[x, y] = pawn;
             }
@@ -111,7 +110,7 @@ public class Board : MonoBehaviour
     public void SetPosition(GameObject obj) // отметить, что квадрат занят определенной пешкой
     {
         Pawn pawn = obj.GetComponent<Pawn>();
-        squares[pawn.xPos, pawn.yPos] = obj;
+        squares[pawn.GetPositionX(), pawn.GetPositionY()] = obj;
     }
 
     public void CheckWinner()               // проверить все ли пешки стоят на поле противника
@@ -126,7 +125,7 @@ public class Board : MonoBehaviour
             GetPosition(2, 6) && GetPosition(2, 6).name == "white" &&
             GetPosition(2, 7) && GetPosition(2, 7).name == "white")
         {
-            gameController.Winner(gameController.playerOneName);
+            gameController.Winner(gameController.GetPlayerOneName());
         }
         if (GetPosition(5, 0) && GetPosition(5, 0).name == "black" &&
             GetPosition(5, 1) && GetPosition(5, 1).name == "black" &&
@@ -138,7 +137,7 @@ public class Board : MonoBehaviour
             GetPosition(7, 1) && GetPosition(7, 1).name == "black" &&
             GetPosition(7, 2) && GetPosition(7, 2).name == "black")
         {
-            gameController.Winner(gameController.playerTwoName);
+            gameController.Winner(gameController.GetPlayerTwoName());
         }
     }
 }

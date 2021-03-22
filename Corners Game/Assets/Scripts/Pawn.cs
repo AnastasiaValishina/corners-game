@@ -43,15 +43,6 @@ public class Pawn : MonoBehaviour
         }
     }
 
-    public void DestroyMovePlates()
-    {
-        MovePlate[] movePlates = FindObjectsOfType<MovePlate>();
-        for (int i = 0; i < movePlates.Length; i++)
-        {
-            Destroy(movePlates[i].gameObject);
-        }
-    }
-
     private void InitiateMovePlates()
     {
         if (gameController.moveOneSquare)
@@ -74,19 +65,19 @@ public class Pawn : MonoBehaviour
     {
         if (board.PositionOnBoardExists(xPos + 1, yPos) && board.GetPosition(xPos + 1, yPos))
         {
-            JumpOver(xPos + 2, yPos);
+            SpawnMovePlate(xPos + 2, yPos);
         }
         if (board.PositionOnBoardExists(xPos, yPos + 1) && board.GetPosition(xPos, yPos + 1))
         {
-            JumpOver(xPos, yPos + 2);
+            SpawnMovePlate(xPos, yPos + 2);
         }
         if (board.PositionOnBoardExists(xPos - 1, yPos) && board.GetPosition(xPos - 1, yPos))
         {
-            JumpOver(xPos - 2, yPos);
+            SpawnMovePlate(xPos - 2, yPos);
         }
         if (board.PositionOnBoardExists(xPos, yPos - 1) && board.GetPosition(xPos, yPos - 1))
         {
-            JumpOver(xPos, yPos - 2);
+            SpawnMovePlate(xPos, yPos - 2);
         }
     }
 
@@ -94,61 +85,53 @@ public class Pawn : MonoBehaviour
     {
         if (board.PositionOnBoardExists(xPos + 1, yPos + 1) && board.GetPosition(xPos + 1, yPos + 1))
         {
-            JumpOver(xPos + 2, yPos + 2);
+            SpawnMovePlate(xPos + 2, yPos + 2);
         }
         if (board.PositionOnBoardExists(xPos - 1, yPos + 1) && board.GetPosition(xPos - 1, yPos + 1))
         {
-            JumpOver(xPos - 2, yPos + 2);
+            SpawnMovePlate(xPos - 2, yPos + 2);
         }
         if (board.PositionOnBoardExists(xPos + 1, yPos - 1) && board.GetPosition(xPos + 1, yPos - 1))
         {
-            JumpOver(xPos + 2, yPos - 2);
+            SpawnMovePlate(xPos + 2, yPos - 2);
         }
         if (board.PositionOnBoardExists(xPos - 1, yPos - 1) && board.GetPosition(xPos - 1, yPos - 1))
         {
-            JumpOver(xPos - 2, yPos - 2);
+            SpawnMovePlate(xPos - 2, yPos - 2);
         }
     }
 
     private void ActivateMoveOneSquare()         // сделать шаг в любом направлении
     {
-        MoveOneSquare(xPos, yPos + 1);
-        MoveOneSquare(xPos, yPos - 1);
-        MoveOneSquare(xPos + 1, yPos);
-        MoveOneSquare(xPos - 1, yPos);
-        MoveOneSquare(xPos + 1, yPos + 1);
-        MoveOneSquare(xPos - 1, yPos - 1);
-        MoveOneSquare(xPos + 1, yPos - 1);
-        MoveOneSquare(xPos - 1, yPos + 1);
+        SpawnMovePlate(xPos, yPos + 1);
+        SpawnMovePlate(xPos, yPos - 1);
+        SpawnMovePlate(xPos + 1, yPos);
+        SpawnMovePlate(xPos - 1, yPos);
+        SpawnMovePlate(xPos + 1, yPos + 1);
+        SpawnMovePlate(xPos - 1, yPos - 1);
+        SpawnMovePlate(xPos + 1, yPos - 1);
+        SpawnMovePlate(xPos - 1, yPos + 1);
     }
 
-    private void JumpOver(int x, int y)
+    private void SpawnMovePlate(int x, int y)   // поместить на доске маркеры возможных ходов
     {
         if (board.PositionOnBoardExists(x, y))
         {
             if (board.GetPosition(x, y) == null)
             {
-                MovePlateSpawn(x, y);
+                GameObject mp = Instantiate(movePlate, new Vector3(x, y, 0f), Quaternion.identity);
+                MovePlate mpScript = mp.GetComponent<MovePlate>();
+                mpScript.SetReference(gameObject);
+                mpScript.SetCoords(x, y);
             }
         }
     }
-
-    private void MoveOneSquare(int x, int y)
+    public void DestroyMovePlates()
     {
-        if (board.PositionOnBoardExists(x, y))
+        MovePlate[] movePlates = FindObjectsOfType<MovePlate>();
+        for (int i = 0; i < movePlates.Length; i++)
         {
-            if (board.GetPosition(x, y) == null)
-            {
-                MovePlateSpawn(x, y);
-            }
+            Destroy(movePlates[i].gameObject);
         }
     }
-
-    private void MovePlateSpawn(int x, int y)
-    {
-        GameObject mp = Instantiate(movePlate, new Vector3(x, y, 0f), Quaternion.identity);
-        MovePlate mpScript = mp.GetComponent<MovePlate>();
-        mpScript.SetReference(gameObject);
-        mpScript.SetCoords(x, y);
-    }    
 }

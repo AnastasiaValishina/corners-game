@@ -62,7 +62,7 @@ public class Board : MonoBehaviour
     }
     private void PlacePawns()
     {
-        // place player 1 pawns
+        // пешки первого игока
         for (int x = 5; x <= 7; x++)
         {
             for (int y = 0; y <= 2; y++)
@@ -75,7 +75,7 @@ public class Board : MonoBehaviour
             }
         }
 
-        // place player 2 pawns
+        // пешки второго игрока
         for (int x = 0; x <= 2; x++)
         {
             for (int y = 5; y <= 7; y++)
@@ -89,7 +89,7 @@ public class Board : MonoBehaviour
         }
     }
 
-    public void SetPositionEmpty(int x, int y)
+    public void SetPositionEmpty(int x, int y)  // отметить, что квадрат свободен
     {
         squares[x, y] = null;
     }
@@ -98,8 +98,23 @@ public class Board : MonoBehaviour
     {
         return squares[x, y];
     }
+       
+    public bool PositionOnBoardExists(int x, int y) 
+    {
+        if (x < 0 || y < 0 || x >= squares.GetLength(0) || y >= squares.GetLength(1))
+        {
+            return false;
+        }
+        else { return true; }
+    }
 
-    public void CheckWinner()
+    public void SetPosition(GameObject obj) // отметить, что квадрат занят определенной пешкой
+    {
+        Pawn pawn = obj.GetComponent<Pawn>();
+        squares[pawn.xPos, pawn.yPos] = obj;
+    }
+
+    public void CheckWinner()               // проверить все ли пешки стоят на поле противника
     {
         if (GetPosition(0, 5) && GetPosition(0, 5).name == "white" &&
             GetPosition(0, 6) && GetPosition(0, 6).name == "white" &&
@@ -125,19 +140,5 @@ public class Board : MonoBehaviour
         {
             gameController.Winner(gameController.playerTwoName);
         }
-    }
-
-    public bool PositionOnBoardExists(int x, int y)
-    {
-        if (x < 0 || y < 0 || x >= squares.GetLength(0) || y >= squares.GetLength(1))
-        {
-            return false;
-        }
-        else { return true; }
-    }
-    public void SetPosition(GameObject obj)
-    {
-        Pawn pawn = obj.GetComponent<Pawn>();
-        squares[pawn.xPos, pawn.yPos] = obj;
     }
 }

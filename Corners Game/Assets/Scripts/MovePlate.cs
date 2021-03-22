@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class MovePlate : MonoBehaviour
 {
-    Board board;
     GameObject reference = null;
 
     int plateX;
@@ -12,20 +11,28 @@ public class MovePlate : MonoBehaviour
 
     public void OnMouseDown()
     {
-        board = FindObjectOfType<Board>();
-        board.SetPositionEmpty(reference.GetComponent<Pawn>().xPos, reference.GetComponent<Pawn>().yPos);
+        Board board = FindObjectOfType<Board>();
+        Pawn pawnScript = reference.GetComponent<Pawn>();
 
-        reference.GetComponent<Pawn>().xPos = plateX;
-        reference.GetComponent<Pawn>().yPos = plateY;
-        reference.GetComponent<Pawn>().SetCoords();
+        // отметить, что квадрат, на котором стояла пешка, свободен
+        board.SetPositionEmpty(pawnScript.xPos, pawnScript.yPos);
 
+        // переместить пешку
+        pawnScript.xPos = plateX;
+        pawnScript.yPos = plateY;
+        pawnScript.SetCoords();
+
+        // отметить, что квадрат занят пешкой
         board.SetPosition(reference);
 
+        // проверить есть ли победитель
+        board.CheckWinner();
+
+        // передать ход след игроку
         FindObjectOfType<GameController>().NextTurn();
 
-        reference.GetComponent<Pawn>().DestroyMovePlates();
-
-        board.CheckWinner();
+        // удалить остальные маркеры возможных ходов 
+        pawnScript.DestroyMovePlates();         
     }
 
     public void SetCoords(int x, int y)

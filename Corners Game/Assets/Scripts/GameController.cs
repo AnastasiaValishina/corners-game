@@ -6,23 +6,24 @@ using UnityEngine.UI;
 
 public class GameController : MonoBehaviour
 {
-    public GameObject toggleJumpDiagonal;
-    public GameObject toggleJumpLine;
-    public GameObject toggleMoveOneSquare;
     public GameObject popupMenu;
-
     public Text winnerText;
     public Text turnText;
     public GameObject restartButton;
 
-    public string playerOneName = "White";
-    public string playerTwoName = "Black";
-    public GameObject inputFieldPlayerOne;
-    public GameObject inputFieldPlayerTwo;
-
+    [Header("Difficulty Toggles")]
+    public GameObject toggleJumpDiagonal;
+    public GameObject toggleJumpLine;
+    public GameObject toggleMoveOneSquare;
     public bool jumpDiagonal = false;
     public bool jumpLine = false;
     public bool moveOneSquare = true;
+
+    [Header("Player names input")]
+    public string playerOneName;
+    public string playerTwoName;
+    public GameObject inputFieldPlayerOne;
+    public GameObject inputFieldPlayerTwo;
 
     string currentPlayer;
     bool gameOver = false;
@@ -38,7 +39,6 @@ public class GameController : MonoBehaviour
         if (gameOver == true)
         {
             restartButton.SetActive(true);
-            gameOver = false;
         }
     }
 
@@ -66,7 +66,6 @@ public class GameController : MonoBehaviour
     {
         FindObjectOfType<Board>().StartGame();
         popupMenu.SetActive(false);
-
         SetPlayersNames();
         currentPlayer = playerOneName;
         UpdatePlayerText();
@@ -76,7 +75,7 @@ public class GameController : MonoBehaviour
     {
         if (inputFieldPlayerOne.GetComponent<Text>().text == "")
         {
-            playerOneName = "White";
+            playerOneName = "Игрок 1";
         }
         else
         {
@@ -85,7 +84,7 @@ public class GameController : MonoBehaviour
 
         if (inputFieldPlayerTwo.GetComponent<Text>().text == "")
         {
-            playerTwoName = "Black";
+            playerTwoName = "Игрок 2";
         }
         else
         {
@@ -102,6 +101,7 @@ public class GameController : MonoBehaviour
     {
         return currentPlayer;
     }
+
     public void NextTurn()
     {
         if (currentPlayer == playerOneName)

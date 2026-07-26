@@ -10,16 +10,20 @@ public class Board : MonoBehaviour
     [SerializeField] Transform pawnsContainer;
 
     GameObject[,] squares;
-    GameController gameController;
 
     int width = 8;
     int height = 8;
 
+	public static Board Instance { get; private set; }
+	private void Awake()
+	{
+		if (Instance == null) Instance = this;
+		else Destroy(gameObject);
+	}
 
-    void Start()
+	void Start()
     {
         squares = new GameObject[width, height];
-        gameController = FindObjectOfType<GameController>();
     }
 
     public void StartGame()
@@ -125,8 +129,8 @@ public class Board : MonoBehaviour
             GetPosition(2, 6) && GetPosition(2, 6).name == "white" &&
             GetPosition(2, 7) && GetPosition(2, 7).name == "white")
         {
-            gameController.Winner(gameController.GetPlayerOneName());
-        }
+			GameController.Instance.Winner(GameController.Instance.GetPlayerOneName()); // выглядит странно
+		}
         if (GetPosition(5, 0) && GetPosition(5, 0).name == "black" &&
             GetPosition(5, 1) && GetPosition(5, 1).name == "black" &&
             GetPosition(5, 2) && GetPosition(5, 2).name == "black" &&
@@ -137,7 +141,7 @@ public class Board : MonoBehaviour
             GetPosition(7, 1) && GetPosition(7, 1).name == "black" &&
             GetPosition(7, 2) && GetPosition(7, 2).name == "black")
         {
-            gameController.Winner(gameController.GetPlayerTwoName());
+			GameController.Instance.Winner(GameController.Instance.GetPlayerTwoName()); 
         }
     }
 }

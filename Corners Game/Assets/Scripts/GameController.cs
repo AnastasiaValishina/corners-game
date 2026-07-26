@@ -26,7 +26,14 @@ public class GameController : MonoBehaviour
     string currentPlayer;
     bool gameOver = false;
 
-    void Start()
+	public static GameController Instance { get; private set; }
+	private void Awake()
+	{
+		if (Instance == null) Instance = this;
+		else Destroy(gameObject);
+	}
+
+	void Start()
     {
         toggleJumpDiagonal.isOn = jumpDiagonal;
         toggleJumpLine.isOn = jumpLine;
@@ -62,7 +69,7 @@ public class GameController : MonoBehaviour
 
     public void OnStartClick()
     {
-        FindObjectOfType<Board>().StartGame();
+        Board.Instance.StartGame();
         popupMenu.SetActive(false);
         SetPlayersNames();
         currentPlayer = playerOneName;

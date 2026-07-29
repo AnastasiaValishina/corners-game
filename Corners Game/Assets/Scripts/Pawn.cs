@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
+using UnityEngine.EventSystems;
 
-public class Pawn : MonoBehaviour
+public class Pawn : MonoBehaviour, IPointerClickHandler
 {
     [SerializeField] private MovePlate movePlate;
     int xPos;
@@ -12,8 +13,8 @@ public class Pawn : MonoBehaviour
 
     void Start()
     {
-        board = FindObjectOfType<Board>();
-        gameController = FindObjectOfType<GameController>();
+        board = Board.Instance              ;
+        gameController = GameController.Instance;
         xPos = (int)transform.position.x;
         yPos = (int)transform.position.y;
 
@@ -31,8 +32,8 @@ public class Pawn : MonoBehaviour
         transform.position = new Vector3(xPos, yPos, 0f);
     }
 
-    private void OnMouseDown()
-    {
+	public void OnPointerClick(PointerEventData eventData)
+	{
         if (!gameController.IsGameOver() && gameController.GetCurrentPlayer() == player)
         {
             DestroyMovePlates();

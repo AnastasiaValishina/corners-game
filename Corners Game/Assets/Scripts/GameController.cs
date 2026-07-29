@@ -14,11 +14,8 @@ public class GameController : MonoBehaviour
     [SerializeField] Toggle toggleJumpLine;
     [SerializeField] Toggle toggleMoveOneSquare;
 
-    [Header("Player names input")]
     string playerOneName;
     string playerTwoName;
-    [SerializeField] InputField inputFieldPlayerOne;
-    [SerializeField] InputField inputFieldPlayerTwo;
 
     bool jumpDiagonal = false;
     bool jumpLine = false;
@@ -38,13 +35,6 @@ public class GameController : MonoBehaviour
         toggleJumpDiagonal.isOn = jumpDiagonal;
         toggleJumpLine.isOn = jumpLine;
         toggleMoveOneSquare.isOn = moveOneSquare;
-    }
-    private void Update()
-    {
-        if (gameOver == true)
-        {
-            restartButton.SetActive(true);
-        }
     }
 
     public void RestartGame()
@@ -78,23 +68,8 @@ public class GameController : MonoBehaviour
 
     private void SetPlayersNames()
     {
-        if (inputFieldPlayerOne.text == "")
-        {
-            playerOneName = "Игрок 1";
-        }
-        else
-        {
-            playerOneName = inputFieldPlayerOne.text;
-        }
-
-        if (inputFieldPlayerTwo.text == "")
-        {
-            playerTwoName = "Игрок 2";
-        }
-        else
-        {
-            playerTwoName = inputFieldPlayerTwo.text;
-        }
+        playerOneName = "Игрок 1";
+        playerTwoName = "Игрок 2";
     }
 
     private void UpdatePlayerText()
@@ -124,7 +99,8 @@ public class GameController : MonoBehaviour
     public void Winner(string playerWinner)
     {
         gameOver = true;
-        winnerText.enabled = true;
+		restartButton.SetActive(true);
+		winnerText.enabled = true;
         winnerText.text = playerWinner + " победил!";
     }
 

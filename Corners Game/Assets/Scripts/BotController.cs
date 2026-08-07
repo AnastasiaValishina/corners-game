@@ -6,6 +6,13 @@ public class BotController : MonoBehaviour
 	// Целевая точка для черных пешек
 	Vector2Int targetCorner = new Vector2Int(7, 0);
 
+	public static BotController Instance { get; private set; }
+	private void Awake()
+	{
+		if (Instance == null) Instance = this;
+		else Destroy(gameObject);
+	}
+
 	public void MakeSmartMove()
 	{
 		Pawn bestPawn = null;

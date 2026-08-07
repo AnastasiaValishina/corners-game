@@ -59,17 +59,17 @@ public class Pawn : MonoBehaviour, IPointerClickHandler
 
 	private void InitiateMovePlates()
     {
-        if (gameController.CanMoveOneSquare())
+        if (gameController.CanMoveOneSquare)
         {
             ActivateMoveOneSquare();
         }
 
-        if (gameController.CanJumpDiagonal())
+        if (gameController.CanJumpDiagonal)
         {
             ActivateJumpOverDiag();
         }
 
-        if (gameController.CanJumpLine())
+        if (gameController.CanJumpLine)
         {
             ActivateJumpOver();
         }

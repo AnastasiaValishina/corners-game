@@ -151,9 +151,9 @@ public class Board : MonoBehaviour
 	{
 		List<Vector2Int> moves = new List<Vector2Int>();
 
-		bool canMoveOne = GameController.Instance.CanMoveOneSquare();
-		bool canJumpLine = GameController.Instance.CanJumpLine();
-		bool canJumpDiag = GameController.Instance.CanJumpDiagonal();
+		bool canMoveOne = GameController.Instance.CanMoveOneSquare;
+		bool canJumpLine = GameController.Instance.CanJumpLine;
+		bool canJumpDiag = GameController.Instance.CanJumpDiagonal;
 
 		// 1. Обычные шаги на соседние клетки
 		if (canMoveOne)

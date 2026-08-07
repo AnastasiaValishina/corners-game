@@ -5,44 +5,31 @@ using System.Collections;
 
 public class GameController : MonoBehaviour
 {
-    [SerializeField] GameObject popupMenu;
     [SerializeField] Text winnerText;
     [SerializeField] Text turnText;
     [SerializeField] GameObject restartButton;
 
-    [Header("Difficulty Toggles")]
-    [SerializeField] Toggle toggleJumpDiagonal;
-    [SerializeField] Toggle toggleJumpLine;
-    [SerializeField] Toggle toggleMoveOneSquare;
-
-	[Header("Game Modes")]
-    //[SerializeField] Toggle toggleBotMode; // Галочка в меню для включения бота
-	[SerializeField] BotController botController; // Ссылка на нашего скрипт-менеджер бота
-
 	string playerOneName;
     string playerTwoName;
 
-    bool jumpDiagonal = false;
-    bool jumpLine = false;
-    bool moveOneSquare = true;
+    bool _jumpDiagonal = false;
+    bool _jumpLine = false;
+    bool _moveOneSquare = true;
+
     string currentPlayer;
     bool gameOver = false;
 
-	bool isBotActive = true;
+	bool _isBotActive = false;
 
 	public static GameController Instance { get; private set; }
+	public bool CanJumpDiagonal { get => _jumpDiagonal; private set => _jumpDiagonal = value; }
+	public bool CanJumpLine { get => _jumpLine; private set => _jumpLine = value; }
+	public bool CanMoveOneSquare { get => _moveOneSquare; private set => _moveOneSquare = value; }
+
 	private void Awake()
 	{
 		if (Instance == null) Instance = this;
 		else Destroy(gameObject);
-	}
-
-	void Start()
-    {
-        toggleJumpDiagonal.isOn = jumpDiagonal;
-        toggleJumpLine.isOn = jumpLine;
-        toggleMoveOneSquare.isOn = moveOneSquare;
-		//toggleBotMode.isOn = isBotActive;
 	}
 
     public void RestartGame()
@@ -52,28 +39,32 @@ public class GameController : MonoBehaviour
 
     public void ToggleJumpDiagonal(bool newValue)
     {
-        jumpDiagonal = newValue;
+        _jumpDiagonal = newValue;
     }
     
     public void ToggleJumpLine(bool newValue)
     {
-        jumpLine = newValue;
+        _jumpLine = newValue;
     }
 
     public void ToggleMoveOneSquare(bool newValue)
     {
-        moveOneSquare = newValue;
+        _moveOneSquare = newValue;
     }
 
 	public void ToggleBotMode(bool newValue)
 	{
-		isBotActive = newValue;
+		_isBotActive = newValue;
 	}
 
-	public void OnStartClick()
+	public void StartGame(bool jumpDiagonal, bool jumpLine, bool moveOneSquare, bool isBotActive)
     {
-        Board.Instance.StartGame();
-        popupMenu.SetActive(false);
+		_jumpDiagonal = jumpDiagonal;
+		_jumpLine = jumpLine;
+		_moveOneSquare = moveOneSquare;
+		_isBotActive = isBotActive;
+
+		Board.Instance.StartGame();
         SetPlayersNames();
         currentPlayer = playerOneName;
         UpdatePlayerText();
@@ -83,7 +74,7 @@ public class GameController : MonoBehaviour
     {
         playerOneName = "Игрок 1";
 
-		if (isBotActive)
+		if (_isBotActive)
 		{
 			playerTwoName = "Бот (Черные)";
 		}
@@ -111,7 +102,7 @@ public class GameController : MonoBehaviour
 			UpdatePlayerText();
 
 			// Если включен режим игры с ботом и игра не окончена - запускаем логику бота
-			if (isBotActive && !gameOver)
+			if (_isBotActive && !gameOver)
 			{
 				StartCoroutine(BotTurnCoroutine());
 			}
@@ -128,7 +119,7 @@ public class GameController : MonoBehaviour
 		// Пауза 1 секунда, чтобы игрок успел понять, что ход перешел к компьютеру
 		yield return new WaitForSeconds(1.0f);
 
-		botController.MakeSmartMove();
+		BotController.Instance.MakeSmartMove();
 	}
 
 	public void Winner(string playerWinner)
@@ -143,22 +134,7 @@ public class GameController : MonoBehaviour
     {
         return gameOver;
     }
-    
-    public bool CanJumpDiagonal()
-    {
-        return jumpDiagonal;
-    }
-    
-    public bool CanJumpLine()
-    {
-        return jumpLine;
-    }
-    
-    public bool CanMoveOneSquare()
-    {
-        return moveOneSquare;
-    }
-
+   
     public string GetPlayerOneName()
     {
         return playerOneName;
@@ -171,6 +147,6 @@ public class GameController : MonoBehaviour
 
 	public bool IsBotActive()
 	{
-		return isBotActive;
+		return _isBotActive;
 	}
 }

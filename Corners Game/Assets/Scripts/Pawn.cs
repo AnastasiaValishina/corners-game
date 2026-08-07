@@ -41,7 +41,23 @@ public class Pawn : MonoBehaviour, IPointerClickHandler
         }
     }
 
-    private void InitiateMovePlates()
+	private void OnMouseDown()
+	{
+		// Если игра не окончена И сейчас ход этого игрока
+		if (!gameController.IsGameOver() && gameController.GetCurrentPlayer() == player)
+		{
+			// БЛОКИРОВКА: Если это черная пешка, и сейчас играет бот — запрещаем ручной клик
+			if (gameController.IsBotActive() && name == "black")
+			{
+				return; // Прерываем выполнение метода
+			}
+
+			DestroyMovePlates();
+			InitiateMovePlates();
+		}
+	}
+
+	private void InitiateMovePlates()
     {
         if (gameController.CanMoveOneSquare())
         {

@@ -245,8 +245,8 @@ MonoBehaviour:
     y: 518.4
     width: 1051.2
     height: 198.39996
-  m_MinSize: {x: 100, y: 100}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 101, y: 126}
+  m_MaxSize: {x: 4001, y: 4026}
   m_ActualView: {fileID: 16}
   m_Panes:
   - {fileID: 15}
@@ -272,8 +272,8 @@ MonoBehaviour:
     y: 0
     width: 484.80005
     height: 716.8
-  m_MinSize: {x: 275, y: 50}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 276, y: 76}
+  m_MaxSize: {x: 4001, y: 4026}
   m_ActualView: {fileID: 17}
   m_Panes:
   - {fileID: 17}
@@ -301,7 +301,7 @@ MonoBehaviour:
   m_Pos:
     serializedVersion: 2
     x: 0
-    y: 43.2
+    y: 0
     width: 1536
     height: 36
   m_SerializedDataModeController:
@@ -568,7 +568,7 @@ MonoBehaviour:
   m_Pos:
     serializedVersion: 2
     x: 0
-    y: 79.200005
+    y: 24
     width: 248.6
     height: 492.40002
   m_SerializedDataModeController:
@@ -596,8 +596,8 @@ MonoBehaviour:
       - m_Data: 33976
       m_RenameOverlay:
         m_UserAcceptedRename: 0
-        m_Name: EventSystem
-        m_OriginalName: EventSystem
+        m_Name: 
+        m_OriginalName: 
         m_EditFieldRect:
           serializedVersion: 2
           x: 0
@@ -605,10 +605,10 @@ MonoBehaviour:
           width: 0
           height: 0
         m_UserData:
-          m_Data: 33690
+          m_Data: 0
         m_IsWaitingForDelay: 0
         m_IsRenaming: 0
-        m_OriginalEventType: 0
+        m_OriginalEventType: 11
         m_IsRenamingFilename: 0
         m_TrimLeadingAndTrailingWhitespace: 0
         m_ClientGUIView: {fileID: 8}
@@ -1407,7 +1407,7 @@ MonoBehaviour:
       m_Data: 34242
     m_ExpandedIDs:
     - m_Data: 0
-    - m_Data: 34118
+    - m_Data: 34124
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1441,7 +1441,7 @@ MonoBehaviour:
       m_Data: 0
     m_ExpandedIDs:
     - m_Data: 0
-    - m_Data: 34118
+    - m_Data: 34124
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1482,8 +1482,8 @@ MonoBehaviour:
     - m_Data: 85584
     m_RenameOverlay:
       m_UserAcceptedRename: 0
-      m_Name: Prefabs
-      m_OriginalName: Prefabs
+      m_Name: 
+      m_OriginalName: 
       m_EditFieldRect:
         serializedVersion: 2
         x: 0
@@ -1491,10 +1491,10 @@ MonoBehaviour:
         width: 0
         height: 0
       m_UserData:
-        m_Data: 34242
+        m_Data: 0
       m_IsWaitingForDelay: 0
       m_IsRenaming: 0
-      m_OriginalEventType: 0
+      m_OriginalEventType: 11
       m_IsRenamingFilename: 1
       m_TrimLeadingAndTrailingWhitespace: 0
       m_ClientGUIView: {fileID: 10}
@@ -1533,7 +1533,7 @@ MonoBehaviour:
   m_Pos:
     serializedVersion: 2
     x: 0
-    y: 597.60004
+    y: 542.4
     width: 1050.2
     height: 172.39996
   m_SerializedDataModeController:
@@ -1571,8 +1571,8 @@ MonoBehaviour:
     m_TextWithWhitespace: "Inspector\u200B"
   m_Pos:
     serializedVersion: 2
-    x: 1051.2001
-    y: 79.200005
+    x: 1052.2
+    y: 24
     width: 483.80005
     height: 690.8
   m_SerializedDataModeController:
@@ -1624,8 +1624,8 @@ MonoBehaviour:
     m_TextWithWhitespace: "Game\u200B"
   m_Pos:
     serializedVersion: 2
-    x: 249.6
-    y: 79.200005
+    x: 250.6
+    y: 24
     width: 799.6
     height: 492.40002
   m_SerializedDataModeController:
@@ -1701,7 +1701,7 @@ MonoBehaviour:
       height: 905.54083
     m_MinimalGUI: 1
   m_defaultScale: 0.5205729
-  m_LastWindowPixelSize: {x: 999.5, y: 615.5}
+  m_LastWindowPixelSize: {x: 799.6, y: 492.40002}
   m_ClearInEditMode: 1
   m_NoCameraWarning: 1
   m_LowResolutionForAspectRatios: 01000000000000000000

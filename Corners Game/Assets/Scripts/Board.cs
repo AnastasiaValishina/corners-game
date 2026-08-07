@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class Board : MonoBehaviour
 {
@@ -144,4 +145,74 @@ public class Board : MonoBehaviour
 			GameController.Instance.Winner(GameController.Instance.GetPlayerTwoName()); 
         }
     }
+
+	// Метод возвращает список всех возможных ходов для пешки на заданных координатах
+	public List<Vector2Int> GetAvailableMoves(int xPos, int yPos)
+	{
+		List<Vector2Int> moves = new List<Vector2Int>();
+
+		bool canMoveOne = GameController.Instance.CanMoveOneSquare();
+		bool canJumpLine = GameController.Instance.CanJumpLine();
+		bool canJumpDiag = GameController.Instance.CanJumpDiagonal();
+
+		// 1. Обычные шаги на соседние клетки
+		if (canMoveOne)
+		{
+			AddMoveIfValid(moves, xPos, yPos + 1);
+			AddMoveIfValid(moves, xPos, yPos - 1);
+			AddMoveIfValid(moves, xPos + 1, yPos);
+			AddMoveIfValid(moves, xPos - 1, yPos);
+			AddMoveIfValid(moves, xPos + 1, yPos + 1);
+			AddMoveIfValid(moves, xPos - 1, yPos - 1);
+			AddMoveIfValid(moves, xPos + 1, yPos - 1);
+			AddMoveIfValid(moves, xPos - 1, yPos + 1);
+		}
+
+		// 2. Прыжки по вертикали и горизонтали
+		if (canJumpLine)
+		{
+			if (PositionOnBoardExists(xPos + 1, yPos) && GetPosition(xPos + 1, yPos))
+				AddMoveIfValid(moves, xPos + 2, yPos);
+
+			if (PositionOnBoardExists(xPos, yPos + 1) && GetPosition(xPos, yPos + 1))
+				AddMoveIfValid(moves, xPos, yPos + 2);
+
+			if (PositionOnBoardExists(xPos - 1, yPos) && GetPosition(xPos - 1, yPos))
+				AddMoveIfValid(moves, xPos - 2, yPos);
+
+			if (PositionOnBoardExists(xPos, yPos - 1) && GetPosition(xPos, yPos - 1))
+				AddMoveIfValid(moves, xPos, yPos - 2);
+		}
+
+		// 3. Прыжки по диагонали
+		if (canJumpDiag)
+		{
+			if (PositionOnBoardExists(xPos + 1, yPos + 1) && GetPosition(xPos + 1, yPos + 1))
+				AddMoveIfValid(moves, xPos + 2, yPos + 2);
+
+			if (PositionOnBoardExists(xPos - 1, yPos + 1) && GetPosition(xPos - 1, yPos + 1))
+				AddMoveIfValid(moves, xPos - 2, yPos + 2);
+
+			if (PositionOnBoardExists(xPos + 1, yPos - 1) && GetPosition(xPos + 1, yPos - 1))
+				AddMoveIfValid(moves, xPos + 2, yPos - 2);
+
+			if (PositionOnBoardExists(xPos - 1, yPos - 1) && GetPosition(xPos - 1, yPos - 1))
+				AddMoveIfValid(moves, xPos - 2, yPos - 2);
+		}
+
+		return moves;
+	}
+
+	// Вспомогательный метод для добавления координат в список
+	private void AddMoveIfValid(List<Vector2Int> moves, int targetX, int targetY)
+	{
+		// Проверяем, существует ли клетка на доске и свободна ли она
+		if (PositionOnBoardExists(targetX, targetY))
+		{
+			if (GetPosition(targetX, targetY) == null)
+			{
+				moves.Add(new Vector2Int(targetX, targetY));
+			}
+		}
+	}
 }

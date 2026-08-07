@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using System.Collections;
 
 public class GameController : MonoBehaviour
 {
@@ -14,7 +15,11 @@ public class GameController : MonoBehaviour
     [SerializeField] Toggle toggleJumpLine;
     [SerializeField] Toggle toggleMoveOneSquare;
 
-    string playerOneName;
+	[Header("Game Modes")]
+    //[SerializeField] Toggle toggleBotMode; // Галочка в меню для включения бота
+	[SerializeField] BotController botController; // Ссылка на нашего скрипт-менеджер бота
+
+	string playerOneName;
     string playerTwoName;
 
     bool jumpDiagonal = false;
@@ -22,6 +27,8 @@ public class GameController : MonoBehaviour
     bool moveOneSquare = true;
     string currentPlayer;
     bool gameOver = false;
+
+	bool isBotActive = true;
 
 	public static GameController Instance { get; private set; }
 	private void Awake()
@@ -35,7 +42,8 @@ public class GameController : MonoBehaviour
         toggleJumpDiagonal.isOn = jumpDiagonal;
         toggleJumpLine.isOn = jumpLine;
         toggleMoveOneSquare.isOn = moveOneSquare;
-    }
+		//toggleBotMode.isOn = isBotActive;
+	}
 
     public void RestartGame()
     {
@@ -57,7 +65,12 @@ public class GameController : MonoBehaviour
         moveOneSquare = newValue;
     }
 
-    public void OnStartClick()
+	public void ToggleBotMode(bool newValue)
+	{
+		isBotActive = newValue;
+	}
+
+	public void OnStartClick()
     {
         Board.Instance.StartGame();
         popupMenu.SetActive(false);
@@ -69,8 +82,16 @@ public class GameController : MonoBehaviour
     private void SetPlayersNames()
     {
         playerOneName = "Игрок 1";
-        playerTwoName = "Игрок 2";
-    }
+
+		if (isBotActive)
+		{
+			playerTwoName = "Бот (Черные)";
+		}
+		else
+		{
+			playerTwoName = "Игрок 2";
+		}
+	}
 
     private void UpdatePlayerText()
     {
@@ -82,21 +103,35 @@ public class GameController : MonoBehaviour
         return currentPlayer;
     }
 
-    public void NextTurn()
-    {
-        if (currentPlayer == playerOneName)
-        {
-            currentPlayer = playerTwoName;
-            UpdatePlayerText();
-        }
-        else
-        {
-            currentPlayer = playerOneName;
-            UpdatePlayerText();
-        }
-    }
+	public void NextTurn()
+	{
+		if (currentPlayer == playerOneName)
+		{
+			currentPlayer = playerTwoName;
+			UpdatePlayerText();
 
-    public void Winner(string playerWinner)
+			// Если включен режим игры с ботом и игра не окончена - запускаем логику бота
+			if (isBotActive && !gameOver)
+			{
+				StartCoroutine(BotTurnCoroutine());
+			}
+		}
+		else
+		{
+			currentPlayer = playerOneName;
+			UpdatePlayerText();
+		}
+	}
+
+	private IEnumerator BotTurnCoroutine()
+	{
+		// Пауза 1 секунда, чтобы игрок успел понять, что ход перешел к компьютеру
+		yield return new WaitForSeconds(1.0f);
+
+		botController.MakeSmartMove();
+	}
+
+	public void Winner(string playerWinner)
     {
         gameOver = true;
 		restartButton.SetActive(true);
@@ -133,4 +168,9 @@ public class GameController : MonoBehaviour
     {
         return playerTwoName;
     }
+
+	public bool IsBotActive()
+	{
+		return isBotActive;
+	}
 }

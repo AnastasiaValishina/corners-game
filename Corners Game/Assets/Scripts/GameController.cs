@@ -21,10 +21,10 @@ public class GameController : MonoBehaviour
 
 	bool _isBotActive = false;
 
-	public static GameController Instance { get; private set; }
 	public bool CanJumpDiagonal { get => _jumpDiagonal; private set => _jumpDiagonal = value; }
 	public bool CanJumpLine { get => _jumpLine; private set => _jumpLine = value; }
 	public bool CanMoveOneSquare { get => _moveOneSquare; private set => _moveOneSquare = value; }
+	public static GameController Instance { get; private set; }
 
 	private void Awake()
 	{
@@ -36,26 +36,6 @@ public class GameController : MonoBehaviour
     {
         SceneManager.LoadScene(0);
     }
-
-    public void ToggleJumpDiagonal(bool newValue)
-    {
-        _jumpDiagonal = newValue;
-    }
-    
-    public void ToggleJumpLine(bool newValue)
-    {
-        _jumpLine = newValue;
-    }
-
-    public void ToggleMoveOneSquare(bool newValue)
-    {
-        _moveOneSquare = newValue;
-    }
-
-	public void ToggleBotMode(bool newValue)
-	{
-		_isBotActive = newValue;
-	}
 
 	public void StartGame(bool jumpDiagonal, bool jumpLine, bool moveOneSquare, bool isBotActive)
     {
@@ -101,7 +81,6 @@ public class GameController : MonoBehaviour
 			currentPlayer = playerTwoName;
 			UpdatePlayerText();
 
-			// Если включен режим игры с ботом и игра не окончена - запускаем логику бота
 			if (_isBotActive && !gameOver)
 			{
 				StartCoroutine(BotTurnCoroutine());
@@ -116,7 +95,6 @@ public class GameController : MonoBehaviour
 
 	private IEnumerator BotTurnCoroutine()
 	{
-		// Пауза 1 секунда, чтобы игрок успел понять, что ход перешел к компьютеру
 		yield return new WaitForSeconds(1.0f);
 
 		BotController.Instance.MakeSmartMove();

@@ -40,12 +40,12 @@ public class Board : MonoBehaviour
             for (int y = 0; y < height; y++)
             {
                 Vector2 posBlack = new Vector2(x, y);
-                GameObject squareBlack = Instantiate(squareBlackPrefab, posBlack, Quaternion.identity) as GameObject;
+                GameObject squareBlack = Instantiate(squareBlackPrefab, posBlack, Quaternion.identity);
                 squareBlack.transform.parent = tilesContainer;
                 squareBlack.name = "( " + x + ", " + y + " )";
                 y++;
                 Vector2 posWhite = new Vector2(x, y);
-                GameObject squareWhite = Instantiate(squareWhitePrefab, posWhite, Quaternion.identity) as GameObject;
+                GameObject squareWhite = Instantiate(squareWhitePrefab, posWhite, Quaternion.identity);
                 squareWhite.transform.parent = tilesContainer;
                 squareWhite.name = "( " + x + ", " + y + " )";
             }
@@ -53,12 +53,12 @@ public class Board : MonoBehaviour
             for (int y = 0; y < height; y++)
             {
                 Vector2 posBlack = new Vector2(x, y);
-                GameObject squareWhite = Instantiate(squareWhitePrefab, posBlack, Quaternion.identity) as GameObject;
+                GameObject squareWhite = Instantiate(squareWhitePrefab, posBlack, Quaternion.identity);
                 squareWhite.transform.parent = tilesContainer;
                 squareWhite.name = "( " + x + ", " + y + " )";
                 y++;
                 Vector2 posWhite = new Vector2(x, y);
-                GameObject squareBlack = Instantiate(squareBlackPrefab, posWhite, Quaternion.identity) as GameObject;
+                GameObject squareBlack = Instantiate(squareBlackPrefab, posWhite, Quaternion.identity);
                 squareBlack.transform.parent = tilesContainer;
                 squareBlack.name = "( " + x + ", " + y + " )";
             }

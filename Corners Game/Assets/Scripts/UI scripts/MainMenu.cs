@@ -11,7 +11,7 @@ public class MainMenu : MonoBehaviour
 
 	public void OnStartClicked()
 	{
-		GameController.Instance.StartGame(jumpDiagonal,jumpLine, moveOneSquare, isBot);
+		GameController.Instance.StartGame(jumpDiagonal.isOn,jumpLine.isOn, moveOneSquare.isOn, isBot.isOn);
 		gameObject.SetActive(false);
 	}
 }

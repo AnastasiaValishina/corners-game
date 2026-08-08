@@ -34,15 +34,6 @@ public class Pawn : MonoBehaviour, IPointerClickHandler
 
 	public void OnPointerClick(PointerEventData eventData)
 	{
-        if (!gameController.IsGameOver() && gameController.GetCurrentPlayer() == player)
-        {
-            DestroyMovePlates();
-            InitiateMovePlates();
-        }
-    }
-
-	private void OnMouseDown()
-	{
 		// Если игра не окончена И сейчас ход этого игрока
 		if (!gameController.IsGameOver() && gameController.GetCurrentPlayer() == player)
 		{

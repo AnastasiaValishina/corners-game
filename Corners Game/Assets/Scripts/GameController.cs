@@ -2,6 +2,7 @@
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using System.Collections;
+using System;
 
 public class GameController : MonoBehaviour
 {
@@ -126,5 +127,10 @@ public class GameController : MonoBehaviour
 	public bool IsBotActive()
 	{
 		return _isBotActive;
+	}
+
+	internal void SetBot(bool v)
+	{
+		throw new NotImplementedException();
 	}
 }

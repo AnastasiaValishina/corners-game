@@ -398,6 +398,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cb601556e40ea240a347439b055ad00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UiManager
+  rulesPopup: {fileID: 0}
 --- !u!1 &673475943
 GameObject:
   m_ObjectHideFlags: 0
@@ -494,7 +495,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &795621341
 RectTransform:
   m_ObjectHideFlags: 0
@@ -784,7 +785,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_VertexColorAlwaysGammaSpace: 0
   m_UseReflectionProbes: 0
-  m_AdditionalShaderChannelsFlag: 0
+  m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
@@ -967,7 +968,7 @@ SpriteRenderer:
   m_Size: {x: 14.86, y: 14.44}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_SpriteSortPoint: 0
 --- !u!4 &1302458894
 Transform:
@@ -1517,26 +1518,32 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3450378541202655457, guid: ed3c547330ae9034688a5b0e9df0a893,
+        type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: a45e60a3311891247bfe0256fae4969f,
+        type: 2}
+    - target: {fileID: 3450378541202655457, guid: ed3c547330ae9034688a5b0e9df0a893,
+        type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3652539596748749314, guid: ed3c547330ae9034688a5b0e9df0a893,
         type: 3}
       propertyPath: m_Name
       value: MainMenu
       objectReference: {fileID: 0}
-    - target: {fileID: 7310966672535636715, guid: ed3c547330ae9034688a5b0e9df0a893,
+    - target: {fileID: 3652539596748749314, guid: ed3c547330ae9034688a5b0e9df0a893,
         type: 3}
-      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1680525158}
-    - target: {fileID: 7830520108062033318, guid: ed3c547330ae9034688a5b0e9df0a893,
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6083736608298580888, guid: ed3c547330ae9034688a5b0e9df0a893,
         type: 3}
-      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1680525158}
-    - target: {fileID: 8535826623796777520, guid: ed3c547330ae9034688a5b0e9df0a893,
-        type: 3}
-      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1680525158}
+      propertyPath: m_CullTransparentMesh
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

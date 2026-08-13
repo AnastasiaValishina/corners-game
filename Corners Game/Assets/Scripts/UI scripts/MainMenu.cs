@@ -6,23 +6,10 @@ public class MainMenu : MonoBehaviour
 	[SerializeField] Button hotSeatBtn;
 	[SerializeField] Button botBtn;
 
-	[Header("Difficulty Toggles")]
-	[SerializeField] Toggle jumpDiagonal;
-	[SerializeField] Toggle jumpLine;
-	[SerializeField] Toggle moveOneSquare;
-	[SerializeField] Toggle isBot;
-
 	private void Start()
 	{
 		botBtn.onClick.AddListener(OnBotClicked);
 		hotSeatBtn.onClick.AddListener(OnHotSeatClicked);
-	}
-
-
-	public void OnStartClicked()
-	{
-		GameController.Instance.StartGame(jumpDiagonal.isOn,jumpLine.isOn, moveOneSquare.isOn, isBot.isOn);
-		gameObject.SetActive(false);
 	}
 
 	private void OnBotClicked()
@@ -38,6 +25,7 @@ public class MainMenu : MonoBehaviour
 		UiManager.Instance.OpenRules();
 		gameObject.SetActive(false);
 	}
+
 	private void OnDestroy()
 	{
 		if (botBtn != null)

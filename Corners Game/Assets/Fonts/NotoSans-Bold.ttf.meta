@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: cf0536624dcc0c84e8c20666ba2a1581
+guid: 68c8578ef231a504fa645cbd36571c75
 TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
@@ -8,9 +8,8 @@ TrueTypeFontImporter:
   characterSpacing: 0
   characterPadding: 1
   includeFontData: 1
-  fontName: Akademische schmalfette
   fontNames:
-  - Akademische schmalfette
+  - Noto Sans
   fallbackFontReferences: []
   customCharacters: 
   fontRenderingMode: 0

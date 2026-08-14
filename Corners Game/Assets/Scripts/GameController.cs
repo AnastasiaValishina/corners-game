@@ -34,8 +34,10 @@ public class GameController : MonoBehaviour
 
     public void RestartGame()
     {
-        SceneManager.LoadScene(0);
-    }
+		Board.Instance.SetBoard();
+		currentPlayer = 1;
+		UiManager.Instance.UpdateTurn(currentPlayer);
+	}
 
 	public void StartGame(bool jumpDiagonal, bool jumpLine, bool moveOneSquare)
     {
@@ -43,7 +45,7 @@ public class GameController : MonoBehaviour
 		_jumpLine = jumpLine;
 		_moveOneSquare = moveOneSquare;
 
-		Board.Instance.StartGame();
+		Board.Instance.SetBoard();
         currentPlayer = 1;
 		UiManager.Instance.UpdateTurn(currentPlayer);
     }

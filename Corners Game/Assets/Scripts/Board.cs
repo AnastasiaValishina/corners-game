@@ -26,12 +26,28 @@ public class Board : MonoBehaviour
         squares = new GameObject[width, height];
     }
 
-    public void StartGame()
+    public void SetBoard()
     {
-        PlacePawns();
+		ClearBoard();
+		PlacePawns();
     }
 
-    private void PlacePawns()
+	void ClearBoard()
+	{
+		for (int x = 0; x < width; x++)
+		{
+			for (int y = 0; y < height; y++)
+			{
+				if (squares[x, y] != null)
+				{
+					Destroy(squares[x, y]); // Удаляем объект со сцены
+					squares[x, y] = null;   // Очищаем ссылку в массиве
+				}
+			}
+		}
+	}
+
+	private void PlacePawns()
     {
         // пешки первого игока
         for (int x = 5; x <= 7; x++)
@@ -97,7 +113,7 @@ public class Board : MonoBehaviour
             GetPosition(2, 6) && GetPosition(2, 6).name == "white" &&
             GetPosition(2, 7) && GetPosition(2, 7).name == "white")
         {
-			GameController.Instance.Winner(1); // выглядит странно
+			GameController.Instance.Winner(1); 
 		}
         if (GetPosition(5, 0) && GetPosition(5, 0).name == "black" &&
             GetPosition(5, 1) && GetPosition(5, 1).name == "black" &&

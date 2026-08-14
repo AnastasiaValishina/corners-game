@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -6,6 +5,7 @@ public class UiManager : MonoBehaviour
 {
 	[SerializeField] RulesPopup rulesPopup;
 	[SerializeField] MainMenu mainMenu;
+	[SerializeField] OptionsPopup optionsPopup;
 
 	[Header("Hud")]
 	[SerializeField] Image nextPlayerImage;
@@ -29,7 +29,10 @@ public class UiManager : MonoBehaviour
 
 	void ShowOptions()
 	{
-		throw new NotImplementedException();
+		if (optionsPopup != null)
+		{
+			optionsPopup.gameObject.SetActive(true);
+		}
 	}
 
 	public void ShowRules(bool isShown)
@@ -40,7 +43,7 @@ public class UiManager : MonoBehaviour
 		}
 	}
 
-	void ShowMainMenu(bool isShown)
+	public void ShowMainMenu(bool isShown)
 	{
 		if (mainMenu != null)
 		{

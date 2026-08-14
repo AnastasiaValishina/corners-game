@@ -1,29 +1,26 @@
-﻿using UnityEngine;
-using UnityEngine.SceneManagement;
-using UnityEngine.UI;
-using System.Collections;
+﻿using System.Collections;
+using UnityEngine;
 
 public class GameController : MonoBehaviour
 {
-    [SerializeField] Text winnerText;
-    [SerializeField] Text turnText;
-    [SerializeField] GameObject restartButton;
-
 	const int playerOne = 1;
 	const int playerTwo = 2;
 
     bool _jumpDiagonal = false;
     bool _jumpLine = false;
     bool _moveOneSquare = true;
-
-    int currentPlayer;
-    bool gameOver = false;
-
+    bool _isGameOver = false;
 	bool _isBotActive = false;
+    int _currentPlayer;
+
 
 	public bool CanJumpDiagonal { get => _jumpDiagonal; private set => _jumpDiagonal = value; }
 	public bool CanJumpLine { get => _jumpLine; private set => _jumpLine = value; }
 	public bool CanMoveOneSquare { get => _moveOneSquare; private set => _moveOneSquare = value; }
+	public bool IsGameOver { get => _isGameOver; private set => _isGameOver = value; }
+	public bool IsBotActive { get => _isBotActive; set => _isBotActive = value; }
+	public int CurrentPlayer { get => _currentPlayer; private set => _currentPlayer = value; }
+
 	public static GameController Instance { get; private set; }
 
 	private void Awake()
@@ -35,8 +32,8 @@ public class GameController : MonoBehaviour
     public void RestartGame()
     {
 		Board.Instance.SetBoard();
-		currentPlayer = 1;
-		UiManager.Instance.UpdateTurn(currentPlayer);
+		_currentPlayer = 1;
+		UiManager.Instance.UpdateTurn(_currentPlayer);
 	}
 
 	public void StartGame(bool jumpDiagonal, bool jumpLine, bool moveOneSquare)
@@ -44,33 +41,26 @@ public class GameController : MonoBehaviour
 		_jumpDiagonal = jumpDiagonal;
 		_jumpLine = jumpLine;
 		_moveOneSquare = moveOneSquare;
-
-		Board.Instance.SetBoard();
-        currentPlayer = 1;
-		UiManager.Instance.UpdateTurn(currentPlayer);
-    }
-
-    public int GetCurrentPlayer()
-    {
-        return currentPlayer;
-    }
+		
+		RestartGame();
+	}
 
 	public void NextTurn()
 	{
-		if (currentPlayer == playerOne)
+		if (_currentPlayer == playerOne)
 		{
-			currentPlayer = playerTwo;
-			UiManager.Instance.UpdateTurn(currentPlayer);
+			_currentPlayer = playerTwo;
+			UiManager.Instance.UpdateTurn(_currentPlayer);
 
-			if (_isBotActive && !gameOver)
+			if (_isBotActive && !IsGameOver)
 			{
 				StartCoroutine(BotTurnCoroutine());
 			}
 		}
 		else
 		{
-			currentPlayer = playerOne;
-			UiManager.Instance.UpdateTurn(currentPlayer);
+			_currentPlayer = playerOne;
+			UiManager.Instance.UpdateTurn(_currentPlayer);
 		}
 	}
 
@@ -83,34 +73,7 @@ public class GameController : MonoBehaviour
 
 	public void Winner(int playerWinner)
     {
-        gameOver = true;
-		restartButton.SetActive(true);
-		winnerText.enabled = true;
-        winnerText.text = playerWinner + " победил!";
+        IsGameOver = true;
+		Debug.Log(playerWinner + " победил!");
     }
-
-    public bool IsGameOver()
-    {
-        return gameOver;
-    }
-   
-    public int GetPlayerOneName()
-    {
-        return playerOne;
-    }
-    
-    public int GetPlayerTwoName()
-    {
-        return playerTwo;
-    }
-
-	public bool IsBotActive()
-	{
-		return _isBotActive;
-	}
-
-	public void SetBot(bool botGame)
-	{
-		_isBotActive = botGame;
-	}
 }

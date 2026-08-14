@@ -14,14 +14,14 @@ public class MainMenu : MonoBehaviour
 
 	private void OnBotClicked()
 	{
-		GameController.Instance.SetBot(true);
+		GameController.Instance.IsBotActive = true;
 		UiManager.Instance.ShowRules(true);
 		gameObject.SetActive(false);
 	}
 
 	private void OnHotSeatClicked()
 	{
-		GameController.Instance.SetBot(false);
+		GameController.Instance.IsBotActive = false;
 		UiManager.Instance.ShowRules(true);
 		gameObject.SetActive(false);
 	}

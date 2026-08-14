@@ -35,10 +35,10 @@ public class Pawn : MonoBehaviour, IPointerClickHandler
 	public void OnPointerClick(PointerEventData eventData)
 	{
 		// Если игра не окончена И сейчас ход этого игрока
-		if (!gameController.IsGameOver() && gameController.GetCurrentPlayer() == player)
+		if (!gameController.IsGameOver && gameController.CurrentPlayer == player)
 		{
 			// БЛОКИРОВКА: Если это черная пешка, и сейчас играет бот — запрещаем ручной клик
-			if (gameController.IsBotActive() && name == "black")
+			if (gameController.IsBotActive && name == "black")
 			{
 				return; // Прерываем выполнение метода
 			}

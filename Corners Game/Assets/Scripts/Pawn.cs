@@ -7,7 +7,7 @@ public class Pawn : MonoBehaviour, IPointerClickHandler
     int xPos;
     int yPos;
     
-    string player;
+    int player;
     Board board;
     GameController gameController;
 
@@ -20,9 +20,9 @@ public class Pawn : MonoBehaviour, IPointerClickHandler
 
         switch (name)
         {
-            case "white": player = gameController.GetPlayerOneName();
+            case "white": player = 1;
                 break;
-            case "black": player = gameController.GetPlayerTwoName();
+            case "black": player = 2;
                 break;
         }
     }

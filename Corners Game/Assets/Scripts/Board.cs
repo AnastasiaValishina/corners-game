@@ -97,7 +97,7 @@ public class Board : MonoBehaviour
             GetPosition(2, 6) && GetPosition(2, 6).name == "white" &&
             GetPosition(2, 7) && GetPosition(2, 7).name == "white")
         {
-			GameController.Instance.Winner(GameController.Instance.GetPlayerOneName()); // выглядит странно
+			GameController.Instance.Winner(1); // выглядит странно
 		}
         if (GetPosition(5, 0) && GetPosition(5, 0).name == "black" &&
             GetPosition(5, 1) && GetPosition(5, 1).name == "black" &&
@@ -109,7 +109,7 @@ public class Board : MonoBehaviour
             GetPosition(7, 1) && GetPosition(7, 1).name == "black" &&
             GetPosition(7, 2) && GetPosition(7, 2).name == "black")
         {
-			GameController.Instance.Winner(GameController.Instance.GetPlayerTwoName()); 
+			GameController.Instance.Winner(2); 
         }
     }
 

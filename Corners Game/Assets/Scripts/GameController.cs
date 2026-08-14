@@ -2,7 +2,6 @@
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using System.Collections;
-using System;
 
 public class GameController : MonoBehaviour
 {
@@ -10,14 +9,14 @@ public class GameController : MonoBehaviour
     [SerializeField] Text turnText;
     [SerializeField] GameObject restartButton;
 
-	string playerOneName;
-    string playerTwoName;
+	const int playerOne = 1;
+	const int playerTwo = 2;
 
     bool _jumpDiagonal = false;
     bool _jumpLine = false;
     bool _moveOneSquare = true;
 
-    string currentPlayer;
+    int currentPlayer;
     bool gameOver = false;
 
 	bool _isBotActive = false;
@@ -45,41 +44,21 @@ public class GameController : MonoBehaviour
 		_moveOneSquare = moveOneSquare;
 
 		Board.Instance.StartGame();
-        SetPlayersNames();
-        currentPlayer = playerOneName;
-        UpdatePlayerText();
+        currentPlayer = 1;
+		UiManager.Instance.UpdateTurn(currentPlayer);
     }
 
-    private void SetPlayersNames()
-    {
-        playerOneName = "Игрок 1";
-
-		if (_isBotActive)
-		{
-			playerTwoName = "Бот (Черные)";
-		}
-		else
-		{
-			playerTwoName = "Игрок 2";
-		}
-	}
-
-    private void UpdatePlayerText()
-    {
-        turnText.text = currentPlayer + " ходит...";
-    }
-
-    public string GetCurrentPlayer()
+    public int GetCurrentPlayer()
     {
         return currentPlayer;
     }
 
 	public void NextTurn()
 	{
-		if (currentPlayer == playerOneName)
+		if (currentPlayer == playerOne)
 		{
-			currentPlayer = playerTwoName;
-			UpdatePlayerText();
+			currentPlayer = playerTwo;
+			UiManager.Instance.UpdateTurn(currentPlayer);
 
 			if (_isBotActive && !gameOver)
 			{
@@ -88,8 +67,8 @@ public class GameController : MonoBehaviour
 		}
 		else
 		{
-			currentPlayer = playerOneName;
-			UpdatePlayerText();
+			currentPlayer = playerOne;
+			UiManager.Instance.UpdateTurn(currentPlayer);
 		}
 	}
 
@@ -100,7 +79,7 @@ public class GameController : MonoBehaviour
 		BotController.Instance.MakeSmartMove();
 	}
 
-	public void Winner(string playerWinner)
+	public void Winner(int playerWinner)
     {
         gameOver = true;
 		restartButton.SetActive(true);
@@ -113,14 +92,14 @@ public class GameController : MonoBehaviour
         return gameOver;
     }
    
-    public string GetPlayerOneName()
+    public int GetPlayerOneName()
     {
-        return playerOneName;
+        return playerOne;
     }
     
-    public string GetPlayerTwoName()
+    public int GetPlayerTwoName()
     {
-        return playerTwoName;
+        return playerTwo;
     }
 
 	public bool IsBotActive()

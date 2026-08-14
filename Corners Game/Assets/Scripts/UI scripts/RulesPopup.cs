@@ -7,12 +7,22 @@ public class RulesPopup : MonoBehaviour
 	[SerializeField] Toggle jumpDiagonal;
 	[SerializeField] Toggle jumpLine;
 	[SerializeField] Toggle moveOneSquare;
-	[SerializeField] Toggle isBot;
+	[SerializeField] Button playButton;
 
-
-	public void OnStartClicked()
+	private void Start()
 	{
-		GameController.Instance.StartGame(jumpDiagonal.isOn, jumpLine.isOn, moveOneSquare.isOn, isBot.isOn);
+		playButton.onClick.AddListener(OnPlayClicked);
+	}
+
+	public void OnPlayClicked()
+	{
+		GameController.Instance.StartGame(jumpDiagonal.isOn, jumpLine.isOn, moveOneSquare.isOn);
 		gameObject.SetActive(false);
+	}
+
+	private void OnDestroy()
+	{
+		if (playButton != null)
+			playButton.onClick.RemoveListener(OnPlayClicked);
 	}
 }

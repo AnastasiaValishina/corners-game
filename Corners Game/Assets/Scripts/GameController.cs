@@ -38,12 +38,11 @@ public class GameController : MonoBehaviour
         SceneManager.LoadScene(0);
     }
 
-	public void StartGame(bool jumpDiagonal, bool jumpLine, bool moveOneSquare, bool isBotActive)
+	public void StartGame(bool jumpDiagonal, bool jumpLine, bool moveOneSquare)
     {
 		_jumpDiagonal = jumpDiagonal;
 		_jumpLine = jumpLine;
 		_moveOneSquare = moveOneSquare;
-		_isBotActive = isBotActive;
 
 		Board.Instance.StartGame();
         SetPlayersNames();
@@ -129,8 +128,8 @@ public class GameController : MonoBehaviour
 		return _isBotActive;
 	}
 
-	internal void SetBot(bool v)
+	public void SetBot(bool botGame)
 	{
-		throw new NotImplementedException();
+		_isBotActive = botGame;
 	}
 }

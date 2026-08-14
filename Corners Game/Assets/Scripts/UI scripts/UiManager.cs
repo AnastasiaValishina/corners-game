@@ -11,6 +11,14 @@ public class UiManager : MonoBehaviour
 		else Destroy(gameObject);
 	}
 
+	private void Start()
+	{
+		if (rulesPopup != null)
+		{
+			rulesPopup.gameObject.SetActive(false);
+		}
+	}
+
 	public void OpenRules()
 	{
 		if (rulesPopup != null)

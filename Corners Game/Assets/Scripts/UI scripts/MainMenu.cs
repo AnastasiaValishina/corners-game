@@ -14,6 +14,7 @@ public class MainMenu : MonoBehaviour
 
 	private void OnBotClicked()
 	{
+		AudioPlayer.Instance.PlayButtonClick();
 		GameController.Instance.IsBotActive = true;
 		UiManager.Instance.ShowRules(true);
 		gameObject.SetActive(false);
@@ -21,6 +22,7 @@ public class MainMenu : MonoBehaviour
 
 	private void OnHotSeatClicked()
 	{
+		AudioPlayer.Instance.PlayButtonClick();
 		GameController.Instance.IsBotActive = false;
 		UiManager.Instance.ShowRules(true);
 		gameObject.SetActive(false);

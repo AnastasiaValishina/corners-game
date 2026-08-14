@@ -16,6 +16,7 @@ public class RulesPopup : MonoBehaviour
 
 	public void OnPlayClicked()
 	{
+		AudioPlayer.Instance.PlayButtonClick();
 		GameController.Instance.StartGame(jumpDiagonal.isOn, jumpLine.isOn, moveOneSquare.isOn);
 		gameObject.SetActive(false);
 	}

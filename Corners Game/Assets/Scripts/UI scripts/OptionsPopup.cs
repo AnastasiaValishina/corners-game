@@ -20,29 +20,31 @@ public class OptionsPopup : MonoBehaviour
 	}
 	private void OnMusicClicked()
 	{
-		throw new NotImplementedException();
+		AudioPlayer.Instance.PlayButtonClick();		
 	}
 
 	private void OnSoundClicked()
 	{
-		throw new NotImplementedException();
+		AudioPlayer.Instance.PlayButtonClick();
 	}
-
 
 	private void OnMenuClicked()
 	{
+		AudioPlayer.Instance.PlayButtonClick();
 		UiManager.Instance.ShowMainMenu(true);
 		gameObject.SetActive(false);
 	}
 
 	private void OnRestartClicked()
 	{
+		AudioPlayer.Instance.PlayButtonClick();
 		GameController.Instance.RestartGame();
 		gameObject.SetActive(false);
 	}
 
 	private void OnContinueClicked()
 	{
+		AudioPlayer.Instance.PlayButtonClick();
 		gameObject.SetActive(false);
 	}
 

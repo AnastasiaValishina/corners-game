@@ -10,7 +10,9 @@ public class MovePlate : MonoBehaviour, IPointerClickHandler
 
 	public void OnPointerClick(PointerEventData eventData)
 	{
-        Pawn pawnScript = reference.GetComponent<Pawn>();
+		AudioPlayer.Instance.PlaySlideSound();
+
+		Pawn pawnScript = reference.GetComponent<Pawn>();
 
 		// отметить, что квадрат, на котором стояла пешка, свободен
 		Board.Instance.SetPositionEmpty(pawnScript.GetPositionX(), pawnScript.GetPositionY());

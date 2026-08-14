@@ -43,6 +43,8 @@ public class Pawn : MonoBehaviour, IPointerClickHandler
 				return; // Прерываем выполнение метода
 			}
 
+            AudioPlayer.Instance.PlayButtonClick();
+
 			DestroyMovePlates();
 			InitiateMovePlates();
 		}

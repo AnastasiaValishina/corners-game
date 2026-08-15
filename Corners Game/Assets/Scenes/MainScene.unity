@@ -1296,6 +1296,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e86cf3fac21565e4d904b77e9c23ba85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BotController
+  currentDifficulty: 0
 --- !u!4 &1897093636
 Transform:
   m_ObjectHideFlags: 0

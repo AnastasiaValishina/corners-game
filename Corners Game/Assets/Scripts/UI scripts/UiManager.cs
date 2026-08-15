@@ -29,6 +29,7 @@ public class UiManager : MonoBehaviour
 
 	void ShowOptions()
 	{
+		AudioPlayer.Instance.PlayButtonClick();
 		if (optionsPopup != null)
 		{
 			optionsPopup.gameObject.SetActive(true);

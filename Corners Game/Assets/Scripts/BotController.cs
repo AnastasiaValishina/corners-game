@@ -3,10 +3,16 @@ using UnityEngine;
 
 public class BotController : MonoBehaviour
 {
-	// Целевая точка для черных пешек
-	Vector2Int targetCorner = new Vector2Int(7, 0);
+	int smart = 0;
+	int notSmart = 0;
+	public enum BotDifficulty { Easy, Medium, Hard }
 
+	[Header("Настройки бота")]
+	public BotDifficulty currentDifficulty = BotDifficulty.Hard;
+
+	Vector2Int targetCorner = new Vector2Int(7, 0);
 	public static BotController Instance { get; private set; }
+
 	private void Awake()
 	{
 		if (Instance == null) Instance = this;
@@ -15,56 +21,139 @@ public class BotController : MonoBehaviour
 
 	public void MakeSmartMove()
 	{
-		Pawn bestPawn = null;
-		Vector2Int bestMove = new Vector2Int(-1, -1);
-		int bestScore = 999999; // Сильно увеличили стартовое значение
-
-		// 1. Находим все черные пешки на сцене
+		// 1. Собираем АБСОЛЮТНО ВСЕ возможные ходы для всех черных пешек
+		List<BotMove> allAvailableMoves = new List<BotMove>();
 		Pawn[] allPawns = FindObjectsOfType<Pawn>();
 
 		foreach (Pawn pawn in allPawns)
 		{
 			if (pawn.name == "black")
 			{
-				// Получаем доступные ходы от доски
-				List<Vector2Int> possibleMoves = Board.Instance.GetAvailableMoves(pawn.GetPositionX(), pawn.GetPositionY());
-
-				// ТЕКУЩАЯ дистанция именно этой пешки до цели
-				int currentDistance = (targetCorner.x - pawn.GetPositionX()) + (pawn.GetPositionY() - targetCorner.y);
-
-				// Проверяем, находится ли пешка УЖЕ в победной зоне (дом черных)
-				bool isAlreadyInZone = (pawn.GetPositionX() >= 5 && pawn.GetPositionY() <= 2);
-
-				foreach (Vector2Int move in possibleMoves)
+				List<Vector2Int> moves = Board.Instance.GetAvailableMoves(pawn.GetPositionX(), pawn.GetPositionY());
+				foreach (Vector2Int move in moves)
 				{
-					// НОВАЯ дистанция после предполагаемого хода
-					int newDistance = (targetCorner.x - move.x) + (move.y - targetCorner.y);
-
-					// Разница (отрицательное число = приблизились к цели, положительное = отдалились)
-					int distanceDelta = newDistance - currentDistance;
-
-					// Штраф, если пешка попытается выйти из победной зоны
-					bool leavesZone = isAlreadyInZone && !(move.x >= 5 && move.y <= 2);
-					int penalty = leavesZone ? 5000 : 0;
-
-					// УМНАЯ ФОРМУЛА:
-					// 1. distanceDelta * 100 -> Приоритет большим прыжкам вперед.
-					// 2. - currentDistance -> При прочих равных приоритет пешке, которая дальше всего!
-					// 3. + penalty -> Огромный штраф за выход из собранного дома.
-					int score = (distanceDelta * 100) - currentDistance + penalty;
-
-					// Ищем наименьший счет
-					if (score < bestScore)
-					{
-						bestScore = score;
-						bestMove = move;
-						bestPawn = pawn;
-					}
+					allAvailableMoves.Add(new BotMove { pawn = pawn, targetPos = move });
 				}
 			}
 		}
 
-		// Совершаем лучший найденный ход
+		if (allAvailableMoves.Count == 0) return;
+
+		bool isThinkingSmart = true;
+
+		var v = Random.value;
+		switch (currentDifficulty)
+		{
+			case BotDifficulty.Easy:
+				isThinkingSmart = v > 0.6f; 
+				break;
+			case BotDifficulty.Medium:
+				isThinkingSmart = v > 0.3f;
+				break;
+			case BotDifficulty.Hard:
+				isThinkingSmart = true;
+				break;
+		}
+
+		if (!isThinkingSmart)
+		{
+			notSmart++;
+			List<BotMove> goodMoves = new List<BotMove>();
+			List<BotMove> outsideMoves = new List<BotMove>();
+
+			foreach (BotMove m in allAvailableMoves)
+			{
+				int currentX = m.pawn.GetPositionX();
+				int currentY = m.pawn.GetPositionY();
+
+				int currentDist = (targetCorner.x - currentX) + (currentY - targetCorner.y);
+				int newDist = (targetCorner.x - m.targetPos.x) + (m.targetPos.y - targetCorner.y);
+
+				bool isAlreadyInZone = (currentX >= 5 && currentY <= 2);
+				bool willBeInZone = (m.targetPos.x >= 5 && m.targetPos.y <= 2);
+
+				// 1. Строгий запрет: никогда не выходить из собранного дома
+				if (isAlreadyInZone && !willBeInZone) continue;
+
+				// 2. Разрешаем ход, если пешка идет вперед ИЛИ шевелится внутри дома (освобождая место)
+				if (newDist <= currentDist || (isAlreadyInZone && willBeInZone))
+				{
+					goodMoves.Add(m);
+
+					// Отдельно собираем ходы тех пешек, которые еще "на улице"
+					if (!isAlreadyInZone)
+					{
+						outsideMoves.Add(m);
+					}
+				}
+			}
+
+			// ЛОГИКА ВЫБОРА: 
+			// Пытаемся играть фигурами с улицы. Если они заблокированы - разрешаем 
+			// перетасовку внутри дома, чтобы освободить проход.
+			List<BotMove> poolToChooseFrom;
+
+			if (outsideMoves.Count > 0)
+			{
+				poolToChooseFrom = outsideMoves;
+			}
+			else if (goodMoves.Count > 0)
+			{
+				poolToChooseFrom = goodMoves;
+			}
+			else
+			{
+				poolToChooseFrom = allAvailableMoves; // Экстренный запасной вариант
+			}
+
+			BotMove randomMove = poolToChooseFrom[Random.Range(0, poolToChooseFrom.Count)];
+			ExecuteMove(randomMove.pawn, randomMove.targetPos);
+		}
+		else
+		{
+			ExecuteSmartHeuristic(allAvailableMoves);
+		}
+		Debug.Log("smart = " + smart + ". Not smart = " + notSmart);
+	}
+
+	private void ExecuteSmartHeuristic(List<BotMove> allAvailableMoves)
+	{
+		smart++;
+		Pawn bestPawn = null;
+		Vector2Int bestMove = new Vector2Int(-1, -1);
+		int bestScore = 999999;
+
+		foreach (BotMove botMove in allAvailableMoves)
+		{
+			Pawn pawn = botMove.pawn;
+			Vector2Int move = botMove.targetPos;
+
+			int currentX = pawn.GetPositionX();
+			int currentY = pawn.GetPositionY();
+
+			int currentCornerDist = (targetCorner.x - currentX) + (currentY - targetCorner.y);
+			bool isAlreadyInZone = (currentX >= 5 && currentY <= 2);
+
+			int newCornerDist = (targetCorner.x - move.x) + (move.y - targetCorner.y);
+			int distanceDelta = newCornerDist - currentCornerDist;
+			bool willBeInZone = (move.x >= 5 && move.y <= 2);
+
+			int score = 0;
+
+			if (!isAlreadyInZone && willBeInZone) score -= 2000;
+			if (isAlreadyInZone && !willBeInZone) score += 5000;
+			score += (distanceDelta * 100);
+			if (!isAlreadyInZone) score -= 50;
+			score -= currentCornerDist;
+
+			if (score < bestScore)
+			{
+				bestScore = score;
+				bestMove = move;
+				bestPawn = pawn;
+			}
+		}
+
 		if (bestPawn != null && bestMove.x != -1)
 		{
 			ExecuteMove(bestPawn, bestMove);
@@ -73,15 +162,19 @@ public class BotController : MonoBehaviour
 
 	private void ExecuteMove(Pawn pawn, Vector2Int move)
 	{
-		// Программно перемещаем пешку и передаем ход человеку
+		AudioPlayer.Instance.PlaySlideSound();
 		Board.Instance.SetPositionEmpty(pawn.GetPositionX(), pawn.GetPositionY());
-
 		pawn.SetPositionX(move.x);
 		pawn.SetPositionY(move.y);
 		pawn.SetCoords();
-
 		Board.Instance.SetPosition(pawn.gameObject);
 		Board.Instance.CheckWinner();
 		GameController.Instance.NextTurn();
+	}
+
+	private struct BotMove
+	{
+		public Pawn pawn;
+		public Vector2Int targetPos;
 	}
 }

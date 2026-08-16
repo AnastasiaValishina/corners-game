@@ -23,18 +23,17 @@ public class BotController : MonoBehaviour
 	{
 		// 1. Собираем АБСОЛЮТНО ВСЕ возможные ходы для всех черных пешек
 		List<BotMove> allAvailableMoves = new List<BotMove>();
-		Pawn[] allPawns = FindObjectsOfType<Pawn>();
+		
+		List<Pawn> myPawns = Board.Instance.BotPawns;
 
-		foreach (Pawn pawn in allPawns)
+		foreach (Pawn pawn in myPawns)
 		{
-			if (pawn.name == "black")
+			List<Vector2Int> moves = Board.Instance.GetAvailableMoves(pawn.XPos, pawn.YPos);
+			foreach (Vector2Int move in moves)
 			{
-				List<Vector2Int> moves = Board.Instance.GetAvailableMoves(pawn.XPos, pawn.YPos);
-				foreach (Vector2Int move in moves)
-				{
-					allAvailableMoves.Add(new BotMove { pawn = pawn, targetPos = move });
-				}
+				allAvailableMoves.Add(new BotMove { pawn = pawn, targetPos = move });
 			}
+
 		}
 
 		if (allAvailableMoves.Count == 0) return;

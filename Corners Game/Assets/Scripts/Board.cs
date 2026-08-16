@@ -10,8 +10,9 @@ public class Board : MonoBehaviour
     [SerializeField] Transform pawnsContainer;
 
     GameObject[,] squares;
+	public List<Pawn> BotPawns = new List<Pawn>();
 
-    int width = 8;
+	int width = 8;
     int height = 8;
 
 	public static Board Instance { get; private set; }
@@ -45,6 +46,7 @@ public class Board : MonoBehaviour
 				}
 			}
 		}
+		BotPawns.Clear();
 	}
 
 	private void PlacePawns()
@@ -72,7 +74,9 @@ public class Board : MonoBehaviour
                 pawn.transform.parent = pawnsContainer;
                 pawn.name = "black";
                 squares[x, y] = pawn;
-            }
+
+				BotPawns.Add(pawn.GetComponent<Pawn>());
+			}
         }
     }
 

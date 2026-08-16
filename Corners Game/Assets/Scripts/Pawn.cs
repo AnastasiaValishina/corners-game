@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.EventSystems;
 
 public class Pawn : MonoBehaviour, IPointerClickHandler
@@ -19,6 +20,8 @@ public class Pawn : MonoBehaviour, IPointerClickHandler
 	public int XPos { get => xPos; set => xPos = value; }
 	public int YPos { get => yPos; set => yPos = value; }
 
+	private List<MovePlate> activeMovePlates = new List<MovePlate>();
+
 	void Start()
     {
         board = Board.Instance              ;
@@ -33,11 +36,6 @@ public class Pawn : MonoBehaviour, IPointerClickHandler
             case "black": player = 2;
                 break;
         }
-    }
-
-    public void SetCoords()
-    {
-        transform.position = new Vector3(xPos, yPos, 0f);
     }
 
 	public void OnPointerClick(PointerEventData eventData)
@@ -150,15 +148,26 @@ public class Pawn : MonoBehaviour, IPointerClickHandler
                 var mp = Instantiate(movePlate, new Vector3(x, y, 0f), Quaternion.identity);
                 mp.SetReference(gameObject);
                 mp.SetCoords(x, y);
-            }
+
+				activeMovePlates.Add(mp);
+			}
         }
     }
-    public void DestroyMovePlates()
-    {
-        MovePlate[] movePlates = FindObjectsOfType<MovePlate>();
-        for (int i = 0; i < movePlates.Length; i++)
-        {
-            Destroy(movePlates[i].gameObject);
-        }
-    }
+	public void DestroyMovePlates()
+	{
+		for (int i = 0; i < activeMovePlates.Count; i++)
+		{
+			if (activeMovePlates[i] != null)
+			{
+				Destroy(activeMovePlates[i].gameObject);
+			}
+		}
+
+		activeMovePlates.Clear();
+	}
+
+	private void OnDestroy()
+	{
+        DestroyMovePlates();
+	}
 }

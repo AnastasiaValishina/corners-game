@@ -78,7 +78,7 @@ public class Board : MonoBehaviour
         }
     }
 
-    public void SetPositionEmpty(int x, int y)  // отметить, что квадрат свободен
+    public void SetPositionEmpty(int x, int y)  
     {
         squares[x, y] = null;
     }
@@ -103,7 +103,7 @@ public class Board : MonoBehaviour
         squares[pawn.XPos, pawn.YPos] = obj;
     }
 
-    public void CheckWinner()               // проверить все ли пешки стоят на поле противника
+    public void CheckWinner()               
     {
         if (GetPosition(0, 5) && GetPosition(0, 5).name == "white" &&
             GetPosition(0, 6) && GetPosition(0, 6).name == "white" &&

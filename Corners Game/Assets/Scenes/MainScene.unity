@@ -373,6 +373,7 @@ MonoBehaviour:
   mainMenu: {fileID: 2015948919}
   optionsPopup: {fileID: 6036819804284170561}
   diffPopup: {fileID: 8727123524635818766}
+  winPopup: {fileID: 6145984491192397757}
   nextPlayerImage: {fileID: 1616996558}
   playerOne: {fileID: 21300000, guid: 294758888931e26428638699ef33d410, type: 3}
   playerTwo: {fileID: 21300000, guid: 1fbffb9ed1cfb8e4c814477fe1250a5a, type: 3}
@@ -1864,6 +1865,26 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1204523604}
     m_Modifications:
+    - target: {fileID: 512884198850631684, guid: 42546dc5748255c459536a5ce3ed4423,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 512884198850631684, guid: 42546dc5748255c459536a5ce3ed4423,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 512884198850631684, guid: 42546dc5748255c459536a5ce3ed4423,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 252.1816
+      objectReference: {fileID: 0}
+    - target: {fileID: 512884198850631684, guid: 42546dc5748255c459536a5ce3ed4423,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -388.81055
+      objectReference: {fileID: 0}
     - target: {fileID: 2678066826471232576, guid: 42546dc5748255c459536a5ce3ed4423,
         type: 3}
       propertyPath: m_Pivot.x
@@ -1964,16 +1985,73 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4575214410503964301, guid: 42546dc5748255c459536a5ce3ed4423,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4575214410503964301, guid: 42546dc5748255c459536a5ce3ed4423,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4575214410503964301, guid: 42546dc5748255c459536a5ce3ed4423,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 252.1816
+      objectReference: {fileID: 0}
+    - target: {fileID: 4575214410503964301, guid: 42546dc5748255c459536a5ce3ed4423,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -144.60352
+      objectReference: {fileID: 0}
+    - target: {fileID: 5837096566056938994, guid: 42546dc5748255c459536a5ce3ed4423,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5837096566056938994, guid: 42546dc5748255c459536a5ce3ed4423,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5837096566056938994, guid: 42546dc5748255c459536a5ce3ed4423,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 252.1816
+      objectReference: {fileID: 0}
+    - target: {fileID: 5837096566056938994, guid: 42546dc5748255c459536a5ce3ed4423,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -588.0176
+      objectReference: {fileID: 0}
     - target: {fileID: 6955158267576190846, guid: 42546dc5748255c459536a5ce3ed4423,
         type: 3}
       propertyPath: m_Name
       value: WinPopup
+      objectReference: {fileID: 0}
+    - target: {fileID: 6955158267576190846, guid: 42546dc5748255c459536a5ce3ed4423,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 42546dc5748255c459536a5ce3ed4423, type: 3}
+--- !u!114 &6145984491192397757 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8715239872332910734, guid: 42546dc5748255c459536a5ce3ed4423,
+    type: 3}
+  m_PrefabInstance: {fileID: 6145984491192397756}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82d7b265afc5c294782b10f57c1da87c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WinPopup
 --- !u!1001 &6948356207381888733
 PrefabInstance:
   m_ObjectHideFlags: 0

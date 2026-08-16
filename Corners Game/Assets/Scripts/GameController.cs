@@ -31,6 +31,7 @@ public class GameController : MonoBehaviour
 
     public void RestartGame()
     {
+		_isGameOver = false;
 		Board.Instance.SetBoard();
 		_currentPlayer = 1;
 		UiManager.Instance.UpdateTurn(_currentPlayer);
@@ -73,7 +74,7 @@ public class GameController : MonoBehaviour
 
 	public void Winner(int playerWinner)
     {
-        IsGameOver = true;
-		Debug.Log(playerWinner + " победил!");
+		_isGameOver = true;
+		UiManager.Instance.ShowWinPopup(playerWinner, _isBotActive);		
     }
 }

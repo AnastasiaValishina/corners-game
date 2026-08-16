@@ -6,6 +6,7 @@ public class UiManager : MonoBehaviour
 	[SerializeField] RulesPopup rulesPopup;
 	[SerializeField] MainMenu mainMenu;
 	[SerializeField] OptionsPopup optionsPopup;
+	[SerializeField] DifficultyPopup diffPopup;
 
 	[Header("Hud")]
 	[SerializeField] Image nextPlayerImage;
@@ -33,6 +34,14 @@ public class UiManager : MonoBehaviour
 		if (optionsPopup != null)
 		{
 			optionsPopup.gameObject.SetActive(true);
+		}
+	}
+
+	public void ShowDiffPopup(bool isShown)
+	{
+		if (diffPopup != null)
+		{
+			diffPopup.gameObject.SetActive(isShown);
 		}
 	}
 

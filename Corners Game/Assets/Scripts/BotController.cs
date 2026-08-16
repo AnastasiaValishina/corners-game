@@ -1,14 +1,13 @@
 using System.Collections.Generic;
 using UnityEngine;
+public enum BotDifficulty { Easy, Medium, Hard }
 
 public class BotController : MonoBehaviour
 {
 	int smart = 0;
 	int notSmart = 0;
-	public enum BotDifficulty { Easy, Medium, Hard }
 
-	[Header("Настройки бота")]
-	public BotDifficulty currentDifficulty = BotDifficulty.Hard;
+	BotDifficulty currentDifficulty = BotDifficulty.Hard;
 
 	Vector2Int targetCorner = new Vector2Int(7, 0);
 	public static BotController Instance { get; private set; }
@@ -167,6 +166,11 @@ public class BotController : MonoBehaviour
 		Board.Instance.SetPosition(pawn.gameObject);
 		Board.Instance.CheckWinner();
 		GameController.Instance.NextTurn();
+	}
+
+	public void SetDifficulty(BotDifficulty difficulty)
+	{
+		currentDifficulty = difficulty;
 	}
 
 	private struct BotMove

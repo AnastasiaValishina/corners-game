@@ -786,10 +786,20 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3450207109052561648, guid: b92bdc90d57960b45b4de1dae85e654f,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6204131888066595033, guid: b92bdc90d57960b45b4de1dae85e654f,
         type: 3}
       propertyPath: m_Name
       value: "Toggle3\u04454"
+      objectReference: {fileID: 0}
+    - target: {fileID: 6204131888066595033, guid: b92bdc90d57960b45b4de1dae85e654f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6506567546393193289, guid: b92bdc90d57960b45b4de1dae85e654f,
         type: 3}
@@ -1229,6 +1239,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: "Toggle3\u04453"
+      objectReference: {fileID: 0}
+    - target: {fileID: 6204131888066595033, guid: b92bdc90d57960b45b4de1dae85e654f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6506567546393193289, guid: b92bdc90d57960b45b4de1dae85e654f,
         type: 3}

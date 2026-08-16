@@ -16,7 +16,7 @@ public class MainMenu : MonoBehaviour
 	{
 		AudioPlayer.Instance.PlayButtonClick();
 		GameController.Instance.IsBotActive = true;
-		UiManager.Instance.ShowRules(true);
+		UiManager.Instance.ShowDiffPopup(true);
 		gameObject.SetActive(false);
 	}
 

@@ -3,8 +3,6 @@ using UnityEngine;
 
 public class Board : MonoBehaviour
 {
-    [SerializeField] GameObject squareBlackPrefab;
-    [SerializeField] GameObject squareWhitePrefab;
     [SerializeField] GameObject pawnBlackPrefab;
     [SerializeField] GameObject pawnWhitePrefab;
     [SerializeField] Transform pawnsContainer;

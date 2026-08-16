@@ -20,7 +20,7 @@ public class Pawn : MonoBehaviour, IPointerClickHandler
 	public int XPos { get => xPos; set => xPos = value; }
 	public int YPos { get => yPos; set => yPos = value; }
 
-	private List<MovePlate> activeMovePlates = new List<MovePlate>();
+	private static List<MovePlate> activeMovePlates = new List<MovePlate>();
 
 	void Start()
     {
@@ -40,18 +40,18 @@ public class Pawn : MonoBehaviour, IPointerClickHandler
 
 	public void OnPointerClick(PointerEventData eventData)
 	{
-		// Если игра не окончена И сейчас ход этого игрока
+		DestroyMovePlates();
+
 		if (!gameController.IsGameOver && gameController.CurrentPlayer == player)
 		{
 			// БЛОКИРОВКА: Если это черная пешка, и сейчас играет бот — запрещаем ручной клик
 			if (gameController.IsBotActive && name == "black")
 			{
-				return; // Прерываем выполнение метода
+				return; 
 			}
 
             AudioPlayer.Instance.PlayButtonClick();
 
-			DestroyMovePlates();
 			InitiateMovePlates();
 		}
 	}
@@ -153,6 +153,7 @@ public class Pawn : MonoBehaviour, IPointerClickHandler
 			}
         }
     }
+
 	public void DestroyMovePlates()
 	{
 		for (int i = 0; i < activeMovePlates.Count; i++)

@@ -29,7 +29,7 @@ public class BotController : MonoBehaviour
 		{
 			if (pawn.name == "black")
 			{
-				List<Vector2Int> moves = Board.Instance.GetAvailableMoves(pawn.GetPositionX(), pawn.GetPositionY());
+				List<Vector2Int> moves = Board.Instance.GetAvailableMoves(pawn.XPos, pawn.YPos);
 				foreach (Vector2Int move in moves)
 				{
 					allAvailableMoves.Add(new BotMove { pawn = pawn, targetPos = move });
@@ -63,8 +63,8 @@ public class BotController : MonoBehaviour
 
 			foreach (BotMove m in allAvailableMoves)
 			{
-				int currentX = m.pawn.GetPositionX();
-				int currentY = m.pawn.GetPositionY();
+				int currentX = m.pawn.XPos;
+				int currentY = m.pawn.YPos;
 
 				int currentDist = (targetCorner.x - currentX) + (currentY - targetCorner.y);
 				int newDist = (targetCorner.x - m.targetPos.x) + (m.targetPos.y - targetCorner.y);
@@ -128,8 +128,8 @@ public class BotController : MonoBehaviour
 			Pawn pawn = botMove.pawn;
 			Vector2Int move = botMove.targetPos;
 
-			int currentX = pawn.GetPositionX();
-			int currentY = pawn.GetPositionY();
+			int currentX = pawn.XPos;
+			int currentY = pawn.YPos;
 
 			int currentCornerDist = (targetCorner.x - currentX) + (currentY - targetCorner.y);
 			bool isAlreadyInZone = (currentX >= 5 && currentY <= 2);
@@ -163,10 +163,8 @@ public class BotController : MonoBehaviour
 	private void ExecuteMove(Pawn pawn, Vector2Int move)
 	{
 		AudioPlayer.Instance.PlaySlideSound();
-		Board.Instance.SetPositionEmpty(pawn.GetPositionX(), pawn.GetPositionY());
-		pawn.SetPositionX(move.x);
-		pawn.SetPositionY(move.y);
-		pawn.SetCoords();
+		Board.Instance.SetPositionEmpty(pawn.XPos, pawn.YPos);
+		pawn.MoveTo(move.x, move.y);
 		Board.Instance.SetPosition(pawn.gameObject);
 		Board.Instance.CheckWinner();
 		GameController.Instance.NextTurn();

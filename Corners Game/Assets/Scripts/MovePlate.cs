@@ -15,23 +15,15 @@ public class MovePlate : MonoBehaviour, IPointerClickHandler
 		Pawn pawnScript = reference.GetComponent<Pawn>();
 
 		// отметить, что квадрат, на котором стояла пешка, свободен
-		Board.Instance.SetPositionEmpty(pawnScript.GetPositionX(), pawnScript.GetPositionY());
+		Board.Instance.SetPositionEmpty(pawnScript.XPos, pawnScript.YPos);
 
-        // переместить пешку
-        pawnScript.SetPositionX(plateX);
-        pawnScript.SetPositionY(plateY);
-        pawnScript.SetCoords();
+		pawnScript.MoveTo(plateX, plateY);
 
 		// отметить, что квадрат занят пешкой
 		Board.Instance.SetPosition(reference);
 
-		// проверить есть ли победитель
 		Board.Instance.CheckWinner();
-
-        // передать ход след игроку
         GameController.Instance.NextTurn();
-
-        // удалить остальные маркеры возможных ходов 
         pawnScript.DestroyMovePlates();         
     }
 

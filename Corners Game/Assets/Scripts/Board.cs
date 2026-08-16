@@ -98,7 +98,7 @@ public class Board : MonoBehaviour
     public void SetPosition(GameObject obj) // отметить, что квадрат занят определенной пешкой
     {
         Pawn pawn = obj.GetComponent<Pawn>();
-        squares[pawn.GetPositionX(), pawn.GetPositionY()] = obj;
+        squares[pawn.XPos, pawn.YPos] = obj;
     }
 
     public void CheckWinner()               // проверить все ли пешки стоят на поле противника

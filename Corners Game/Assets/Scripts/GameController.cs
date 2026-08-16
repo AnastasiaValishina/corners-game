@@ -6,8 +6,8 @@ public class GameController : MonoBehaviour
 	const int playerOne = 1;
 	const int playerTwo = 2;
 
-    bool _jumpDiagonal = false;
-    bool _jumpLine = false;
+    bool _jumpDiagonal = true;
+    bool _jumpLine = true;
     bool _moveOneSquare = true;
     bool _isGameOver = false;
 	bool _isBotActive = false;

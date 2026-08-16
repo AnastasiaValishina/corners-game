@@ -4,21 +4,29 @@ using UnityEngine.EventSystems;
 public class Pawn : MonoBehaviour, IPointerClickHandler
 {
     [SerializeField] private MovePlate movePlate;
-    int xPos;
+
+	[Header("Настройки анимации LeanTween")]
+	[SerializeField] private float moveDuration = 0.3f;
+	[SerializeField] private LeanTweenType moveEase = LeanTweenType.easeInOutQuad;
+
+	int xPos;
     int yPos;
     
     int player;
     Board board;
     GameController gameController;
 
-    void Start()
+	public int XPos { get => xPos; set => xPos = value; }
+	public int YPos { get => yPos; set => yPos = value; }
+
+	void Start()
     {
         board = Board.Instance              ;
         gameController = GameController.Instance;
         xPos = (int)transform.position.x;
         yPos = (int)transform.position.y;
 
-        switch (name)
+		switch (name)
         {
             case "white": player = 1;
                 break;
@@ -48,6 +56,19 @@ public class Pawn : MonoBehaviour, IPointerClickHandler
 			DestroyMovePlates();
 			InitiateMovePlates();
 		}
+	}
+
+	public void MoveTo(int x, int y)
+	{
+		LeanTween.cancel(gameObject);
+
+		Vector3 finalPos = new Vector3(x, y, transform.position.z);
+
+		LeanTween.move(gameObject, finalPos, moveDuration)
+			.setEase(moveEase);
+
+		xPos = x;
+		yPos = y;
 	}
 
 	private void InitiateMovePlates()
@@ -139,22 +160,5 @@ public class Pawn : MonoBehaviour, IPointerClickHandler
         {
             Destroy(movePlates[i].gameObject);
         }
-    }
-
-    public int GetPositionX()
-    {
-        return xPos;
-    }
-    public int GetPositionY()
-    {
-        return yPos;
-    }
-    public void SetPositionX(int x)
-    {
-        xPos = x;
-    }
-    public void SetPositionY(int y)
-    {
-        yPos = y;
     }
 }

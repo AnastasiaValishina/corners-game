@@ -1296,7 +1296,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e86cf3fac21565e4d904b77e9c23ba85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BotController
-  currentDifficulty: 0
+  currentDifficulty: 1
 --- !u!4 &1897093636
 Transform:
   m_ObjectHideFlags: 0
@@ -1567,31 +1567,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3450378541202655457, guid: ed3c547330ae9034688a5b0e9df0a893,
-        type: 3}
-      propertyPath: m_fontAsset
-      value: 
-      objectReference: {fileID: 11400000, guid: a45e60a3311891247bfe0256fae4969f,
-        type: 2}
-    - target: {fileID: 3450378541202655457, guid: ed3c547330ae9034688a5b0e9df0a893,
-        type: 3}
-      propertyPath: m_hasFontAssetChanged
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 3652539596748749314, guid: ed3c547330ae9034688a5b0e9df0a893,
         type: 3}
       propertyPath: m_Name
       value: MainMenu
-      objectReference: {fileID: 0}
-    - target: {fileID: 3652539596748749314, guid: ed3c547330ae9034688a5b0e9df0a893,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6083736608298580888, guid: ed3c547330ae9034688a5b0e9df0a893,
-        type: 3}
-      propertyPath: m_CullTransparentMesh
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1882,6 +1861,6 @@ SceneRoots:
   - {fileID: 81486960}
   - {fileID: 1302458894}
   - {fileID: 1305167759}
-  - {fileID: 1454017716}
   - {fileID: 1481478910}
   - {fileID: 1204523604}
+  - {fileID: 1454017716}

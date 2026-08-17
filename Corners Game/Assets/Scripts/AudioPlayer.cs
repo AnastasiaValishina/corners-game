@@ -3,6 +3,7 @@ using UnityEngine;
 public class AudioPlayer : MonoBehaviour
 {
 	[SerializeField] AudioClip _buttonClick;
+	[SerializeField] AudioClip _pawnClick;
 	[SerializeField] AudioClip _pieceSlide;
 	[SerializeField] AudioClip _win;
 	[SerializeField] AudioSource _musicSource;
@@ -50,6 +51,7 @@ public class AudioPlayer : MonoBehaviour
 	}
 
 	public void PlayButtonClick() => PlayClip(_buttonClick, soundVolume);
+	public void PlayPawnClick() => PlayClip(_pawnClick, soundVolume);
 	public void PlaySlideSound() => PlayClip(_pieceSlide, soundVolume);
 	public void PlayWinSound() => PlayClip(_win, soundVolume);
 

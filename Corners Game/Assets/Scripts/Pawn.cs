@@ -50,7 +50,7 @@ public class Pawn : MonoBehaviour, IPointerClickHandler
 				return; 
 			}
 
-            AudioPlayer.Instance.PlayButtonClick();
+            AudioPlayer.Instance.PlayPawnClick();
 
 			InitiateMovePlates();
 		}

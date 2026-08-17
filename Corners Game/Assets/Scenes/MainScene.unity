@@ -498,11 +498,11 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 0}
+  m_Resource: {fileID: 8300000, guid: a6438a1ad5b42d84ea85e86a220e4b04, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -1865,26 +1865,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1204523604}
     m_Modifications:
-    - target: {fileID: 512884198850631684, guid: 42546dc5748255c459536a5ce3ed4423,
-        type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 512884198850631684, guid: 42546dc5748255c459536a5ce3ed4423,
-        type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 512884198850631684, guid: 42546dc5748255c459536a5ce3ed4423,
-        type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 252.1816
-      objectReference: {fileID: 0}
-    - target: {fileID: 512884198850631684, guid: 42546dc5748255c459536a5ce3ed4423,
-        type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -388.81055
-      objectReference: {fileID: 0}
     - target: {fileID: 2678066826471232576, guid: 42546dc5748255c459536a5ce3ed4423,
         type: 3}
       propertyPath: m_Pivot.x
@@ -1985,55 +1965,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4575214410503964301, guid: 42546dc5748255c459536a5ce3ed4423,
-        type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4575214410503964301, guid: 42546dc5748255c459536a5ce3ed4423,
-        type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4575214410503964301, guid: 42546dc5748255c459536a5ce3ed4423,
-        type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 252.1816
-      objectReference: {fileID: 0}
-    - target: {fileID: 4575214410503964301, guid: 42546dc5748255c459536a5ce3ed4423,
-        type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -144.60352
-      objectReference: {fileID: 0}
-    - target: {fileID: 5837096566056938994, guid: 42546dc5748255c459536a5ce3ed4423,
-        type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5837096566056938994, guid: 42546dc5748255c459536a5ce3ed4423,
-        type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5837096566056938994, guid: 42546dc5748255c459536a5ce3ed4423,
-        type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 252.1816
-      objectReference: {fileID: 0}
-    - target: {fileID: 5837096566056938994, guid: 42546dc5748255c459536a5ce3ed4423,
-        type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -588.0176
-      objectReference: {fileID: 0}
     - target: {fileID: 6955158267576190846, guid: 42546dc5748255c459536a5ce3ed4423,
         type: 3}
       propertyPath: m_Name
       value: WinPopup
-      objectReference: {fileID: 0}
-    - target: {fileID: 6955158267576190846, guid: 42546dc5748255c459536a5ce3ed4423,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

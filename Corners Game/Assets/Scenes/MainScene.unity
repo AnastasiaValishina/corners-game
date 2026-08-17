@@ -2175,6 +2175,11 @@ PrefabInstance:
       propertyPath: hotSeatBtn
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 7794789506748468411, guid: 9b7c8564208e0804aa34aeb93381648d,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -11.000366
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

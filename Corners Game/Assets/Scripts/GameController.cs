@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 
 public class GameController : MonoBehaviour
@@ -30,12 +31,9 @@ public class GameController : MonoBehaviour
 		UiManager.Instance.UpdateTurn(_currentPlayer);
 	}
 
-	public void StartGame(bool jumpDiagonal, bool jumpLine, bool moveOneSquare)
+	public void StartGame(CornersMode selectedMode)
     {
-		//_jumpDiagonal = jumpDiagonal;
-		//_jumpLine = jumpLine;
-		//_moveOneSquare = moveOneSquare;
-		
+		Board.Instance.currentMode = selectedMode;
 		RestartGame();
 	}
 

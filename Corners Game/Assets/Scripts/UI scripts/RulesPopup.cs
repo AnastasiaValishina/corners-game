@@ -3,11 +3,9 @@ using UnityEngine.UI;
 
 public class RulesPopup : MonoBehaviour
 {
-	[Header("Difficulty Toggles")]
-	[SerializeField] Toggle jumpDiagonal;
-	[SerializeField] Toggle jumpLine;
-	[SerializeField] Toggle moveOneSquare;
-	[SerializeField] Button playButton;
+	[SerializeField] private Toggle classicModeToggle;
+	[SerializeField] private Toggle diagonalModeToggle;
+	[SerializeField] private Button playButton;
 
 	private void Start()
 	{
@@ -17,7 +15,10 @@ public class RulesPopup : MonoBehaviour
 	public void OnPlayClicked()
 	{
 		AudioPlayer.Instance.PlayButtonClick();
-		GameController.Instance.StartGame(jumpDiagonal.isOn, jumpLine.isOn, moveOneSquare.isOn);
+
+		CornersMode selectedMode = diagonalModeToggle.isOn ? CornersMode.Diagonal : CornersMode.Classic;
+		GameController.Instance.StartGame(selectedMode);
+
 		gameObject.SetActive(false);
 	}
 

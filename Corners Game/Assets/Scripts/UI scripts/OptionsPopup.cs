@@ -17,15 +17,40 @@ public class OptionsPopup : MonoBehaviour
 		mainMenuButton.onClick.AddListener(OnMenuClicked);
 		restartButton.onClick.AddListener(OnRestartClicked);
 		continueButton.onClick.AddListener(OnContinueClicked);
+		UpdateButtonVisuals();
 	}
+
 	private void OnMusicClicked()
 	{
-		AudioPlayer.Instance.PlayButtonClick();		
+		if (AudioPlayer.Instance != null)
+		{
+			AudioPlayer.Instance.PlayButtonClick();
+			AudioPlayer.Instance.ToggleMusic();
+			UpdateButtonVisuals();
+		}
 	}
 
 	private void OnSoundClicked()
 	{
-		AudioPlayer.Instance.PlayButtonClick();
+		if (AudioPlayer.Instance != null)
+		{
+			AudioPlayer.Instance.ToggleSound();
+			AudioPlayer.Instance.PlayButtonClick();
+			UpdateButtonVisuals();
+		}
+	}
+
+	private void UpdateButtonVisuals()
+	{
+		if (Settings.IsMusicOn)		
+			musicButton.GetComponent<ButtonSpriteSwap>().SetOn();		
+		else		
+			musicButton.GetComponent<ButtonSpriteSwap>().SetOff();
+		
+		if (Settings.IsSoundOn)
+			soundButton.GetComponent<ButtonSpriteSwap>().SetOn();
+		else
+			soundButton.GetComponent<ButtonSpriteSwap>().SetOff();
 	}
 
 	private void OnMenuClicked()

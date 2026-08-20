@@ -29,25 +29,25 @@ public class AudioPlayer : MonoBehaviour
 	{
 		_cameraPos = Camera.main.transform.position;
 
-		//if (_musicSource != null)
-		//{
-		//	_musicSource.mute = !Settings.IsMusicOn;
-		//}
+		if (_musicSource != null)
+		{
+			_musicSource.mute = !Settings.IsMusicOn;
+		}
 	}
 
 	public void ToggleMusic()
 	{
-		//Settings.IsMusicOn = !Settings.IsMusicOn;
+		Settings.IsMusicOn = !Settings.IsMusicOn;
 
 		if (_musicSource != null)
 		{
-			//_musicSource.mute = !Settings.IsMusicOn;
+			_musicSource.mute = !Settings.IsMusicOn;
 		}
 	}
 
 	public void ToggleSound()
 	{
-		//Settings.IsSoundOn = !Settings.IsSoundOn;
+		Settings.IsSoundOn = !Settings.IsSoundOn;
 	}
 
 	public void PlayButtonClick() => PlayClip(_buttonClick, soundVolume);
@@ -57,7 +57,7 @@ public class AudioPlayer : MonoBehaviour
 
 	void PlayClip(AudioClip clip, float volume)
 	{
-		//if (clip != null && Settings.IsSoundOn)
+		if (clip != null && Settings.IsSoundOn)
 		if (clip != null)
 		{
 			AudioSource.PlayClipAtPoint(clip, _cameraPos, volume);

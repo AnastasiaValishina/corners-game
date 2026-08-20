@@ -92,6 +92,7 @@ MonoBehaviour:
   easyBtn: {fileID: 951531741995124485}
   normBtn: {fileID: 8064409392120297265}
   hardBtn: {fileID: 7909655919475927128}
+  backBtn: {fileID: 8182949319678735501}
 --- !u!1 &8686434824531861706
 GameObject:
   m_ObjectHideFlags: 0
@@ -716,6 +717,18 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 7075508413400554119}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &8182949319678735501 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1422834459496853002, guid: b02b0e0231569044aa276711d12f4e5d,
+    type: 3}
+  m_PrefabInstance: {fileID: 7075508413400554119}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
 --- !u!1001 &9072407330966213687
 PrefabInstance:
   m_ObjectHideFlags: 0

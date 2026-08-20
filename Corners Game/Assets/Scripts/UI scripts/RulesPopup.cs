@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -6,10 +7,19 @@ public class RulesPopup : MonoBehaviour
 	[SerializeField] private Toggle classicModeToggle;
 	[SerializeField] private Toggle diagonalModeToggle;
 	[SerializeField] private Button playButton;
+	[SerializeField] private Button backButton;
 
 	private void Start()
 	{
 		playButton.onClick.AddListener(OnPlayClicked);
+		backButton.onClick.AddListener(OnBackClicked);
+	}
+
+	private void OnBackClicked()
+	{
+		AudioPlayer.Instance.PlayButtonClick();
+		UiManager.Instance.ShowMainMenu(true);
+		gameObject.SetActive(false);
 	}
 
 	public void OnPlayClicked()
@@ -26,5 +36,8 @@ public class RulesPopup : MonoBehaviour
 	{
 		if (playButton != null)
 			playButton.onClick.RemoveListener(OnPlayClicked);
+
+		if (backButton != null)
+			backButton.onClick.RemoveListener(OnBackClicked);
 	}
 }

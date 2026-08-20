@@ -6,17 +6,10 @@ public class GameController : MonoBehaviour
 	const int playerOne = 1;
 	const int playerTwo = 2;
 
-    bool _jumpDiagonal = true;
-    bool _jumpLine = true;
-    bool _moveOneSquare = true;
     bool _isGameOver = false;
 	bool _isBotActive = false;
     int _currentPlayer;
 
-
-	public bool CanJumpDiagonal { get => _jumpDiagonal; private set => _jumpDiagonal = value; }
-	public bool CanJumpLine { get => _jumpLine; private set => _jumpLine = value; }
-	public bool CanMoveOneSquare { get => _moveOneSquare; private set => _moveOneSquare = value; }
 	public bool IsGameOver { get => _isGameOver; private set => _isGameOver = value; }
 	public bool IsBotActive { get => _isBotActive; set => _isBotActive = value; }
 	public int CurrentPlayer { get => _currentPlayer; private set => _currentPlayer = value; }
@@ -39,9 +32,9 @@ public class GameController : MonoBehaviour
 
 	public void StartGame(bool jumpDiagonal, bool jumpLine, bool moveOneSquare)
     {
-		_jumpDiagonal = jumpDiagonal;
-		_jumpLine = jumpLine;
-		_moveOneSquare = moveOneSquare;
+		//_jumpDiagonal = jumpDiagonal;
+		//_jumpLine = jumpLine;
+		//_moveOneSquare = moveOneSquare;
 		
 		RestartGame();
 	}

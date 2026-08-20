@@ -596,7 +596,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3473210ecf2d9df4c9ac1f1299fd4fe0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AudioPlayer
-  _buttonClick: {fileID: 8300000, guid: bab367a78b062bf4b8ecfabb90c7277c, type: 3}
+  _buttonClick: {fileID: 8300000, guid: 8657c0365156d3049a89aebf803d6322, type: 3}
+  _pawnClick: {fileID: 8300000, guid: bab367a78b062bf4b8ecfabb90c7277c, type: 3}
   _pieceSlide: {fileID: 8300000, guid: 85e3159f0d0031f47aac0a35d8e3a8e0, type: 3}
   _win: {fileID: 8300000, guid: b63a4e346c8adcf4a824875f22269781, type: 3}
   _musicSource: {fileID: 836706255}
@@ -989,6 +990,7 @@ MonoBehaviour:
     type: 3}
   pawnsContainer: {fileID: 1454017716}
   BotPawns: []
+  currentMode: 0
 --- !u!1 &1454017715
 GameObject:
   m_ObjectHideFlags: 0

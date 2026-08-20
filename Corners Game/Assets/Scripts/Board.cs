@@ -12,6 +12,7 @@ public class Board : MonoBehaviour
 
 	int width = 8;
     int height = 8;
+	public CornersMode currentMode;
 
 	public static Board Instance { get; private set; }
 	private void Awake()
@@ -131,47 +132,47 @@ public class Board : MonoBehaviour
         }
     }
 
-	// Метод возвращает список всех возможных ходов для пешки на заданных координатах
 	public List<Vector2Int> GetAvailableMoves(int xPos, int yPos)
 	{
 		List<Vector2Int> moves = new List<Vector2Int>();
 
-		bool canMoveOne = GameController.Instance.CanMoveOneSquare;
-		bool canJumpLine = GameController.Instance.CanJumpLine;
-		bool canJumpDiag = GameController.Instance.CanJumpDiagonal;
+		// ==========================================
+		// БАЗОВЫЕ ХОДЫ (Доступны в обоих режимах)
+		// ==========================================
 
-		// 1. Обычные шаги на соседние клетки
-		if (canMoveOne)
+		// 1. Обычные шаги по вертикали и горизонтали
+		AddMoveIfValid(moves, xPos, yPos + 1);
+		AddMoveIfValid(moves, xPos, yPos - 1);
+		AddMoveIfValid(moves, xPos + 1, yPos);
+		AddMoveIfValid(moves, xPos - 1, yPos);
+
+		// 2. Прыжки по вертикали и горизонтали
+		if (PositionOnBoardExists(xPos + 1, yPos) && GetPosition(xPos + 1, yPos))
+			AddMoveIfValid(moves, xPos + 2, yPos);
+
+		if (PositionOnBoardExists(xPos, yPos + 1) && GetPosition(xPos, yPos + 1))
+			AddMoveIfValid(moves, xPos, yPos + 2);
+
+		if (PositionOnBoardExists(xPos - 1, yPos) && GetPosition(xPos - 1, yPos))
+			AddMoveIfValid(moves, xPos - 2, yPos);
+
+		if (PositionOnBoardExists(xPos, yPos - 1) && GetPosition(xPos, yPos - 1))
+			AddMoveIfValid(moves, xPos, yPos - 2);
+
+
+		// ==========================================
+		// ДИАГОНАЛЬНЫЕ ХОДЫ (Только для режима Diagonal)
+		// ==========================================
+
+		if (currentMode == CornersMode.Diagonal)
 		{
-			AddMoveIfValid(moves, xPos, yPos + 1);
-			AddMoveIfValid(moves, xPos, yPos - 1);
-			AddMoveIfValid(moves, xPos + 1, yPos);
-			AddMoveIfValid(moves, xPos - 1, yPos);
+			// 3. Диагональные шаги на соседние клетки
 			AddMoveIfValid(moves, xPos + 1, yPos + 1);
 			AddMoveIfValid(moves, xPos - 1, yPos - 1);
 			AddMoveIfValid(moves, xPos + 1, yPos - 1);
 			AddMoveIfValid(moves, xPos - 1, yPos + 1);
-		}
 
-		// 2. Прыжки по вертикали и горизонтали
-		if (canJumpLine)
-		{
-			if (PositionOnBoardExists(xPos + 1, yPos) && GetPosition(xPos + 1, yPos))
-				AddMoveIfValid(moves, xPos + 2, yPos);
-
-			if (PositionOnBoardExists(xPos, yPos + 1) && GetPosition(xPos, yPos + 1))
-				AddMoveIfValid(moves, xPos, yPos + 2);
-
-			if (PositionOnBoardExists(xPos - 1, yPos) && GetPosition(xPos - 1, yPos))
-				AddMoveIfValid(moves, xPos - 2, yPos);
-
-			if (PositionOnBoardExists(xPos, yPos - 1) && GetPosition(xPos, yPos - 1))
-				AddMoveIfValid(moves, xPos, yPos - 2);
-		}
-
-		// 3. Прыжки по диагонали
-		if (canJumpDiag)
-		{
+			// 4. Диагональные прыжки
 			if (PositionOnBoardExists(xPos + 1, yPos + 1) && GetPosition(xPos + 1, yPos + 1))
 				AddMoveIfValid(moves, xPos + 2, yPos + 2);
 
@@ -200,4 +201,10 @@ public class Board : MonoBehaviour
 			}
 		}
 	}
+}
+
+public enum CornersMode
+{
+	Classic,
+	Diagonal
 }

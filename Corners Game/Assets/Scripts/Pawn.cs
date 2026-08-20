@@ -4,18 +4,18 @@ using UnityEngine.EventSystems;
 
 public class Pawn : MonoBehaviour, IPointerClickHandler
 {
-    [SerializeField] private MovePlate movePlate;
+	[SerializeField] private MovePlate movePlate;
 
 	[Header("Настройки анимации LeanTween")]
 	[SerializeField] private float moveDuration = 0.3f;
 	[SerializeField] private LeanTweenType moveEase = LeanTweenType.easeInOutQuad;
 
 	int xPos;
-    int yPos;
-    
-    int player;
-    Board board;
-    GameController gameController;
+	int yPos;
+
+	int player;
+	Board board;
+	GameController gameController;
 
 	public int XPos { get => xPos; set => xPos = value; }
 	public int YPos { get => yPos; set => yPos = value; }
@@ -23,20 +23,22 @@ public class Pawn : MonoBehaviour, IPointerClickHandler
 	private static List<MovePlate> activeMovePlates = new List<MovePlate>();
 
 	void Start()
-    {
-        board = Board.Instance              ;
-        gameController = GameController.Instance;
-        xPos = (int)transform.position.x;
-        yPos = (int)transform.position.y;
+	{
+		board = Board.Instance;
+		gameController = GameController.Instance;
+		xPos = (int)transform.position.x;
+		yPos = (int)transform.position.y;
 
 		switch (name)
-        {
-            case "white": player = 1;
-                break;
-            case "black": player = 2;
-                break;
-        }
-    }
+		{
+			case "white":
+				player = 1;
+				break;
+			case "black":
+				player = 2;
+				break;
+		}
+	}
 
 	public void OnPointerClick(PointerEventData eventData)
 	{
@@ -47,12 +49,12 @@ public class Pawn : MonoBehaviour, IPointerClickHandler
 			// БЛОКИРОВКА: Если это черная пешка, и сейчас играет бот — запрещаем ручной клик
 			if (gameController.IsBotActive && name == "black")
 			{
-				return; 
+				return;
 			}
 
-            AudioPlayer.Instance.PlayPawnClick();
+			AudioPlayer.Instance.PlayPawnClick();
 
-			InitiateMovePlates();
+			ShowAvailableMoves();
 		}
 	}
 
@@ -69,90 +71,24 @@ public class Pawn : MonoBehaviour, IPointerClickHandler
 		yPos = y;
 	}
 
-	private void InitiateMovePlates()
-    {
-        if (gameController.CanMoveOneSquare)
-        {
-            ActivateMoveOneSquare();
-        }
+	private void ShowAvailableMoves()
+	{
+		List<Vector2Int> moves = board.GetAvailableMoves(xPos, yPos);
 
-        if (gameController.CanJumpDiagonal)
-        {
-            ActivateJumpOverDiag();
-        }
+		foreach (Vector2Int move in moves)
+		{
+			SpawnMovePlate(move.x, move.y);
+		}
+	}
 
-        if (gameController.CanJumpLine)
-        {
-            ActivateJumpOver();
-        }
-    }
+	private void SpawnMovePlate(int x, int y)
+	{
+		var mp = Instantiate(movePlate, new Vector3(x, y, 0f), Quaternion.identity);
+		mp.SetReference(gameObject);
+		mp.SetCoords(x, y);
 
-    private void ActivateJumpOver()         // перепрыгнуть по вертикали по горизонтали
-    {
-        if (board.PositionOnBoardExists(xPos + 1, yPos) && board.GetPosition(xPos + 1, yPos))
-        {
-            SpawnMovePlate(xPos + 2, yPos);
-        }
-        if (board.PositionOnBoardExists(xPos, yPos + 1) && board.GetPosition(xPos, yPos + 1))
-        {
-            SpawnMovePlate(xPos, yPos + 2);
-        }
-        if (board.PositionOnBoardExists(xPos - 1, yPos) && board.GetPosition(xPos - 1, yPos))
-        {
-            SpawnMovePlate(xPos - 2, yPos);
-        }
-        if (board.PositionOnBoardExists(xPos, yPos - 1) && board.GetPosition(xPos, yPos - 1))
-        {
-            SpawnMovePlate(xPos, yPos - 2);
-        }
-    }
-
-    private void ActivateJumpOverDiag()         // перепрыгнуть по диагонали
-    {
-        if (board.PositionOnBoardExists(xPos + 1, yPos + 1) && board.GetPosition(xPos + 1, yPos + 1))
-        {
-            SpawnMovePlate(xPos + 2, yPos + 2);
-        }
-        if (board.PositionOnBoardExists(xPos - 1, yPos + 1) && board.GetPosition(xPos - 1, yPos + 1))
-        {
-            SpawnMovePlate(xPos - 2, yPos + 2);
-        }
-        if (board.PositionOnBoardExists(xPos + 1, yPos - 1) && board.GetPosition(xPos + 1, yPos - 1))
-        {
-            SpawnMovePlate(xPos + 2, yPos - 2);
-        }
-        if (board.PositionOnBoardExists(xPos - 1, yPos - 1) && board.GetPosition(xPos - 1, yPos - 1))
-        {
-            SpawnMovePlate(xPos - 2, yPos - 2);
-        }
-    }
-
-    private void ActivateMoveOneSquare()         // сделать шаг в любом направлении
-    {
-        SpawnMovePlate(xPos, yPos + 1);
-        SpawnMovePlate(xPos, yPos - 1);
-        SpawnMovePlate(xPos + 1, yPos);
-        SpawnMovePlate(xPos - 1, yPos);
-        SpawnMovePlate(xPos + 1, yPos + 1);
-        SpawnMovePlate(xPos - 1, yPos - 1);
-        SpawnMovePlate(xPos + 1, yPos - 1);
-        SpawnMovePlate(xPos - 1, yPos + 1);
-    }
-
-    private void SpawnMovePlate(int x, int y)   // поместить на доске маркеры возможных ходов
-    {
-        if (board.PositionOnBoardExists(x, y))
-        {
-            if (board.GetPosition(x, y) == null)
-            {
-                var mp = Instantiate(movePlate, new Vector3(x, y, 0f), Quaternion.identity);
-                mp.SetReference(gameObject);
-                mp.SetCoords(x, y);
-
-				activeMovePlates.Add(mp);
-			}
-        }
-    }
+		activeMovePlates.Add(mp);
+	}
 
 	public void DestroyMovePlates()
 	{
@@ -169,6 +105,6 @@ public class Pawn : MonoBehaviour, IPointerClickHandler
 
 	private void OnDestroy()
 	{
-        DestroyMovePlates();
+		DestroyMovePlates();
 	}
 }

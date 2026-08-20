@@ -146,47 +146,87 @@ public class Board : MonoBehaviour
 		AddMoveIfValid(moves, xPos + 1, yPos);
 		AddMoveIfValid(moves, xPos - 1, yPos);
 
-		// 2. Прыжки по вертикали и горизонтали
-		if (PositionOnBoardExists(xPos + 1, yPos) && GetPosition(xPos + 1, yPos))
-			AddMoveIfValid(moves, xPos + 2, yPos);
-
-		if (PositionOnBoardExists(xPos, yPos + 1) && GetPosition(xPos, yPos + 1))
-			AddMoveIfValid(moves, xPos, yPos + 2);
-
-		if (PositionOnBoardExists(xPos - 1, yPos) && GetPosition(xPos - 1, yPos))
-			AddMoveIfValid(moves, xPos - 2, yPos);
-
-		if (PositionOnBoardExists(xPos, yPos - 1) && GetPosition(xPos, yPos - 1))
-			AddMoveIfValid(moves, xPos, yPos - 2);
-
 
 		// ==========================================
-		// ДИАГОНАЛЬНЫЕ ХОДЫ (Только для режима Diagonal)
+		// ПРЫЖКИ (Одиночные и серии)
 		// ==========================================
 
-		if (currentMode == CornersMode.Diagonal)
+		// Создаем список посещенных клеток, чтобы шашка не зациклилась, прыгая туда-сюда
+		HashSet<Vector2Int> visitedSquares = new HashSet<Vector2Int>();
+		visitedSquares.Add(new Vector2Int(xPos, yPos)); // Запрещаем прыгать обратно в стартовую точку
+
+		if (currentMode == CornersMode.Classic)
 		{
-			// 3. Диагональные шаги на соседние клетки
+			// Запускаем рекурсивный поиск прыжков ТОЛЬКО по вертикали и горизонтали (false)
+			FindChainJumps(xPos, yPos, visitedSquares, moves, false);
+		}
+		else if (currentMode == CornersMode.Diagonal)
+		{
+			// В диагональном режиме добавляем обычные диагональные шаги
 			AddMoveIfValid(moves, xPos + 1, yPos + 1);
 			AddMoveIfValid(moves, xPos - 1, yPos - 1);
 			AddMoveIfValid(moves, xPos + 1, yPos - 1);
 			AddMoveIfValid(moves, xPos - 1, yPos + 1);
 
-			// 4. Диагональные прыжки
-			if (PositionOnBoardExists(xPos + 1, yPos + 1) && GetPosition(xPos + 1, yPos + 1))
-				AddMoveIfValid(moves, xPos + 2, yPos + 2);
-
-			if (PositionOnBoardExists(xPos - 1, yPos + 1) && GetPosition(xPos - 1, yPos + 1))
-				AddMoveIfValid(moves, xPos - 2, yPos + 2);
-
-			if (PositionOnBoardExists(xPos + 1, yPos - 1) && GetPosition(xPos + 1, yPos - 1))
-				AddMoveIfValid(moves, xPos + 2, yPos - 2);
-
-			if (PositionOnBoardExists(xPos - 1, yPos - 1) && GetPosition(xPos - 1, yPos - 1))
-				AddMoveIfValid(moves, xPos - 2, yPos - 2);
+			// Запускаем поиск прыжков ВО ВСЕХ направлениях (true)
+			FindChainJumps(xPos, yPos, visitedSquares, moves, true);
 		}
 
 		return moves;
+	}
+
+	// НОВЫЙ МЕТОД: Рекурсивный поиск цепочки прыжков
+	private void FindChainJumps(int currentX, int currentY, HashSet<Vector2Int> visited, List<Vector2Int> moves, bool includeDiagonal)
+	{
+		// Массив направлений: Вверх, Вниз, Вправо, Влево
+		List<Vector2Int> directions = new List<Vector2Int>
+	{
+		new Vector2Int(0, 1), new Vector2Int(0, -1),
+		new Vector2Int(1, 0), new Vector2Int(-1, 0)
+	};
+
+		// Если включен диагональный режим, добавляем диагонали для прыжков
+		if (includeDiagonal)
+		{
+			directions.Add(new Vector2Int(1, 1)); directions.Add(new Vector2Int(-1, -1));
+			directions.Add(new Vector2Int(1, -1)); directions.Add(new Vector2Int(-1, 1));
+		}
+
+		// Проверяем каждое направление
+		foreach (Vector2Int dir in directions)
+		{
+			int jumpOverX = currentX + dir.x;
+			int jumpOverY = currentY + dir.y;
+			int landX = currentX + dir.x * 2;
+			int landY = currentY + dir.y * 2;
+
+			// 1. Проверяем, есть ли на соседней клетке шашка, через которую можно перепрыгнуть
+			if (PositionOnBoardExists(jumpOverX, jumpOverY) && GetPosition(jumpOverX, jumpOverY) != null)
+			{
+				// 2. Проверяем, не выходит ли клетка ПРИЗЕМЛЕНИЯ за пределы доски
+				if (PositionOnBoardExists(landX, landY))
+				{
+					Vector2Int landPos = new Vector2Int(landX, landY);
+
+					// 3. Проверяем, свободна ли клетка приземления и не были ли мы там в текущем ходе
+					if (GetPosition(landX, landY) == null && !visited.Contains(landPos))
+					{
+						// Запоминаем, что мы тут были
+						visited.Add(landPos);
+
+						// Добавляем эту клетку как доступный ход
+						if (!moves.Contains(landPos))
+						{
+							moves.Add(landPos);
+						}
+
+						// САМАЯ ГЛАВНАЯ МАГИЯ (Рекурсия): 
+						// Спрашиваем: "А могу ли я прыгнуть куда-то еще ИЗ ЭТОЙ НОВОЙ ТОЧКИ?"
+						FindChainJumps(landX, landY, visited, moves, includeDiagonal);
+					}
+				}
+			}
+		}
 	}
 
 	// Вспомогательный метод для добавления координат в список

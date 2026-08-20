@@ -167,11 +167,7 @@ public class BotController : MonoBehaviour
 	private void ExecuteMove(Pawn pawn, BotMove botMove)
 	{
 		AudioPlayer.Instance.PlaySlideSound();
-
-		// 1. СРАЗУ освобождаем старую клетку
 		Board.Instance.SetPositionEmpty(pawn.XPos, pawn.YPos);
-
-		// 2. Запускаем анимацию бота (доску он обновит сам в Pawn.cs)
 		pawn.MoveInSteps(botMove.path);
 	}
 

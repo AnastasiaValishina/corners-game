@@ -228,9 +228,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 347a6fbf0fc7d76499616ab30ffefc56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RulesPopup
-  classicModeToggle: {fileID: 0}
-  diagonalModeToggle: {fileID: 0}
+  classicModeToggle: {fileID: 3999557234729016905}
+  diagonalModeToggle: {fileID: 1415061831214442529}
   playButton: {fileID: 5717151127070443926}
+  backButton: {fileID: 5343762712954518554}
 --- !u!1 &4304025006111844751
 GameObject:
   m_ObjectHideFlags: 0
@@ -552,7 +553,7 @@ PrefabInstance:
     - target: {fileID: 6204131888066595033, guid: b92bdc90d57960b45b4de1dae85e654f,
         type: 3}
       propertyPath: m_Name
-      value: ToggleJumpDiag
+      value: ToggleClassic
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -565,6 +566,18 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 1756633690089662137}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &3999557234729016905 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3450207109052561648, guid: b92bdc90d57960b45b4de1dae85e654f,
+    type: 3}
+  m_PrefabInstance: {fileID: 1756633690089662137}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9085046f02f69544eb97fd06b6048fe2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &4342268462460752081
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -686,7 +699,7 @@ PrefabInstance:
     - target: {fileID: 6204131888066595033, guid: b92bdc90d57960b45b4de1dae85e654f,
         type: 3}
       propertyPath: m_Name
-      value: ToggleJumpVert
+      value: ToggleDiaginal
       objectReference: {fileID: 0}
     - target: {fileID: 6506567546393193289, guid: b92bdc90d57960b45b4de1dae85e654f,
         type: 3}
@@ -705,6 +718,18 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b92bdc90d57960b45b4de1dae85e654f, type: 3}
+--- !u!114 &1415061831214442529 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3450207109052561648, guid: b92bdc90d57960b45b4de1dae85e654f,
+    type: 3}
+  m_PrefabInstance: {fileID: 4342268462460752081}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9085046f02f69544eb97fd06b6048fe2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &2428840035247746908 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2158964807295483789, guid: b92bdc90d57960b45b4de1dae85e654f,
@@ -976,3 +1001,15 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 6455408383487840784}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &5343762712954518554 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1422834459496853002, guid: b02b0e0231569044aa276711d12f4e5d,
+    type: 3}
+  m_PrefabInstance: {fileID: 6455408383487840784}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button

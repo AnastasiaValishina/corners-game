@@ -27,12 +27,17 @@ public class BotController : MonoBehaviour
 
 		foreach (Pawn pawn in myPawns)
 		{
-			List<Vector2Int> moves = Board.Instance.GetAvailableMoves(pawn.XPos, pawn.YPos);
-			foreach (Vector2Int move in moves)
-			{
-				allAvailableMoves.Add(new BotMove { pawn = pawn, targetPos = move });
-			}
+			// Теперь получаем список маршрутов
+			List<List<Vector2Int>> paths = Board.Instance.GetAvailableMoves(pawn.XPos, pawn.YPos);
 
+			foreach (List<Vector2Int> path in paths)
+			{
+				// Конечная цель хода — это всегда последняя точка в маршруте
+				Vector2Int finalTarget = path[path.Count - 1];
+
+				// Сохраняем и конечную точку (для расчетов), и весь маршрут (для анимации)
+				allAvailableMoves.Add(new BotMove { pawn = pawn, targetPos = finalTarget, path = path });
+			}
 		}
 
 		if (allAvailableMoves.Count == 0) return;
@@ -105,7 +110,7 @@ public class BotController : MonoBehaviour
 			}
 
 			BotMove randomMove = poolToChooseFrom[Random.Range(0, poolToChooseFrom.Count)];
-			ExecuteMove(randomMove.pawn, randomMove.targetPos);
+			ExecuteMove(randomMove.pawn, randomMove);
 		}
 		else
 		{
@@ -120,6 +125,8 @@ public class BotController : MonoBehaviour
 		Pawn bestPawn = null;
 		Vector2Int bestMove = new Vector2Int(-1, -1);
 		int bestScore = 999999;
+
+		BotMove bestBotMove = new BotMove { pawn = null };
 
 		foreach (BotMove botMove in allAvailableMoves)
 		{
@@ -147,25 +154,25 @@ public class BotController : MonoBehaviour
 			if (score < bestScore)
 			{
 				bestScore = score;
-				bestMove = move;
+				bestBotMove = botMove; 
 				bestPawn = pawn;
 			}
 		}
-
-		if (bestPawn != null && bestMove.x != -1)
+		if (bestPawn != null && bestBotMove.targetPos.x != -1) // Проверяем, что ход найден
 		{
-			ExecuteMove(bestPawn, bestMove);
+			ExecuteMove(bestPawn, bestBotMove);
 		}
 	}
 
-	private void ExecuteMove(Pawn pawn, Vector2Int move)
+	private void ExecuteMove(Pawn pawn, BotMove botMove)
 	{
 		AudioPlayer.Instance.PlaySlideSound();
+
+		// 1. СРАЗУ освобождаем старую клетку
 		Board.Instance.SetPositionEmpty(pawn.XPos, pawn.YPos);
-		pawn.MoveTo(move.x, move.y);
-		Board.Instance.SetPosition(pawn.gameObject);
-		Board.Instance.CheckWinner();
-		GameController.Instance.NextTurn();
+
+		// 2. Запускаем анимацию бота (доску он обновит сам в Pawn.cs)
+		pawn.MoveInSteps(botMove.path);
 	}
 
 	public void SetDifficulty(BotDifficulty difficulty)
@@ -177,5 +184,6 @@ public class BotController : MonoBehaviour
 	{
 		public Pawn pawn;
 		public Vector2Int targetPos;
+		public List<Vector2Int> path; 
 	}
 }

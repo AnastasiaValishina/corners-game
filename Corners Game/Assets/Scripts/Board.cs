@@ -132,67 +132,66 @@ public class Board : MonoBehaviour
         }
     }
 
-	public List<Vector2Int> GetAvailableMoves(int xPos, int yPos)
+	// Теперь мы возвращаем список маршрутов (каждый маршрут — это список точек)
+	public List<List<Vector2Int>> GetAvailableMoves(int xPos, int yPos)
 	{
-		List<Vector2Int> moves = new List<Vector2Int>();
+		List<List<Vector2Int>> allPaths = new List<List<Vector2Int>>();
 
-		// ==========================================
-		// БАЗОВЫЕ ХОДЫ (Доступны в обоих режимах)
-		// ==========================================
+		// 1. Обычные шаги (длина маршрута = 1 шаг)
+		AddSimpleMove(allPaths, xPos, yPos + 1);
+		AddSimpleMove(allPaths, xPos, yPos - 1);
+		AddSimpleMove(allPaths, xPos + 1, yPos);
+		AddSimpleMove(allPaths, xPos - 1, yPos);
 
-		// 1. Обычные шаги по вертикали и горизонтали
-		AddMoveIfValid(moves, xPos, yPos + 1);
-		AddMoveIfValid(moves, xPos, yPos - 1);
-		AddMoveIfValid(moves, xPos + 1, yPos);
-		AddMoveIfValid(moves, xPos - 1, yPos);
+		bool includeDiag = (currentMode == CornersMode.Diagonal);
 
-
-		// ==========================================
-		// ПРЫЖКИ (Одиночные и серии)
-		// ==========================================
-
-		// Создаем список посещенных клеток, чтобы шашка не зациклилась, прыгая туда-сюда
-		HashSet<Vector2Int> visitedSquares = new HashSet<Vector2Int>();
-		visitedSquares.Add(new Vector2Int(xPos, yPos)); // Запрещаем прыгать обратно в стартовую точку
-
-		if (currentMode == CornersMode.Classic)
+		if (includeDiag)
 		{
-			// Запускаем рекурсивный поиск прыжков ТОЛЬКО по вертикали и горизонтали (false)
-			FindChainJumps(xPos, yPos, visitedSquares, moves, false);
-		}
-		else if (currentMode == CornersMode.Diagonal)
-		{
-			// В диагональном режиме добавляем обычные диагональные шаги
-			AddMoveIfValid(moves, xPos + 1, yPos + 1);
-			AddMoveIfValid(moves, xPos - 1, yPos - 1);
-			AddMoveIfValid(moves, xPos + 1, yPos - 1);
-			AddMoveIfValid(moves, xPos - 1, yPos + 1);
-
-			// Запускаем поиск прыжков ВО ВСЕХ направлениях (true)
-			FindChainJumps(xPos, yPos, visitedSquares, moves, true);
+			AddSimpleMove(allPaths, xPos + 1, yPos + 1);
+			AddSimpleMove(allPaths, xPos - 1, yPos - 1);
+			AddSimpleMove(allPaths, xPos + 1, yPos - 1);
+			AddSimpleMove(allPaths, xPos - 1, yPos + 1);
 		}
 
-		return moves;
+		// 2. Серии прыжков
+		HashSet<Vector2Int> visited = new HashSet<Vector2Int>();
+		visited.Add(new Vector2Int(xPos, yPos)); // Стартовую точку отмечаем посещенной
+
+		// Пустой маршрут для старта рекурсии
+		List<Vector2Int> startingPath = new List<Vector2Int>();
+
+		// Запускаем поиск прыжков
+		FindChainJumps(xPos, yPos, visited, allPaths, startingPath, includeDiag);
+
+		return allPaths;
 	}
 
-	// НОВЫЙ МЕТОД: Рекурсивный поиск цепочки прыжков
-	private void FindChainJumps(int currentX, int currentY, HashSet<Vector2Int> visited, List<Vector2Int> moves, bool includeDiagonal)
+	// Вспомогательный метод для обычных шагов
+	private void AddSimpleMove(List<List<Vector2Int>> allPaths, int x, int y)
 	{
-		// Массив направлений: Вверх, Вниз, Вправо, Влево
+		if (PositionOnBoardExists(x, y) && GetPosition(x, y) == null)
+		{
+			// Создаем маршрут из одной точки и добавляем в общий список
+			allPaths.Add(new List<Vector2Int> { new Vector2Int(x, y) });
+		}
+	}
+
+	// Обновленная рекурсия, которая запоминает путь
+	private void FindChainJumps(int currentX, int currentY, HashSet<Vector2Int> visited,
+								List<List<Vector2Int>> allPaths, List<Vector2Int> currentPath, bool includeDiag)
+	{
 		List<Vector2Int> directions = new List<Vector2Int>
 	{
 		new Vector2Int(0, 1), new Vector2Int(0, -1),
 		new Vector2Int(1, 0), new Vector2Int(-1, 0)
 	};
 
-		// Если включен диагональный режим, добавляем диагонали для прыжков
-		if (includeDiagonal)
+		if (includeDiag)
 		{
 			directions.Add(new Vector2Int(1, 1)); directions.Add(new Vector2Int(-1, -1));
 			directions.Add(new Vector2Int(1, -1)); directions.Add(new Vector2Int(-1, 1));
 		}
 
-		// Проверяем каждое направление
 		foreach (Vector2Int dir in directions)
 		{
 			int jumpOverX = currentX + dir.x;
@@ -200,29 +199,25 @@ public class Board : MonoBehaviour
 			int landX = currentX + dir.x * 2;
 			int landY = currentY + dir.y * 2;
 
-			// 1. Проверяем, есть ли на соседней клетке шашка, через которую можно перепрыгнуть
 			if (PositionOnBoardExists(jumpOverX, jumpOverY) && GetPosition(jumpOverX, jumpOverY) != null)
 			{
-				// 2. Проверяем, не выходит ли клетка ПРИЗЕМЛЕНИЯ за пределы доски
 				if (PositionOnBoardExists(landX, landY))
 				{
 					Vector2Int landPos = new Vector2Int(landX, landY);
 
-					// 3. Проверяем, свободна ли клетка приземления и не были ли мы там в текущем ходе
 					if (GetPosition(landX, landY) == null && !visited.Contains(landPos))
 					{
-						// Запоминаем, что мы тут были
 						visited.Add(landPos);
 
-						// Добавляем эту клетку как доступный ход
-						if (!moves.Contains(landPos))
-						{
-							moves.Add(landPos);
-						}
+						// ВАЖНО: Создаем копию текущего пути и добавляем новую точку приземления
+						List<Vector2Int> newPath = new List<Vector2Int>(currentPath);
+						newPath.Add(landPos);
 
-						// САМАЯ ГЛАВНАЯ МАГИЯ (Рекурсия): 
-						// Спрашиваем: "А могу ли я прыгнуть куда-то еще ИЗ ЭТОЙ НОВОЙ ТОЧКИ?"
-						FindChainJumps(landX, landY, visited, moves, includeDiagonal);
+						// Сохраняем этот новый маршрут как доступный ход
+						allPaths.Add(newPath);
+
+						// Прыгаем дальше, передавая уже обновленный путь!
+						FindChainJumps(landX, landY, visited, allPaths, newPath, includeDiag);
 					}
 				}
 			}

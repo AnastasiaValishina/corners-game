@@ -1,33 +1,32 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.EventSystems;
 
 public class MovePlate : MonoBehaviour, IPointerClickHandler
 {
     GameObject reference = null;
+	private List<Vector2Int> pathToHere;
 
-    int plateX;
+	int plateX;
     int plateY;
 
 	public void OnPointerClick(PointerEventData eventData)
 	{
 		AudioPlayer.Instance.PlaySlideSound();
-
 		Pawn pawnScript = reference.GetComponent<Pawn>();
 
-		// отметить, что квадрат, на котором стояла пешка, свободен
+		// 1. СРАЗУ освобождаем старую клетку, пока пешка не улетела
 		Board.Instance.SetPositionEmpty(pawnScript.XPos, pawnScript.YPos);
 
-		pawnScript.MoveTo(plateX, plateY);
+		// 2. Убираем маркеры ходов
+		pawnScript.DestroyMovePlates();
 
-		// отметить, что квадрат занят пешкой
-		Board.Instance.SetPosition(reference);
+		// 3. Даем пешке команду прыгать. 
+		// Все остальные действия она сделает сама в конце пути!
+		pawnScript.MoveInSteps(pathToHere);
+	}
 
-		Board.Instance.CheckWinner();
-        GameController.Instance.NextTurn();
-        pawnScript.DestroyMovePlates();         
-    }
-
-    public void SetCoords(int x, int y)
+	public void SetCoords(int x, int y)
     {
         plateX = x;
         plateY = y;
@@ -38,8 +37,8 @@ public class MovePlate : MonoBehaviour, IPointerClickHandler
         reference = obj;
     }
 
-    public GameObject GetReference()
-    {
-        return reference;
-    }
+	public void SetPath(List<Vector2Int> path)
+	{
+		pathToHere = path;
+	}
 }

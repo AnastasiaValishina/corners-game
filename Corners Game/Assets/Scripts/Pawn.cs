@@ -71,21 +71,62 @@ public class Pawn : MonoBehaviour, IPointerClickHandler
 		yPos = y;
 	}
 
+	public void MoveInSteps(List<Vector2Int> path)
+	{
+		LeanTween.cancel(gameObject);
+
+		// Создаем очередь анимаций (секвенцию)
+		LTSeq sequence = LeanTween.sequence();
+
+		foreach (Vector2Int step in path)
+		{
+			Vector3 targetPos = new Vector3(step.x, step.y, transform.position.z);
+
+			// ВАЖНО: Кладем само движение ВНУТРЬ sequence.append()
+			// Теперь LeanTween будет ждать окончания прыжка перед следующим шагом!
+			sequence.append(LeanTween.move(gameObject, targetPos, 0.25f).setEase(LeanTweenType.easeInOutQuad));
+
+			// Небольшая пауза на каждой клетке, чтобы прыжки читались четче
+			sequence.append(0.05f);
+		}
+
+		// 4. Действия после полного завершения цепочки прыжков
+		sequence.append(() =>
+		{
+			// Обновляем внутренние координаты пешки только когда она дошла до финиша
+			xPos = path[path.Count - 1].x;
+			yPos = path[path.Count - 1].y;
+
+			Board.Instance.SetPosition(gameObject);
+
+			Board.Instance.CheckWinner();
+			GameController.Instance.NextTurn();
+		});
+	}
+
 	private void ShowAvailableMoves()
 	{
-		List<Vector2Int> moves = board.GetAvailableMoves(xPos, yPos);
+		// Получаем все МАРШРУТЫ
+		List<List<Vector2Int>> allPaths = board.GetAvailableMoves(xPos, yPos);
 
-		foreach (Vector2Int move in moves)
+		// Перебираем каждый маршрут и спавним для него плитку
+		foreach (List<Vector2Int> path in allPaths)
 		{
-			SpawnMovePlate(move.x, move.y);
+			SpawnMovePlate(path);
 		}
 	}
 
-	private void SpawnMovePlate(int x, int y)
+	// Теперь метод принимает маршрут целиком
+	private void SpawnMovePlate(List<Vector2Int> path)
 	{
-		var mp = Instantiate(movePlate, new Vector3(x, y, 0f), Quaternion.identity);
+		// Плитка должна появиться на ПОСЛЕДНЕЙ клетке маршрута
+		Vector2Int finalPos = path[path.Count - 1];
+
+		var mp = Instantiate(movePlate, new Vector3(finalPos.x, finalPos.y, 0f), Quaternion.identity);
 		mp.SetReference(gameObject);
-		mp.SetCoords(x, y);
+
+		// Передаем весь маршрут в плитку (этот метод мы сейчас создадим)
+		mp.SetPath(path);
 
 		activeMovePlates.Add(mp);
 	}

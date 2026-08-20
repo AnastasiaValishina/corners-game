@@ -22,6 +22,11 @@ public class RulesPopup : MonoBehaviour
 		gameObject.SetActive(false);
 	}
 
+	public void PlaySound()
+	{
+		AudioPlayer.Instance.PlayButtonClick();
+	}
+
 	public void OnPlayClicked()
 	{
 		AudioPlayer.Instance.PlayButtonClick();

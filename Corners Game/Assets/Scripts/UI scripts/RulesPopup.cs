@@ -14,14 +14,6 @@ public class RulesPopup : MonoBehaviour
 		backButton.onClick.AddListener(OnBackClicked);
 	}
 
-	private void OnEnable()
-	{
-		if (classicModeToggle != null)
-		{
-			classicModeToggle.isOn = true;
-		}
-	}
-
 	private void OnBackClicked()
 	{
 		AudioPlayer.Instance.PlayButtonClick();

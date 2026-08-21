@@ -7,7 +7,13 @@
         false,
         false
     ],
-    "idSave": 16,
+    "idSave": 19,
     "isMusicOn": false,
-    "isSoundOn": false
+    "isSoundOn": false,
+    "winsEasy": 1,
+    "losesEasy": 0,
+    "winsNormal": 1,
+    "losesNormal": 0,
+    "winsHard": 1,
+    "losesHard": 0
 }

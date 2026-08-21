@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -5,11 +6,19 @@ public class MainMenu : MonoBehaviour
 {
 	[SerializeField] Button hotSeatBtn;
 	[SerializeField] Button botBtn;
+	[SerializeField] Button statsBtn;
 
 	private void Start()
 	{
 		botBtn.onClick.AddListener(OnBotClicked);
 		hotSeatBtn.onClick.AddListener(OnHotSeatClicked);
+		statsBtn.onClick.AddListener(OnStatsClicked);
+	}
+
+	private void OnStatsClicked()
+	{
+		AudioPlayer.Instance.PlayButtonClick();
+		UiManager.Instance.ShowStats();
 	}
 
 	private void OnBotClicked()
@@ -35,5 +44,8 @@ public class MainMenu : MonoBehaviour
 
 		if (hotSeatBtn != null)
 			hotSeatBtn.onClick.RemoveListener(OnHotSeatClicked);
+
+		if (statsBtn != null)
+			statsBtn.onClick.RemoveListener(OnStatsClicked);
 	}
 }

@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -7,6 +8,7 @@ public class WinPopup : MonoBehaviour
 	[SerializeField] GameObject panel;
 	[SerializeField] TextMeshProUGUI text;
 	[SerializeField] Button restartBtn;
+	[SerializeField] Button mainMenuBtn;
 	[SerializeField] Button statsBtn;
 	[SerializeField] Image[] pawnImage;
 	[SerializeField] GameObject sun;
@@ -16,6 +18,14 @@ public class WinPopup : MonoBehaviour
 	{
 		restartBtn.onClick.AddListener(OnRestartClicked);
 		statsBtn.onClick.AddListener(OnStatsClicked);
+		mainMenuBtn.onClick.AddListener(OnMenuClicked);
+	}
+
+	private void OnMenuClicked()
+	{
+		AudioPlayer.Instance.PlayButtonClick();
+		UiManager.Instance.ShowMainMenu(true);
+		gameObject.SetActive(false);
 	}
 
 	public void ShowWin(int playerWinner, bool isBot)
@@ -96,6 +106,7 @@ public class WinPopup : MonoBehaviour
 	void OnStatsClicked()
 	{
 		AudioPlayer.Instance.PlayButtonClick();
+		UiManager.Instance.ShowStats();
 	}
 
 	private void OnDestroy()
@@ -105,5 +116,8 @@ public class WinPopup : MonoBehaviour
 
 		if (statsBtn != null)
 			statsBtn.onClick.RemoveListener(OnStatsClicked);
+
+		if (mainMenuBtn != null)
+			mainMenuBtn.onClick.RemoveListener(OnMenuClicked);
 	}
 }

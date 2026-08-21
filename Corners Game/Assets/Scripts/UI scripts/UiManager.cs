@@ -8,6 +8,7 @@ public class UiManager : MonoBehaviour
 	[SerializeField] OptionsPopup optionsPopup;
 	[SerializeField] DifficultyPopup diffPopup;
 	[SerializeField] WinPopup winPopup;
+	[SerializeField] StatsPopup statsPopup;
 
 	[Header("Hud")]
 	[SerializeField] Image nextPlayerImage;
@@ -52,6 +53,14 @@ public class UiManager : MonoBehaviour
 		{
 			winPopup.gameObject.SetActive(true);
 			winPopup.ShowWin(playerWinner, isBot);
+		}
+	}
+
+	public void ShowStats()
+	{
+		if (statsPopup != null)
+		{
+			statsPopup.gameObject.SetActive(true);
 		}
 	}
 

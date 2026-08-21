@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using UnityEngine;
+using YG;
 
 public class GameController : MonoBehaviour
 {
@@ -66,6 +67,30 @@ public class GameController : MonoBehaviour
 	public void Winner(int playerWinner)
     {
 		_isGameOver = true;
+		if (_isBotActive)
+		{
+			bool isPlayerWin = (playerWinner == 1);
+
+			switch (BotController.Instance.currentDifficulty)
+			{
+				case BotDifficulty.Easy:
+					if (isPlayerWin) YG2.saves.winsEasy++;
+					else YG2.saves.losesEasy++;
+					break;
+
+				case BotDifficulty.Medium:
+					if (isPlayerWin) YG2.saves.winsNormal++;
+					else YG2.saves.losesNormal++;
+					break;
+
+				case BotDifficulty.Hard:
+					if (isPlayerWin) YG2.saves.winsHard++;
+					else YG2.saves.losesHard++;
+					break;
+			}
+
+			YG2.SaveProgress();
+		}
 		UiManager.Instance.ShowWinPopup(playerWinner, _isBotActive);		
     }
 }

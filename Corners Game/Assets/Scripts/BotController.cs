@@ -7,7 +7,7 @@ public class BotController : MonoBehaviour
 	int smart = 0;
 	int notSmart = 0;
 
-	BotDifficulty currentDifficulty = BotDifficulty.Hard;
+	public BotDifficulty currentDifficulty = BotDifficulty.Hard;
 
 	Vector2Int targetCorner = new Vector2Int(7, 0);
 	public static BotController Instance { get; private set; }

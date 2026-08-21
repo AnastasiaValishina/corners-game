@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 9102395455377617321}
   - component: {fileID: 7069715756053970471}
   - component: {fileID: 111013505322842960}
+  - component: {fileID: 1518169372890859264}
   m_Layer: 5
   m_Name: SoundText
   m_TagString: Untagged
@@ -138,6 +139,20 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &1518169372890859264
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1214596158389439482}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4234f9fcadebb844ba2ed14dd235623, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UITranslator
+  ru: "\u0417\u0432\u0443\u043A"
+  en: Sound
 --- !u!1 &3330405715948513901
 GameObject:
   m_ObjectHideFlags: 0
@@ -149,6 +164,7 @@ GameObject:
   - component: {fileID: 3751954199095176518}
   - component: {fileID: 3742111295791115191}
   - component: {fileID: 2864848008711788022}
+  - component: {fileID: 7760685809958471762}
   m_Layer: 5
   m_Name: MusicText
   m_TagString: Untagged
@@ -276,6 +292,20 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &7760685809958471762
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3330405715948513901}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4234f9fcadebb844ba2ed14dd235623, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UITranslator
+  ru: "\u041C\u0443\u0437\u044B\u043A\u0430"
+  en: Music
 --- !u!1 &4203804692334632144
 GameObject:
   m_ObjectHideFlags: 0
@@ -752,7 +782,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4651418837788923399, guid: b9da2ef0e6642f0488537c63dce4f051,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8550943812689311191}
   m_SourcePrefab: {fileID: 100100000, guid: b9da2ef0e6642f0488537c63dce4f051, type: 3}
 --- !u!114 &5417520035584943161 stripped
 MonoBehaviour:
@@ -772,6 +806,26 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 4322834080201635595}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &8894858271943745804 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4651418837788923399, guid: b9da2ef0e6642f0488537c63dce4f051,
+    type: 3}
+  m_PrefabInstance: {fileID: 4322834080201635595}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &8550943812689311191
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8894858271943745804}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4234f9fcadebb844ba2ed14dd235623, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UITranslator
+  ru: "\u041F\u0440\u043E\u0434\u043E\u043B\u0436\u0438\u0442\u044C"
+  en: Continue
 --- !u!1001 &4618826579452466363
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -903,8 +957,32 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4651418837788923399, guid: b9da2ef0e6642f0488537c63dce4f051,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 219539649891953569}
   m_SourcePrefab: {fileID: 100100000, guid: b9da2ef0e6642f0488537c63dce4f051, type: 3}
+--- !u!1 &41788608220070588 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4651418837788923399, guid: b9da2ef0e6642f0488537c63dce4f051,
+    type: 3}
+  m_PrefabInstance: {fileID: 4618826579452466363}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &219539649891953569
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 41788608220070588}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4234f9fcadebb844ba2ed14dd235623, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UITranslator
+  ru: "\u041D\u0430\u0447\u0430\u0442\u044C \u0437\u0430\u043D\u043E\u0432\u043E"
+  en: Start again
 --- !u!114 &3515746947713550217 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8129893934739804978, guid: b9da2ef0e6642f0488537c63dce4f051,
@@ -1223,7 +1301,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4651418837788923399, guid: b9da2ef0e6642f0488537c63dce4f051,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7284706271258613347}
   m_SourcePrefab: {fileID: 100100000, guid: b9da2ef0e6642f0488537c63dce4f051, type: 3}
 --- !u!114 &1982811478270962712 stripped
 MonoBehaviour:
@@ -1243,3 +1325,23 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 7734778415817735978}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &3159938371557828909 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4651418837788923399, guid: b9da2ef0e6642f0488537c63dce4f051,
+    type: 3}
+  m_PrefabInstance: {fileID: 7734778415817735978}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &7284706271258613347
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3159938371557828909}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4234f9fcadebb844ba2ed14dd235623, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UITranslator
+  ru: "\u0413\u043B\u0430\u0432\u043D\u043E\u0435 \u043C\u0435\u043D\u044E"
+  en: Main menu

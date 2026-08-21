@@ -425,6 +425,7 @@ GameObject:
   - component: {fileID: 4339786328617558794}
   - component: {fileID: 7910152307031954711}
   - component: {fileID: 7463361387094380712}
+  - component: {fileID: 3081843358668998444}
   m_Layer: 5
   m_Name: Bot
   m_TagString: Untagged
@@ -448,8 +449,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 322, y: -276}
-  m_SizeDelta: {x: 230.8738, y: 112.5022}
+  m_AnchoredPosition: {x: 342.69214, y: -276}
+  m_SizeDelta: {x: 272.258, y: 112.5022}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7910152307031954711
 CanvasRenderer:
@@ -479,7 +480,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u041F\u041A"
+  m_text: Computer
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b6d72248af243824b88444b9bc2060ec, type: 2}
   m_sharedMaterial: {fileID: -6604648697948491524, guid: b6d72248af243824b88444b9bc2060ec,
@@ -552,6 +553,20 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &3081843358668998444
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1983846343349485995}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4234f9fcadebb844ba2ed14dd235623, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UITranslator
+  ru: "\u041F\u041A"
+  en: Computer
 --- !u!1 &2522548415565055707
 GameObject:
   m_ObjectHideFlags: 0
@@ -701,6 +716,7 @@ GameObject:
   - component: {fileID: 635967199835083293}
   - component: {fileID: 5855679680283004282}
   - component: {fileID: 7979058068487639161}
+  - component: {fileID: 100694362603647294}
   m_Layer: 5
   m_Name: Player
   m_TagString: Untagged
@@ -828,6 +844,20 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &100694362603647294
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2635151305790814334}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4234f9fcadebb844ba2ed14dd235623, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UITranslator
+  ru: "\u0418\u0433\u0440\u043E\u043A"
+  en: Player
 --- !u!1 &3324343623426034128
 GameObject:
   m_ObjectHideFlags: 0
@@ -1713,6 +1743,7 @@ GameObject:
   - component: {fileID: 245725653203997623}
   - component: {fileID: 4845471449122187077}
   - component: {fileID: 748900704555117225}
+  - component: {fileID: 7524884553093218793}
   m_Layer: 5
   m_Name: TitleText (1)
   m_TagString: Untagged
@@ -1840,6 +1871,20 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &7524884553093218793
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8100147199372062489}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4234f9fcadebb844ba2ed14dd235623, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UITranslator
+  ru: "\u0421\u0442\u0430\u0442\u0438\u0441\u0442\u0438\u043A\u0430"
+  en: Statistics
 --- !u!1001 &5348748829635524719
 PrefabInstance:
   m_ObjectHideFlags: 0

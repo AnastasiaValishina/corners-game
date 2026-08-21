@@ -2,6 +2,7 @@ using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using YG;
 
 public class WinPopup : MonoBehaviour
 {
@@ -32,28 +33,30 @@ public class WinPopup : MonoBehaviour
 	{
 		statsBtn.gameObject.SetActive(isBot);
 
+		string lang = YG2.envir.language;
+
 		if (isBot)
 		{
 			if (playerWinner == 1)
 			{
-				text.text = "онаедю!";
+				text.text = lang == "ru" ? "онаедю!" : "VICTORY!";
 				PlayWin();
 			}
 			else
 			{
 				sun.SetActive(false);
-				text.text = "онпюфемхе";
+				text.text = lang == "ru" ? "онпюфемхе" : "DEFEAT"; ;
 			}
 		}
 		else
 		{
 			if (playerWinner == 2)
 			{
-				text.text = "онаедю аекшу";				
+				text.text = lang == "ru" ? "онаедю аекшу" : "WHITE WINS!";
 			}
 			else
 			{
-				text.text = "онаедю вепмшу";				
+				text.text = lang == "ru" ? "онаедю вепмшу" : "BLACK WINS!";
 			}
 			PlayWin();
 		}

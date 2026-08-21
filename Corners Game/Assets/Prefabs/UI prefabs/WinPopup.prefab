@@ -886,7 +886,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4651418837788923399, guid: b9da2ef0e6642f0488537c63dce4f051,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7676582940127305459}
   m_SourcePrefab: {fileID: 100100000, guid: b9da2ef0e6642f0488537c63dce4f051, type: 3}
 --- !u!224 &5837096566056938994 stripped
 RectTransform:
@@ -906,6 +910,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
+--- !u!1 &7354465236083183399 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4651418837788923399, guid: b9da2ef0e6642f0488537c63dce4f051,
+    type: 3}
+  m_PrefabInstance: {fileID: 2782494370552256800}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &7676582940127305459
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7354465236083183399}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4234f9fcadebb844ba2ed14dd235623, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UITranslator
+  ru: "\u0413\u043B\u0430\u0432\u043D\u043E\u0435 \u043C\u0435\u043D\u044E"
+  en: Main menu
 --- !u!1001 &8107269826224090326
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1037,7 +1061,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4651418837788923399, guid: b9da2ef0e6642f0488537c63dce4f051,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2047823295725311246}
   m_SourcePrefab: {fileID: 100100000, guid: b9da2ef0e6642f0488537c63dce4f051, type: 3}
 --- !u!114 &23047439888990180 stripped
 MonoBehaviour:
@@ -1057,6 +1085,26 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 8107269826224090326}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &3463239775483099857 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4651418837788923399, guid: b9da2ef0e6642f0488537c63dce4f051,
+    type: 3}
+  m_PrefabInstance: {fileID: 8107269826224090326}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2047823295725311246
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3463239775483099857}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4234f9fcadebb844ba2ed14dd235623, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UITranslator
+  ru: "\u041D\u0430\u0447\u0430\u0442\u044C \u0437\u0430\u043D\u043E\u0432\u043E"
+  en: Start again
 --- !u!1001 &8834189606624733789
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1183,7 +1231,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4651418837788923399, guid: b9da2ef0e6642f0488537c63dce4f051,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 9083603804463200898}
   m_SourcePrefab: {fileID: 100100000, guid: b9da2ef0e6642f0488537c63dce4f051, type: 3}
 --- !u!114 &741536832156891503 stripped
 MonoBehaviour:
@@ -1203,3 +1255,23 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 8834189606624733789}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &4185093569916746842 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4651418837788923399, guid: b9da2ef0e6642f0488537c63dce4f051,
+    type: 3}
+  m_PrefabInstance: {fileID: 8834189606624733789}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &9083603804463200898
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4185093569916746842}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4234f9fcadebb844ba2ed14dd235623, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UITranslator
+  ru: "\u0421\u0442\u0430\u0442\u0438\u0441\u0442\u0438\u043A\u0430"
+  en: Statistics

@@ -105,6 +105,7 @@ GameObject:
   - component: {fileID: 83039300280936326}
   - component: {fileID: 2332967357888344581}
   - component: {fileID: 3892360582170720322}
+  - component: {fileID: 7509918839609950250}
   m_Layer: 5
   m_Name: TitleText (1)
   m_TagString: Untagged
@@ -232,6 +233,20 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &7509918839609950250
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8686434824531861706}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4234f9fcadebb844ba2ed14dd235623, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UITranslator
+  ru: "\u0412\u044B\u0431\u0435\u0440\u0435\u0442\u0435 \u0441\u043B\u043E\u0436\u043D\u043E\u0441\u0442\u044C"
+  en: Choose difficulty
 --- !u!1 &8932946898079867193
 GameObject:
   m_ObjectHideFlags: 0
@@ -432,8 +447,32 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4651418837788923399, guid: b9da2ef0e6642f0488537c63dce4f051,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4522247473896097610}
   m_SourcePrefab: {fileID: 100100000, guid: b9da2ef0e6642f0488537c63dce4f051, type: 3}
+--- !u!1 &6744907465194827117 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4651418837788923399, guid: b9da2ef0e6642f0488537c63dce4f051,
+    type: 3}
+  m_PrefabInstance: {fileID: 2096303938946562922}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &4522247473896097610
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6744907465194827117}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4234f9fcadebb844ba2ed14dd235623, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UITranslator
+  ru: "\u0421\u043B\u043E\u0436\u043D\u043E"
+  en: Hard
 --- !u!224 &7677369450308964280 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8619027144765568210, guid: b9da2ef0e6642f0488537c63dce4f051,
@@ -573,8 +612,32 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4651418837788923399, guid: b9da2ef0e6642f0488537c63dce4f051,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6468259566574998994}
   m_SourcePrefab: {fileID: 100100000, guid: b9da2ef0e6642f0488537c63dce4f051, type: 3}
+--- !u!1 &6896293202779419140 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4651418837788923399, guid: b9da2ef0e6642f0488537c63dce4f051,
+    type: 3}
+  m_PrefabInstance: {fileID: 2250013007925191683}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &6468259566574998994
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6896293202779419140}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4234f9fcadebb844ba2ed14dd235623, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UITranslator
+  ru: "\u041D\u043E\u0440\u043C\u0430\u043B\u044C\u043D\u043E"
+  en: Normal
 --- !u!224 &7540513883942867153 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8619027144765568210, guid: b9da2ef0e6642f0488537c63dce4f051,
@@ -850,7 +913,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4651418837788923399, guid: b9da2ef0e6642f0488537c63dce4f051,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5805979984213480216}
   m_SourcePrefab: {fileID: 100100000, guid: b9da2ef0e6642f0488537c63dce4f051, type: 3}
 --- !u!224 &755274206238171365 stripped
 RectTransform:
@@ -870,3 +937,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
+--- !u!1 &4425493275131773488 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4651418837788923399, guid: b9da2ef0e6642f0488537c63dce4f051,
+    type: 3}
+  m_PrefabInstance: {fileID: 9072407330966213687}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &5805979984213480216
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4425493275131773488}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4234f9fcadebb844ba2ed14dd235623, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UITranslator
+  ru: "\u041B\u0435\u0433\u043A\u043E"
+  en: Easy

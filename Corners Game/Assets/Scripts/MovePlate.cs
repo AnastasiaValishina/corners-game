@@ -15,14 +15,10 @@ public class MovePlate : MonoBehaviour, IPointerClickHandler
 		AudioPlayer.Instance.PlaySlideSound();
 		Pawn pawnScript = reference.GetComponent<Pawn>();
 
-		// 1. СРАЗУ освобождаем старую клетку, пока пешка не улетела
 		Board.Instance.SetPositionEmpty(pawnScript.XPos, pawnScript.YPos);
 
-		// 2. Убираем маркеры ходов
 		pawnScript.DestroyMovePlates();
 
-		// 3. Даем пешке команду прыгать. 
-		// Все остальные действия она сделает сама в конце пути!
 		pawnScript.MoveInSteps(pathToHere);
 	}
 

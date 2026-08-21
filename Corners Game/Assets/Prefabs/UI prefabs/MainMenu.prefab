@@ -178,6 +178,7 @@ GameObject:
   - component: {fileID: 6792080244997695886}
   - component: {fileID: 6083736608298580888}
   - component: {fileID: 3450378541202655457}
+  - component: {fileID: 7916404372398092348}
   m_Layer: 5
   m_Name: TitleText
   m_TagString: Untagged
@@ -305,6 +306,21 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &7916404372398092348
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5946687685366941572}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff5483d3f3099bb46af519e62247b656, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::YG.Example.LanguageExample
+  ru: "\u0423\u0413\u041E\u041B\u041A\u0418"
+  en: CORNERS
+  tr: 
 --- !u!1 &5976177760377292308
 GameObject:
   m_ObjectHideFlags: 0

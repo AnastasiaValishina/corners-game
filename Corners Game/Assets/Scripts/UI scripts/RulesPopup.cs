@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,6 +12,14 @@ public class RulesPopup : MonoBehaviour
 	{
 		playButton.onClick.AddListener(OnPlayClicked);
 		backButton.onClick.AddListener(OnBackClicked);
+	}
+
+	private void OnEnable()
+	{
+		if (classicModeToggle != null)
+		{
+			classicModeToggle.isOn = true;
+		}
 	}
 
 	private void OnBackClicked()
